@@ -1,0 +1,29 @@
+// =============================================================================
+// PANELS (CSS)
+// =============================================================================
+
+
+.panel-title {
+    font-size: fontSize("small");
+}
+
+.panel--large {
+
+    .panel-body {
+        margin-bottom: spacing("single") + spacing("third");
+        padding: spacing("single") + spacing("third");
+    }
+}
+
+@include breakpoint('small') {
+	.panel--address {
+		.panel-body {
+			padding-bottom: 2.5rem;
+		}
+		.form-actions {
+			margin: 0;
+			position: relative;
+			bottom: auto;
+		}
+	}
+}

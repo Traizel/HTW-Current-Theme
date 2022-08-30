@@ -1,0 +1,61 @@
+---
+category:
+    shop_by_price: true
+    products:
+        limit: { { theme_settings.categorypage_products_per_page } }
+---
+
+{{inject "categoryProductsPerPage"
+theme_settings.categorypage_products_per_page}} {{#partial "head"}} {{#if
+pagination.category.previous}}
+<link rel="prev" href="{{pagination.category.previous}}" />
+{{/if}} {{#if pagination.category.next}}
+<link rel="next" href="{{pagination.category.next}}" />
+{{/if}} {{/partial}} {{#partial "page"}} {{#unless
+theme_settings.hide_category_page_heading }}
+<div class="category-header bg-{{dashcase category.name}}">
+	<h1 class="page-heading">{{category.name}}</h1>
+</div>
+{{/unless}}
+<div class="breadcrumbs-row bg-light-gray stretch-full">
+	{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}} {{>
+	components/products/filter sort=pagination.category.sort}}
+</div>
+<div class="page">
+	{{#if category.faceted_search_enabled}}
+	<aside class="page-sidebar" id="faceted-search-container">
+		{{> components/category/sidebar}}
+	</aside>
+	{{else if category.subcategories}}
+	<aside class="page-sidebar" id="faceted-search-container">
+		{{> components/category/sidebar}}
+	</aside>
+	{{else if category.shop_by_price}} {{#if
+	theme_settings.shop_by_price_visibility}}
+	<aside class="page-sidebar" id="faceted-search-container">
+		{{> components/category/sidebar}}
+	</aside>
+	{{/if}} {{/if}}
+
+	<main
+		class="page-content"
+		id="product-listing-container"
+		data-enable-swatches
+	>
+		{{#if category.products}} {{inject 'products' category.products}} {{>
+		components/category/product-listing}} {{else}}
+		<p>{{lang 'categories.no_products'}}</p>
+		{{/if}} {{{category.description}}}
+	</main>
+</div>
+
+<script>
+	window.dataLayer = window.dataLayer || []
+	window.dataLayer.push({
+		pageType: 'Category',
+		categoryID: '{{category.id}}',
+		categoryName: '{{category.name}}',
+	});
+</script>
+
+{{/partial}} {{> layout/base}}

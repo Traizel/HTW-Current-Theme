@@ -1,0 +1,133 @@
+<div class="tabs-contents" data-tab role="tablist">
+	<button type="button" class="collapsible" data-tab-description href="#tab-description" role="tab" tabindex="0" aria-selected="true" controls="tab-description">{{lang 'products.description'}}</button>
+		<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-description">
+	    <ul>
+<li>Gloss Finish</li>
+<li>Also known as sticker vinyl</li>
+<li>Outdoor durability: 3-5 years</li>
+<li>11" printed pattern (workable space)</li>
+<li>Can be cut with most cutters</li>
+<li>Not a heat press material</li>
+<li>Product ships from Fargo only (1-3 business days for production)</li>
+<li>Can be used for car graphics, banners, lettering, window glass, walls, etc.</li>
+<li>Application mask and accessories are sold separately</li>
+<li>Due to the manufacturing process, material may vary in width by 1/8-1/4"</li>
+<li><a href="https://www.heattransferwarehouse.com/accessories/" target="_blank">Accessories</a></li>
+<li><a href="https://www.heattransferwarehouse.com/transfer-tapes-masks/" target="_blank">Application Tape</a></li>
+<li><a href="https://www.heattransferwarehouse.com/patterned-vinyl/" target="_blank">Patterned Heat Transfer Vinyl</a></li>
+</ul>
+	</div>
+		<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-videos">                                        
+			<div class="videoGallery-list">
+				<div class="videoGallery-item">
+					<h4 class="videoGallery-title">Patterned Vinyl from Start to Finish</h4>
+					<a href="//www.youtube.com/embed/cv2jIykWQFc" data-featherlight="iframe" data-featherlight-iframe-allowfullscreen="true">
+						<div class="video-figure">
+							<img alt="Patterned Vinyl from Start to Finish" class="lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="//i.ytimg.com/vi/cv2jIykWQFc/hqdefault.jpg"/>
+							<div class="shine"></div>
+						</div>
+					</a>
+				</div>
+				{{#each product.videos.list}}
+					<div class="videoGallery-item">
+						<h4 class="videoGallery-title">{{title_long}}</h4>
+						<a href="//www.youtube.com/embed/{{id}}" data-featherlight="iframe" data-featherlight-iframe-allowfullscreen="true">
+							<div class="video-figure">
+								<img alt="{{title_long}}" class="lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="//i.ytimg.com/vi/{{id}}/hqdefault.jpg"/>
+								<div class="shine"></div>
+							</div>
+						</a>
+					</div>
+				{{/each}}
+			</div>
+			<link href="//cdn.rawgit.com/noelboss/featherlight/1.7.13/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+			<script src="//code.jquery.com/jquery-latest.min.js" defer></script>
+			<script src="//cdn.rawgit.com/noelboss/featherlight/1.7.13/release/featherlight.min.js" type="text/javascript" charset="utf-8" defer></script>
+		</div>
+	<button style="display:none;" type="button" class="collapsible" data-tab-application-instructions href="#tab-application-instructions" role="tab" tabindex="0" aria-selected="true" controls="tab-application-instructions">Application Instructions</button>
+	<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-application-instructions">
+		<div id="Application-Instructions" class="cf"><br>
+			<ul class="application-instructions">
+				<li class="readingrev">Cut right reading</li>
+				<li class="mats">Hard Surfaces</li>
+			</ul>
+			<h2>Additional Instructions</h2>
+			<ul>
+				<li><span>Cut image in Right Reading</span></li>
+				<li><span>Weed Material</span></li>
+				<li><span>Squeegee Transfer Mask Over Image</span></li>
+				<li><span>Remove the white backing (Images will stick to the Transfer Mask)</span></li>
+				<li><span>Squeegee Images onto Surface</span></li>
+				<li><span>Remove Transfer Mask</span></li>
+			</ul>
+			<p><strong>Cut Settings for Graphtec CE6000:</strong></p>
+			<p>Settings can alter for each cutter and how dull or sharp the blade is. Test Cutting is Recommended.</p>
+			<p>1. Offset: 0</p>
+			<p>2. Speed: 25 cm/s</p>
+			<p>3. Acceleration: 4</p>
+			<p>4. Cut Force: 16</p>
+			<p>*HTW uses a 45 Degree Blade</p>
+			<p><strong>Cut Settings for Silhouette Cameo:</strong></p>
+			<p><em>Settings can alter on how dull or sharp the blade is. Test Cutting is Recommended.</em></p>
+			<p><span>Smooth Heat Transfer Material Setting</span></p>
+			<p>Blade: 1</p>
+			<p>Speed: 3</p>
+			<p>Force: 4</p>
+			<p><strong>Cut Settings for Cricut®:</strong></p>
+			<p><em>Settings can alter on how dull or sharp the blade is. Test Cutting is Recommended.</em></p>
+			<p>Set Material: Vinyl</p>
+			<p>Pressure: Default</p>
+			<p>Blade: Fine-Point Blade (Standard)</p>
+			</div>
+	</div>
+	{{#if product.custom_fields}}
+		<button style="display:none;" type="button" class="collapsible" data-tab-shipping href="#tab-shipping" role="tab" tabindex="0" aria-selected="true" controls="tab-shipping">Shipping</button>
+		<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-shipping">
+			<ul class="shipping-restrictions">
+				{{#each product.custom_fields}}
+					{{#if name '===' 'location'}}
+						<li class="{{name}}"><strong>{{uppercase value}}</strong> PRODUCT; will make your entire order ship from our {{value}} location.</li>
+					{{/if}}
+					{{#if name '===' 'location_colors'}}
+						{{#if value '===' 'all'}}
+						{{else}}
+							<li class="{{name}}">location specific colors: <strong>{{value}}</strong>.</li>
+						{{/if}}
+					{{/if}}
+					{{#if name '===' 'dropship_colors'}}
+						<li class="{{name}}">This product has options that are <strong>DROPSHIP ONLY</strong> and, if selected, this material will be sent via ground shipping from the manufacturer and will ship separately from your order.</li>
+					{{/if}}
+					{{#if name '===' 'shipping'}}
+						{{#if value '===' 'ground only'}}
+							<li class="{{name}}"><strong>GROUND ONLY</strong> shipping; will make your entire order ship 2-5 day ground.</li>
+						{{/if}}
+					{{/if}}
+				{{/each}}
+			</ul>
+		</div>
+				<!-- FAQ -->
+		<button style="display:none;" type="button" class="collapsible" data-tab-faq href="#tab-faq" role="tab" tabindex="0" aria-selected="true" controls="tab-faq">FAQ</button>
+		<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-faq">
+			<ul class="faq-question-list">
+				{{#each product.custom_fields}}
+					{{#if name '===' 'faq question'}}
+						<li class="{{dashcase name}}"><strong>Q: {{value}}</strong></li>
+					{{/if}}
+					{{#if name '===' 'faq answer'}}
+						<li class="{{dashcase name}}"><strong>A:</strong> {{value}}</li>
+					{{/if}}
+				{{/each}}
+			</ul>
+			<script>
+				window.addEventListener('DOMContentLoaded', function() {
+					if (document.querySelectorAll('.faq-question-list li').length > 1) {
+						document.querySelector('[data-tab-faq]').style.display = '';
+					}
+				});
+			</script>
+		</div>
+		<!-- /FAQ -->
+	{{/if}}
+	<button style="display:none;" type="button" class="collapsible" data-tab-pricing href="#tab-pricing" role="tab" tabindex="0" aria-selected="true" controls="tab-pricing">Pricing</button>
+	<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-pricing"></div>
+</div>

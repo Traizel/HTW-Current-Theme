@@ -1,0 +1,186 @@
+<div class="cart">
+	{{inject 'cartItems' cart.items}} {{#each cart.items}}
+	<div
+		class="cart-item"
+		data-item-row
+		data-id="{{id}}"
+		data-sku="{{sku}}"
+		data-product-id="{{product_id}}"
+		data-quantity="{{quantity}}"
+		data-unit-price="{{#if price_discounted}}{{price_discounted.value}}{{else}}{{price.value}}{{/if}}"
+	>
+		<div class="cart-item-block cart-item-figure">
+			{{#if type '==' 'GiftCertificate'}}
+			<img
+				class="cart-item-fixed-image lazyload"
+				data-sizes="auto"
+				src="{{cdn 'img/loading.svg'}}"
+				data-src="{{cdn ../../theme_settings.default_image_gift_certificate}}"
+				alt="GiftCertificate"
+				title="GiftCertificate"
+			/>
+			{{else}}
+			{{> components/common/responsive-img
+				image=image
+				class="cart-item-image"
+				fallback_size=../theme_settings.productthumb_size
+				lazyload='disabled'
+				default_image=../theme_settings.default_image_product
+			}}
+			{{/if}}
+			<div class="shine"></div>
+		</div>
+		<div class="cart-item-block cart-item-title">
+			<h4 class="cart-item-name">
+				<a href="{{url}}">{{name}}</a>
+				<!--{{#if options}}
+			    {{#unless product_id '==' 9831}}
+			    {{#unless product_id '==' 9616}}
+			    {{#unless product_id '==' 9832}}
+			    {{#unless product_id '==' 9862}}
+			    {{#unless product_id '==' 9863}}
+				<a class="edit" href="#" data-item-edit="{{id}}">
+					<i class="icon">
+						<svg><use xlink:href="#icon-pencil"></use></svg>
+					</i>
+				</a>
+				{{/unless}}
+				{{/unless}}
+				{{/unless}}
+				{{/unless}}
+				{{/unless}}
+				{{/if}} -->
+				{{#if type '==' 'GiftCertificate'}}
+				<a class="edit" href="{{edit_url}}">
+					<i class="icon">
+						<svg><use xlink:href="#icon-pencil"></use></svg>
+					</i>
+				</a>
+				{{/if}}
+			</h4>
+			{{#if release_date}}
+				<p>({{release_date}})</p>
+			{{/if}}
+			{{#if options}}
+				<dl class="definitionList">
+					{{#each options}}
+						{{#if name '===' 'Transfer Count'}}
+						{{else}}
+							<dt class="definitionList-key" data-option-id="{{id}}">
+								{{name}}:
+							</dt>
+							<dd class="definitionList-value">
+                                {{#if is_file}}
+								<a href="/viewfile.php?attributeId={{../id}}&cartitem={{../../id}}">
+									{{{value}}}
+								</a>
+								{{else}}
+									{{#contains name 'Comments'}}<em>&ldquo;{{/contains}}
+									{{{value}}}
+									{{#contains name 'Comments'}}&rdquo;</em>{{/contains}}
+								{{/if}}
+							</dd>
+						{{/if}}
+					{{/each}}
+				</dl>
+			{{/if}}
+			{{> components/cart/item-giftwrap this}}
+			{{#if event_date}}
+				<dl class="cart-item-options">
+					<dt class="cart-item-option-title">
+						{{event_date.name}}
+					</dt>
+					<dd class="cart-item-option-description">
+						{{event_date.date}}
+					</dd>
+				</dl>
+			{{/if}}
+		</div>
+
+		<div class="cart-item-block cart-item-info cart-item-quantity">
+			<label class="form-label cart-item-label is-srOnly" for="qty-{{id}}">
+				{{lang 'products.quantity'}}
+			</label>
+			<div class="form-increment">
+				{{# if product_id '===' 864}} {{else if product_id '===' 865}}
+				{{else if product_id '===' 866}} {{else}}
+					{{#or can_modify}}
+						<button class="button button--icon" data-cart-update data-cart-itemid="{{id}}" data-action="dec">
+							<span class="is-srOnly">
+								{{lang 'products.quantity_decrease'}}
+							</span>
+							<i class="icon" aria-hidden="true">
+								<svg><use xlink:href="#icon-remove-circle" /></svg>
+							</i>
+						</button>
+					{{/or}}
+				{{/if}}
+				<input class="form-input form-input--incrementTotal
+				cart-item-qty-input" id="qty-{{id}}" name="qty-{{id}}"
+				type="tel" value="{{quantity}}"
+				data-quantity-min="{{min_purchase_quantity}}"
+				data-quantity-max="{{max_purchase_quantity}}"
+				data-quantity-min-error="{{lang 'products.quantity_min'
+				quantity=min_purchase_quantity}}"
+				data-quantity-max-error="{{lang 'products.quantity_max'
+				quantity=max_purchase_quantity}}" min="1" pattern="[0-9]*"
+				data-cart-itemid="{{id}}" data-action="manualQtyChange"
+				aria-live="polite"{{#unless can_modify}} disabled{{/unless}}>
+				{{# if product_id '===' 864}} {{else if product_id '===' 865}}
+				{{else if product_id '===' 866}} {{else}}
+					{{#or can_modify}}
+						<button class="button button--icon" data-cart-update data-cart-itemid="{{id}}" data-action="inc">
+							<span class="is-srOnly">
+								{{lang 'products.quantity_increase'}}
+							</span>
+							<i class="icon" aria-hidden="true">
+								<svg><use xlink:href="#icon-add-circle" /></svg>
+							</i>
+						</button>
+					{{/or}}
+				{{/if}}
+			</div>
+		</div>
+
+		<div class="cart-item-block cart-item-total">
+			<span class="cart-item-label is-srOnly">
+				{{lang 'cart.checkout.total'}}
+			</span>
+			{{#or ../customer (if ../theme_settings.restrict_to_login '!=='
+			true)}}
+			<strong class="cart-item-value {{#if total_discounted}}price--discounted{{/if}}">
+				{{total.formatted}}
+			</strong>
+			{{#if total_discounted}}
+			<strong class="cart-item-value">
+				{{total_discounted.formatted}}
+			</strong>
+			{{/if}} {{# gt quantity 0}}
+			<span class="cart-item-value unit-price">
+				{{quantity}} x {{price.formatted}}
+			</span>
+			{{/gt}} {{else}} {{> components/common/login-for-pricing}} {{/or}}
+		</div>
+
+		<div class="cart-item-block cart-item-remove">
+			{{# if can_modify}}
+				<a class="cart-remove icon" data-cart-itemid="{{id}}" href="#" data-confirm-delete="{{lang 'cart.confirm_delete'}}">
+					<svg><use xlink:href="#icon-trash"></use></svg>
+				</a>
+				<input class="cart-remove-checkbox" type="checkbox" value="{{id}}" data-cart-itemid="{{id}}" />
+			{{else}}
+				{{#if type '==' 'GiftCertificate'}}
+					<a class="cart-remove icon" data-cart-itemid="{{id}}" href="#" data-confirm-delete="{{lang 'cart.confirm_delete'}}">
+						<svg><use xlink:href="#icon-trash"></use></svg>
+					</a>
+				{{/if}}
+			{{/if}}
+		</div>
+	</div>
+	{{/each}}
+</div>
+<div class="text-right">
+	<button data-clear-cart class="button button--xs button--danger2">Clear Cart</button>
+</div>
+
+{{{ remote_api_scripts }}}

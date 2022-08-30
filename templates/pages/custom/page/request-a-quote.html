@@ -1,0 +1,99 @@
+<div id="drag-drop-form">
+	<nav class="form-progress-nav">
+		<div class="progress-bar">
+			<div class="fill"></div>
+		</div>
+		<div class="step-icon contact text-center">
+			<i class="icon envelope"><svg><use xlink:href="#icon-envelope" /></svg></i>
+			<i class="icon checkmark"><svg><use xlink:href="#icon-checkmark" /></svg></i>
+			Contact information
+		</div>
+		<div class="step-icon artwork text-center">
+			<i class="icon upload"><svg><use xlink:href="#icon-person" /></svg></i>
+			<i class="icon checkmark"><svg><use xlink:href="#icon-checkmark" /></svg></i>
+			Upload artwork
+		</div>
+		<div class="step-icon rhinestones text-center">
+			<i class="icon rhinestone"><svg><use xlink:href="#icon-rhinestone" /></svg></i>
+			<i class="icon checkmark"><svg><use xlink:href="#icon-checkmark" /></svg></i>
+			Rhinestones
+		</div>
+	</nav>
+	<section class="form-section one contact">
+		<div class="form-flex-container">
+			<div class="form-input-container one-half">
+				<label for="contact-first-name">First name</label>
+				<inpu type="text" id="contact-first-name" placeholder="John">
+			</div>
+			<div class="form-input-container one-half">
+				<label for="contact-last-name">Last name</label>
+				<input type="text" id="contact-last-name" placeholder="Doe">
+			</div>
+			<div class="form-input-container one-half">
+				<label for="contact-email">Email</label>
+				<input type="email" id="contact-email" placeholder="your@email.com">
+			</div>
+			<div class="form-input-container one-half">
+				<label for="contact-phone">Phone</label>
+				<input type="tel" id="contact-phone">
+			</div>
+			<div class="form-input-container">
+				<label for="contact-company">Company</label>
+				<input type="text" id="contact-company">
+			</div>
+		</div>
+	</section>
+	<section class="form-section two artwork">
+		<div class="form-flex-container">
+			<div class="form-input-container">
+				<div class="drag-drop-input text-center">
+					<input class="drag-drop-file" type="file" name="files[]" id="artwork-files" data-multiple-caption="{count} files selected" multiple />
+					<label for="artwork-files">
+						<i class="icon upload-icon"></i>
+						<span class="box__dragndrop">Drag and drop files</span>
+						<span class="clr-blue">Choose a file</span>
+					</label>
+					<div class="status-uploading">Uploading&hellip;</div>
+					<div class="status-success">Done!</div>
+					<div class="status-error">Error! <span></span></div>
+				</div>
+			</div>
+		</div>
+		<p class="upload-disclaimer">Before uploading, please be sure you trust this site, have rights to the data, and want to share this content to the owner of this upload widget.</p>
+		<div class="alertBox">
+			<div class="alertBox-column alertBox-icon">
+				<icon glyph="ic-success" class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg></icon>
+			</div>
+			<p class="alertBox-column alertBox-message">Complicated designs may not work on small locations such as a pocket. Complicated designs may not work at all, especially those that require small lettering. When submitting your artwork, please let us know if we can omit smaller letters, otherwise we may not be able to complete your design.</p>
+		</div>
+	</section>
+	<section class="form-section three rhinestones">
+		<div class="form-flex-container">
+			<div class="form-input-container one-half">
+				<label for="rhinestones-width">Width</label>
+				<input type="text" id="rhinestones-width">
+			</div>
+			<div class="form-input-container one-half">
+				<label for="rhinestones-height">Height</label>
+				<input type="text" id="rhinestones-height">
+			</div>
+			<div class="form-input-container one-half">
+				<label for="rhinestones-quantity">Quantity</label>
+				<input type="number" id="rhinestones-quantity">
+			</div>
+			<div class="form-input-container one-half">
+				<label for="rhinestones-color">Garment color</label>
+				<input type="text" id="rhinestones-garment-color">
+			</div>
+			<div class="form-input-container">
+				<label for="rhinestones-rhinestones">Rhinestone<s/label>
+				<input type="text" id="rhinestones-rhinestones">
+			</div>
+		</div>
+	</section>
+	<div class="form-actions text-center">
+		<button class="button button--secondary back">Back</button>
+		<button class="button button--primary next">Next</button>
+		<button class="button button--primary submit">Submit</button>
+	</div>
+</div>

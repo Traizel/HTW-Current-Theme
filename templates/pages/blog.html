@@ -1,0 +1,59 @@
+---
+blog:
+    posts:
+        limit: 8
+        pages: 3
+        summary: 200
+---
+{{#partial "page"}}
+{{inject 'blog' blog}}
+<div class="breadcrumbs-row bg-light-gray stretch-full">
+	{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+</div>
+<main class="page">
+    {{#unless theme_settings.hide_blog_page_heading }}
+        <h1 class="page-heading">{{ blog.name }}</h1>
+	{{/unless}}
+	<div class="blog-feed-container">
+		<section class="blog-nav" style="display: none;">
+			<h3>Categories</h3>
+			<ul class="blog-tags"></ul>
+			<p class="text-center">
+				<a href="javascript:void(0)" class="button button--xs button-block button--ghost expand">
+					<span class="expand-text">Expand</span>
+					<i class="icon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-down" /></svg></i>
+				</a>
+			</p>
+		</section>
+		<section class="blog-feed">
+			{{#each blog.posts}}
+				<article class="blog-feed-item">
+					<div class="blog-post-figure">
+						{{#if thumbnail}}
+							<figure class="blog-thumbnail">
+								<a href="{{url}}">
+									<img class="lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage thumbnail 'blog_size'}}" alt="{{thumbnail.alt}}" title="{{thumbnail.alt}}">
+								</a>
+							</figure>
+						{{/if}}
+					</div>
+					<div class="blog-post-body bg-light-gray">
+						<header class="blog-header">
+							<h2 class="blog-title">
+								<a href="{{url}}">{{title}}</a>
+							</h2>
+						</header>
+						<div class="blog-post">
+							{{{summary}}}
+						</div>
+					</div>
+				</article>
+			{{/each}}
+		</section>
+	</div>
+
+    {{> components/common/paginator pagination.blog}}
+</main>
+
+{{/partial}}
+{{> layout/base}}

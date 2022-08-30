@@ -1,0 +1,190 @@
+// =============================================================================
+// BUTTONS (CSS)
+// =============================================================================
+
+.button,
+.swal2-modal .swal2-buttonswrapper .swal2-styled {
+	background-color: #fff;
+	color: #006bd6;
+	font-size: 0.875rem;
+	font-weight: bold;
+	line-height: 2.375rem;
+	min-width: 8.75rem;
+	padding: 0 1.25rem;
+	transition: all 0.15s ease;
+
+	+ .button,
+	+ .swal2-styled {
+		margin-left: 0;
+
+		@include breakpoint('medium') {
+			margin-left: spacing('half');
+		}
+	}
+
+	&.button-xs,
+	&.button--xs {
+		min-width: 0;
+		padding: 0.5rem 0.75rem;
+		line-height: 1;
+	}
+	&.button-block,
+	&.button--block {
+		display: block;
+		min-width: 0;
+		width: 100%;
+	}
+
+	&.button--primary {
+		background-color: #006bd6;
+		border-color: #006bd6;
+		color: #fff;
+	}
+	&.button--primary:hover,
+	&.button--primary:focus,
+	&.button--primary:active {
+		background-color: #0050a2;
+		border-color: #0050a2;
+	}
+	&.button--primary:focus,
+	&.button--primary:active {
+		border-color: #006bd6;
+	}
+	&.button--primary:disabled {
+		background-color: #acb0b2;
+		color: #f8f8f8;
+	}
+
+	&.button--secondary {
+		color: #006bd6;
+		border-color: #006bd6;
+		background-color: #fff;
+	}
+	&.button--secondary:hover,
+	&.button--secondary:focus,
+	&.button--secondary:active {
+		background-color: #edf6ff;
+		border-color: #006bd6;
+	}
+	&.button--secondary:disabled {
+		color: #acb0b2;
+		border-color: #acb0b2;
+		background-color: #f8f8f8;
+	}
+
+	&.button--ghost {
+		border-color: transparent;
+	}
+	&.button--ghost:hover,
+	&.button--ghost:focus,
+	&.button--ghost:active {
+		background-color: #edf6ff;
+		border-color: #edf6ff;
+		color: #006bd6;
+	}
+
+	&.button--outline,
+	&.button--outline:active,
+	&.button--outline:focus,
+	&.button--outline:hover {
+		background-color: transparent;
+		border-color: currentColor;
+	}
+	&.button--outline.clr-white {
+		color: #fff;
+	}
+	&.button--outline.clr-white:active,
+	&.button--outline.clr-white:focus,
+	&.button--outline.clr-white:hover {
+		background-color: #000;
+		border-color: #000;
+	}
+
+	&.button--action {
+		color: #006bd6;
+		background-color: #fff;
+	}
+	&.button--action:hover,
+	&.button--action:focus,
+	&.button--action:active {
+		color: #006bd6;
+		background-color: #edf6ff;
+		border-color: #edf6ff;
+	}
+	&.button--action:focus,
+	&.button--action:active {
+		border-color: #006bd6;
+	}
+	&.button--action:disabled {
+		color: #acb0b2;
+		background-color: #fff;
+	}
+	&.button--danger {
+		color: #a40000;
+		border-color: #fff;
+	}
+	&.button--danger:hover {
+		background-color: #ffdddd;
+		border-color: #ffdddd;
+	}
+	&.button--danger2 {
+		background-color: #ffdddd;
+		color: #a40000;
+		border-color: #fff;
+	}
+	&.button--danger2:hover {
+		background-color: white;
+		border-color: #ffdddd;
+	}
+
+	span {
+		display: inline-block;
+		vertical-align: top;
+	}
+}
+.swal2-modal.swal2-show .swal2-buttonswrapper {
+	.swal2-confirm {
+		background-color: #006bd6;
+		border-color: #006bd6;
+		color: #fff;
+		&:hover,
+		&:focus,
+		&:active {
+			background-color: #0050a2;
+			border-color: #0050a2;
+		}
+	}
+	.swal2-cancel {
+		background-color: #fff !important;
+		border-color: #006bd6;
+		color: #006bd6;
+
+		&:hover,
+		&:focus,
+		&:active {
+			color: #0050a2;
+			border-color: #0050a2;
+		}
+	}
+}
+
+.button[disabled] {
+	cursor: not-allowed;
+}
+
+.button--icon {
+	svg {
+		fill: stencilColor('button--icon-svg-color');
+	}
+}
+
+.swal2-modal .swal2-buttonswrapper .swal2-styled {
+	background-color: #006bd6 !important;
+	border-color: #006bd6 !important;
+	outline: none;
+}
+
+.form-prefixPostfix .button {
+	height: auto;
+	border: none;
+}

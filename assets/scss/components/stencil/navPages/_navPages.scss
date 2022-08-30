@@ -1,0 +1,784 @@
+// Page Navigation
+// -----------------------------------------------------------------------------
+//
+// Purpose: Contains the styles for the page navigation, deals with 2 viewsdue to
+// responsive layout of that navigation
+//
+// 1. It's not exactly a grid row, as it's a little further down the DOM tree, but
+// I use it here to grab the max width centering.
+// 2. Prevent document scrolling by clipping its body
+// 3. Prevent inertia scrolling of document
+//
+// -----------------------------------------------------------------------------
+
+//
+// Shared styles for sub page navigation
+// -----------------------------------------------------------------------------
+
+%navPage-childList {
+	border-left: 1px solid $navPage-childList-borderColor;
+	margin: spacing('quarter') spacing('half');
+	padding-left: spacing('half');
+}
+
+//
+// When navPages is open
+// -----------------------------------------------------------------------------
+
+.has-activeNavPages {
+	// scss-lint:disable VendorPrefix
+	overflow: hidden; // 2
+	-webkit-overflow-scrolling: auto; // 3
+}
+
+//
+// Top level Pages navigation container
+// -----------------------------------------------------------------------------
+
+.navPages-container {
+	// scss-lint:disable VendorPrefix
+	bottom: 0;
+	display: none;
+	height: 100%;
+	left: 0;
+	-webkit-overflow-scrolling: touch;
+	position: absolute;
+	right: 0;
+	z-index: zIndex('lower');
+
+	@media (min-width: 980px) {
+		background: transparent;
+		display: block;
+		height: auto;
+		padding: 0;
+		position: relative;
+	}
+}
+
+//
+// Top level Pages navigation list styles
+// -----------------------------------------------------------------------------
+
+.navPages {
+	// background-color: $navPages-backgroundColor;
+	display: none;
+	position: relative;
+
+	@media (min-width: 980px) {
+		display: block;
+		-webkit-box-flex: 1;
+		-ms-flex: 1 0 auto;
+		flex: 1 0 auto;
+		-ms-flex-preferred-size: 100%;
+		flex-basis: 100%;
+		max-width: 100%;
+		text-align: center;
+	}
+
+	ul {
+		list-style: none;
+	}
+
+	.navPage-subMenu-list {
+		@extend %navPage-childList;
+
+		border-left: 0;
+		list-style: none;
+		margin-left: 0;
+		padding-left: 0;
+
+		@media (min-width: 980px) {
+			@include grid-row();
+			border-left: 0;
+			margin: auto;
+			padding-left: 0;
+		}
+	}
+}
+
+#navCategories {
+	@media (min-width: 980px) {
+		box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+		position: absolute;
+		top: calc(100% + 4px);
+		left: 0;
+		width: 100%;
+
+		.navPage-subMenu-list.tier-1 {
+			min-height: 600px;
+			width: 260px;
+			padding: 0.625rem 0;
+			display: inline-block;
+			background-color: #f8f8f8;
+
+			.navPage-subMenu-action {
+				border-radius: 0;
+				padding: 0.625rem 1.25rem;
+			}
+
+			.navPage-subMenu-action.has-subMenu {
+				padding-right: 2rem;
+			}
+
+			.active>.navPage-subMenu-action,
+			.navPage-subMenu-item>.navPage-subMenu-action:hover {
+				box-shadow: inset 3px 0 0 0 $brand-blue;
+				background-color: #fff;
+			}
+
+			.navPages-action-moreIcon {
+				right: 0.75rem;
+				-webkit-transform: rotate(-90deg);
+				transform: rotate(-90deg);
+			}
+		}
+
+		.navPage-childList,
+		.navPage-subMenu {
+			margin: 0;
+			padding: 0;
+		}
+
+		.navPage-subMenu.tier-2 {
+			display: none;
+			background-color: #fff;
+			position: absolute;
+			top: 0;
+			left: 260px;
+			padding: 1.5rem 1.75rem;
+			width: calc(100% - 260px);
+			min-height: 100%;
+			
+
+			&:after {
+				content: '';
+				display: table;
+				clear: both;
+			}
+
+			.navPage-subMenu-item {
+				-webkit-box-flex: 1;
+				-ms-flex-positive: 1;
+				flex-grow: 1;
+				-ms-flex-preferred-size: 0;
+				-ms-flex-preferred-size: 25%;
+				flex-basis: 25%;
+				max-width: 25%;
+				min-height: 100px;
+			}
+
+			.navPage-subMenu-action {
+				font-size: 1rem;
+				padding: 0.5rem;
+				line-height: 1.4;
+				margin: 0 0 1rem;
+				padding: 0 0.5rem;
+				text-decoration: underline;
+				text-underline-position: under;
+			}
+
+			.navPages-action-moreIcon {
+				display: none;
+			}
+		}
+
+		.active .navPage-subMenu.tier-2 {
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-flex: 0;
+			-ms-flex: 0 1 auto;
+			flex: 0 1 auto;
+			-webkit-box-orient: horizontal;
+			-webkit-box-direction: normal;
+			-ms-flex-direction: row;
+			flex-direction: row;
+			-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+			-webkit-box-align: start;
+			-ms-flex-align: start;
+			align-items: flex-start;
+		}
+
+		.navPage-childList.tier-3 {
+			.navPage-childList-item {
+				margin: 0 0 0.5rem;
+
+				&.shop-all .navPage-childList-action {
+					color: $brand-blue;
+					font-weight: bold;
+				}
+			}
+
+			.navPage-childList-action {
+				padding: 0.25rem 0.5rem;
+			}
+		}
+	}
+}
+
+.dropdown.megamenu {
+	@media (min-width: 980px) {
+		background-color: #fff;
+		border: 1px solid #f8f8f8;
+		border-radius: 8px;
+		box-sizing: border-box;
+		box-shadow: 0px 12px 20px rgba(0, 0, 0, 0.15);
+		padding: 1rem;
+		position: absolute;
+		left: 0;
+		top: 100%;
+		width: 93%;
+		display: none;
+		-webkit-box-flex: 0;
+		-ms-flex: 0 1 auto;
+		flex: 0 1 auto;
+		-webkit-box-orient: horizontal;
+		-webkit-box-direction: normal;
+		-ms-flex-direction: row;
+		flex-direction: row;
+		-ms-flex-wrap: wrap;
+		flex-wrap: wrap;
+		overflow: hidden;
+
+		.style-img-container,
+		.navPage-subMenu-container {
+			-webkit-box-flex: 0;
+			-ms-flex: 0 0 auto;
+			flex: 0 0 auto;
+		}
+
+		// This covers the menu sub menu opening animation
+
+		.cover {
+			height: 100%;
+			width: 150px;
+			background-color: white;
+			-webkit-box-flex: 0;
+			-ms-flex: 0 0 auto;
+			flex: 0 0 auto;
+			position: absolute;
+			right: 0;
+			z-index: 1;
+		}
+
+		.style-img-container {
+			border-radius: 8px;
+			overflow: hidden;
+			position: relative;
+			width: calc(93% - 500px);
+
+			.style-img {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				width: auto;
+				height: auto;
+				max-width: initial;
+				min-height: 100%;
+			}
+		}
+
+		.navPage-subMenu-container {
+			padding: 1rem;
+			-ms-flex-preferred-size: 350px;
+			flex-basis: 350px;
+			max-width: 350px;
+		}
+
+		.navPage-edu-container {
+			padding: 1rem;
+			-ms-flex-preferred-size: 550px;
+			flex-basis: 550px;
+			max-width: 550px;
+		}
+
+		.navPage-brands-container {
+			padding: 1rem;
+			-ms-flex-preferred-size: 200px;
+			flex-basis: 200px;
+			max-width: 200px;
+			background-color: white;
+		}
+
+		.navPage-childList,
+		.navPage-subMenu {
+			margin: 0;
+			padding: 0;
+		}
+
+		.navPage-subMenu {
+			background-color: #fff;
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-flex: 0;
+			-ms-flex: 0 1 auto;
+			flex: 0 1 auto;
+			-webkit-box-orient: horizontal;
+			-webkit-box-direction: normal;
+			-ms-flex-direction: row;
+			flex-direction: row;
+			-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+			-webkit-box-align: start;
+			-ms-flex-align: start;
+			align-items: flex-start;
+
+			// -webkit-box-pack: justify;
+			// -ms-flex-pack: justify;
+			// justify-content: space-between;
+			&:after {
+				content: '';
+				display: table;
+				clear: both;
+			}
+
+			&.tier-2 {
+				margin: 0 -0.5rem;
+
+				.navPage-subMenu-item {
+					padding: 0 0.5rem;
+				}
+			}
+
+			.navPage-subMenu-item {
+				-webkit-box-flex: 0;
+				-ms-flex: 0 0 auto;
+				flex: 0 0 auto;
+				-ms-flex-preferred-size: 25%;
+				flex-basis: 25%;
+				max-width: 25%;
+				// min-height: 100px;
+				margin: 0 0 1rem;
+			}
+
+			.navPage-subMenu-action {
+				font-size: 0.875rem;
+				line-height: 1.3;
+				margin: 0 0 1rem 1em;
+				padding: 0;
+
+				.navPages-action-moreIcon {
+					color: #a6a9ab;
+					transform: rotateZ(-90deg);
+					width: 18px;
+				}
+
+				.navPages-action-moreIcon svg {
+					fill: transparent;
+					stroke: currentColor;
+					margin-left: 0.25rem;
+				}
+			}
+
+			.navPage-childList-action {
+				font-weight: 400;
+				margin-left: -1em;
+			}
+
+			&.popular-brands {
+				-webkit-box-align: start;
+				-ms-flex-align: start;
+				align-items: flex-start;
+				-webkit-box-pack: start;
+				-ms-flex-pack: start;
+				justify-content: flex-start;
+
+				.navPage-subMenu-item {
+					-webkit-box-flex: 0;
+					-ms-flex: 0 0 auto;
+					flex: 0 0 auto;
+					-ms-flex-preferred-size: 100px;
+					flex-basis: 100px;
+					max-width: 100px;
+					min-height: auto;
+					margin: 15px 15px 0 0;
+				}
+
+				.navPage-subMenu-action {
+					margin: 0;
+					padding: 0;
+				}
+
+				.navPages-action:hover,
+				.navPages-action.activePage,
+				.navPages-action.is-open {
+					background-color: #fff;
+				}
+
+				.img-container {
+					background-color: #f8f8f8;
+					border-radius: 50%;
+					position: relative;
+					width: 100px;
+					height: 100px;
+					margin: 0;
+				}
+
+				.brand-img {
+					display: block;
+					position: absolute;
+					top: 50%;
+					left: 50%;
+					max-width: 90%;
+					transform: translate(-50%, -50%);
+				}
+			}
+		}
+
+		.popular-brands-heading {
+			margin: 0;
+			text-transform: none;
+		}
+
+		.navPage-childList {
+			.navPage-childList-item {
+				margin: 0 0 0.625rem;
+
+				&.shop-all .navPage-childList-action {
+					color: $brand-blue;
+					font-weight: bold;
+				}
+			}
+
+			.navPage-childList-action {
+				padding: 0;
+			}
+		}
+	}
+}
+
+.navPages-action.has-subMenu:hover+.dropdown.megamenu,
+.dropdown.megamenu:hover {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+.navPage-subMenu-item.clothing .navPage-subMenu-action .navPages-action-moreIcon,
+.navPage-subMenu-item.clothing .navPage-subMenu-action .navPages-action-moreIcon svg {
+	height: 1.25rem;
+	width: 1.25rem;
+	transform: none !important;
+}
+
+.navPage-subMenu-item.clothing .navPage-subMenu-action .navPages-action-moreIcon {
+	right: 0.75rem;
+}
+
+.navPage-subMenu-item.clothing:before {
+	content: '';
+	display: block;
+	height: 1px;
+	width: calc(100% - 1.875rem);
+	margin: 0.5rem 0;
+	margin-left: 1.25rem;
+	border-top: 1px solid #acb0b2;
+}
+
+.navPages-list {
+	display: inline-block;
+	margin: 0.75rem 0 0;
+
+	+.navPages-list {
+		border-top: 1px solid $navPages-list--user-borderColor;
+		margin-top: spacing('half');
+		padding-top: spacing('half');
+	}
+}
+
+.navPages-list {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-flex: 0;
+	-ms-flex: 0 1 auto;
+	flex: 0 1 auto;
+	-webkit-box-orient: horizontal;
+	-webkit-box-direction: normal;
+	-ms-flex-direction: row;
+	flex-direction: row;
+	-ms-flex-wrap: wrap;
+	flex-wrap: wrap;
+	-webkit-box-pack: justify;
+	-ms-flex-pack: justify;
+	justify-content: space-between;
+	text-align: center;
+	-webkit-box-align: center;
+	-ms-flex-align: center;
+	align-items: center;
+	margin: 0.75rem 0 0;
+
+	.navPages-item {
+		-webkit-box-flex: 0;
+		-ms-flex: 0 0 auto;
+		flex: 0 0 auto;
+
+		&.is-open>.navPages-action {
+			background-color: #edf6ff;
+		}
+	}
+}
+
+.navPages-list-depth-max.subMenu-is-open {
+	.is-hidden {
+		display: none;
+
+		@media (min-width: 980px) {
+			display: inline-block;
+		}
+	}
+
+	.navPages-item-page {
+		display: none;
+
+		@media (min-width: 980px) {
+			display: inline-block;
+		}
+	}
+}
+
+.navPages-action-depth-max.has-subMenu.is-root.is-open {
+	.navPages-action-moreIcon {
+		@media (min-width: 980px) {
+			transform: rotate(0);
+		}
+	}
+}
+
+.navPages-action-depth-max.has-subMenu.is-open {
+	border-bottom: 1px solid $navPages-list--user-borderColor;
+	text-align: center;
+
+	@media (min-width: 980px) {
+		border-bottom: 0;
+		text-align: left;
+	}
+
+	.navPages-action-moreIcon {
+		border: solid 1px $navPages-action-moreIcon-borderColor;
+		border-radius: 4px;
+		float: left;
+		height: 35px;
+		margin-top: -10px;
+		padding: 11.7px; // (33 - 9.6) / 2
+		transform: rotate(90deg);
+		width: 35px;
+
+		@media (min-width: 980px) {
+			@include square(8px);
+			border: 0;
+			border-radius: 0;
+			float: none;
+			margin-top: 0;
+			padding: 0;
+			transform: rotate(-90deg);
+		}
+	}
+
+	svg {
+		height: 9.6px;
+		width: 9.6px;
+
+		@media (min-width: 980px) {
+			height: 100%;
+			width: 100%;
+		}
+	}
+}
+
+.navPages-action {
+	color: #424548;
+	display: block;
+	font-size: 0.875rem;
+	font-weight: 800;
+	line-height: 1.25rem;
+	padding: 0.5rem 1rem;
+	position: relative;
+	text-decoration: none;
+
+	&:hover,
+	&.activePage,
+	&.is-open {
+		// background-color: #edf6ff;
+		color: $brand-blue;
+
+		// scss-lint:disable NestingDepth
+		svg {
+			fill: $brand-blue;
+			stroke: $brand-blue;
+		}
+	}
+
+	.bullet {
+		font-size: 1.5rem;
+		line-height: 1.125rem;
+		display: inline-block;
+		vertical-align: top;
+	}
+
+	svg {
+		fill: stencilColor('navPages-color');
+		stroke: stencilColor('navPages-color');
+		transition: all 0.15s ease;
+	}
+}
+
+.navPages-action--storeCredit {
+	color: stencilColor('color-textSecondary');
+}
+
+.navPages-action--compare {
+	display: none;
+
+	&.show {
+		display: block;
+	}
+}
+
+.navPages-action-moreIcon {
+	height: 1rem;
+	width: 1rem;
+	// position: absolute;
+	// top: 13px;
+	// right: 0.25rem;
+	margin: 0;
+	// -webkit-transform: rotate(-90deg);
+	// transform: rotate(-90deg);
+
+	svg {
+		height: 1rem;
+		width: 0.75rem;
+	}
+
+	.has-subMenu.is-open & {
+		transform: rotate(0);
+	}
+}
+
+// Sub page navigation and children of sub pages
+// -----------------------------------------------------------------------------
+
+.navPage-childList {
+	@extend %navPage-childList;
+	display: none;
+
+	@media (min-width: 980px) {
+		border: 0;
+		display: block;
+	}
+
+	&.is-open {
+		display: block;
+	}
+}
+
+// Sub menu, first level down from top level categories
+// -----------------------------------------------------------------------------
+//
+// 1. navBar mixin has lots of decendant child selectors to deal with
+//
+// -----------------------------------------------------------------------------
+
+.navPage-subMenu {
+	display: none;
+	outline: 0;
+
+	// @include breakpoint("medium") {
+	//     // scss-lint:disable ImportantRule
+	//     position: absolute;
+	//     text-align: left;
+
+	//     &.is-open {
+	//         display: block;
+	//         left: 0;
+	//         width: 100%;
+	//     }
+
+	//     .navPages-action-moreIcon {
+	//         display: none;
+	//     }
+	// }
+
+	// &.is-open {
+	//     display: block;
+	// }
+}
+
+.has-subMenu.is-root+.navPage-subMenu-horizontal {
+	@media (min-width: 980px) {
+		border-left: 0;
+		height: $navPage-subMenu-horizontal-height;
+		left: inherit;
+		margin: auto;
+		top: inherit;
+		width: $navPage-subMenu-horizontal-width;
+	}
+}
+
+// .navPages-action.has-subMenu:hover + .navPage-subMenu,
+// .navPages-action.has-subMenu .navPage-subMenu:hover,
+.navPages-item.is-open .navPage-subMenu {
+	display: block;
+}
+
+.navPage-subMenu-item {
+	text-transform: none;
+	width: 100%;
+}
+
+//
+// Quick search inside the mobile nav
+// -----------------------------------------------------------------------------
+
+.navPages-quickSearch {
+	border-bottom: container('border');
+	margin-bottom: spacing('half');
+
+	@media (min-width: 980px) {
+		display: none;
+	}
+
+	>.container {
+		padding: 0;
+	}
+
+	.form {
+		margin: 0;
+	}
+
+	.form-field {
+		margin-bottom: 0;
+	}
+}
+
+//
+// NavPages user section for mobile nav panel
+// -----------------------------------------------------------------------------
+
+.navPages-list--user {
+	@media (min-width: 980px) {
+		display: none;
+	}
+
+	// scss-lint:disable SelectorDepth, NestingDepth, IdSelector
+	#currencySelection2 {
+		background-color: color('whites', 'bright');
+		border: container('border');
+
+		.dropdown-menu-item {
+			padding: 0;
+
+			// scss-lint:disable NestingDepth
+			&:not(:last-child) {
+				border-bottom: container('border');
+			}
+		}
+
+		a {
+			padding: spacing('half') spacing('single');
+		}
+	}
+}

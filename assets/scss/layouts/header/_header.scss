@@ -1,0 +1,271 @@
+// =============================================================================
+// HEADER (CSS)
+//
+// 1. Setting font size of header-logo to 0, since wrapper element may vary, and
+//    inline-block whitespace messes with header height. Font-size is reset to
+//    appropriate size on header-logo-text.
+// 2. Needs left/right margin so it doesn't cover left/right nav bar toggles
+// 3. Offset the letter-spacing on the last character by adding a right negative
+//    margin. This centers the text logo properly.
+// 4. When the word "cart" is added to the mobile header's cart link, add more
+//    margin to compensate.
+// 5. When logo size is set to "original", we don't have advance knowledge of the
+//    image size, so we can't use absolute positioning + padding to reserve space
+//    for lazy loading.
+//
+// -----------------------------------------------------------------------------
+
+.header {
+	// box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	box-shadow: none;
+	background-color: $header-bg;
+	// border-bottom: container('border');
+	border-bottom: none;
+	padding: 2px 0 0;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	text-align: center;
+	z-index: zIndex('higher');
+	&.header-scrolled-away {
+		-webkit-transform: translateY(-62px);
+		transform: translateY(-62px);
+	}
+
+	.container {
+		padding-left: 15px;
+		padding-right: 15px;
+	}
+
+	@media (min-width: 980px) {
+		overflow: visible;
+		position: relative;
+		padding: 0.75rem 0 0;
+		text-align: left;
+		&.header-scrolled-away {
+			-webkit-transform: translateY(0);
+			transform: translateY(0);
+		}
+		.container {
+			display: -webkit-box;
+			display: -ms-flexbox;
+			display: flex;
+			-webkit-box-flex: 0;
+			-ms-flex: 0 1 auto;
+			flex: 0 1 auto;
+			-webkit-box-orient: horizontal;
+			-webkit-box-direction: normal;
+			-ms-flex-direction: row;
+			flex-direction: row;
+			-ms-flex-wrap: wrap;
+			flex-wrap: wrap;
+			-webkit-box-pack: justify;
+			-ms-flex-pack: justify;
+			-webkit-justify-content: space-between;
+			justify-content: space-between;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
+			align-items: center;
+		}
+	}
+}
+
+.header-inline-banner {
+	display: none;
+	@media (min-width: 980px) {
+		display: block;
+		position: absolute;
+		bottom: 0.25rem;
+		right: 1rem;
+		font-size: 0.875rem;
+		p {
+			margin-bottom: 0;
+		}
+	}
+}
+
+.header-logo {
+	display: inline-block;
+	font-size: 0; // 1
+	margin: 0; // 2
+	text-align: left;
+
+	@media (min-width: 980px) {
+		margin: 0;
+		-webkit-box-flex: 1;
+		-ms-flex: 1 0 auto;
+		flex: 1 0 auto;
+		-ms-flex-preferred-size: 11.25rem;
+		flex-basis: 11.25rem;
+		max-width: 11.25rem;
+		// .header.fixed & {
+		// 	background-color: color('greys', 'lightest');
+		// 	margin: 0;
+		// 	padding: spacing('quarter') 0;
+		// 	position: absolute;
+		// 	top: 0;
+		// 	width: 100%;
+		// }
+	}
+
+	> a {
+		@include clearfix;
+		color: $storeName-color;
+		display: inline-block;
+		position: relative;
+		text-decoration: none;
+		z-index: zIndex('low');
+
+		// scss-lint:disable NestingDepth
+		@media (min-width: 980px) {
+			background: none;
+			border-bottom: 0;
+			display: inline;
+			padding: 0;
+			width: 100%;
+		}
+
+		&:hover {
+			color: color('link', 'hover');
+		}
+
+		&:active {
+			color: color('link', 'active');
+		}
+	}
+}
+
+.header-logo--left {
+	text-align: left;
+
+	.header-logo-image {
+		right: unset;
+	}
+}
+
+.header-logo-text {
+	display: block;
+	font-family: $fontFamily-hero;
+	font-size: $fontSize-logo-small; // 1
+	font-weight: stencilFontWeight('headings-font');
+	letter-spacing: remCalc(2px);
+	margin-left: auto;
+	margin-right: auto;
+	overflow: hidden;
+	padding: remCalc(3px) 0;
+	text-overflow: ellipsis;
+	text-transform: uppercase;
+	white-space: nowrap;
+
+	@include breakpoint('small') {
+		font-size: $fontSize-logo-medium;
+		padding-bottom: 0;
+		padding-top: 0;
+	}
+
+	@media (min-width: 980px) {
+		display: inline;
+		font-size: $fontSize-logo-large;
+		margin-left: 0;
+		margin-right: -(remCalc(2px)); // 3
+		max-width: none;
+		overflow: auto;
+		white-space: normal;
+
+		.header.fixed & {
+			font-size: fontSize('larger');
+		}
+	}
+}
+
+.header-logo-image-container {
+	position: relative;
+}
+
+.header-logo-image {
+	height: 3.125rem;
+	font-size: 1rem;
+	line-height: 3.125rem;
+	@media only screen and (min-width: 375px) {
+		height: 3.75rem;
+		line-height: 3.75rem;
+	}
+}
+
+//
+// Mobile Menu Toggle
+//
+// 1. Animate lines from 'x' to hamburger
+// -----------------------------------------------------------------------------
+
+.mobileMenu-toggle {
+	display: block;
+	font-size: 0;
+	height: 60px;
+	width: 50px;
+	left: 0;
+	top: 0;
+	overflow: hidden;
+	padding: 0 15px;
+	position: absolute;
+	z-index: zIndex('high');
+
+	@media (min-width: 980px) {
+		display: none;
+		// left: 20px;
+	}
+	.mobileMenu-toggleIcon,
+	.mobileMenu-toggleIcon::before,
+	.mobileMenu-toggleIcon::after {
+		background: $header-font-color;
+		content: '';
+		display: block;
+		height: 2px;
+		position: absolute;
+		transform: rotate(0deg);
+		transition: transform 100ms ease-in, top 100ms ease-in 150ms,
+			bottom 100ms ease-in 150ms; // 1
+		width: remCalc(20);
+	}
+
+	.mobileMenu-toggleIcon {
+		top: remCalc(27);
+		transition: background-color 10ms ease-in 100ms;
+	}
+
+	.mobileMenu-toggleIcon::before {
+		top: -0.5rem;
+	}
+
+	.mobileMenu-toggleIcon::after {
+		bottom: -0.5rem;
+	}
+
+	&.is-open .mobileMenu-toggleIcon {
+		transition-delay: 100ms;
+
+		// scss-lint:disable NestingDepth
+		&::before,
+		&::after {
+			background-color: $header-font-color;
+			bottom: auto;
+			top: auto;
+			transition: transform 100ms ease-in 150ms, top 100ms ease-in,
+				bottom 100ms ease-in, width 100ms ease-in; // Animate lines from hamburger to 'x'
+		}
+
+		&::before {
+			top: 0;
+			top: calc(160% + 2px);
+			width: 60%;
+			transform: rotate(45deg);
+		}
+
+		&::after {
+			bottom: 0;
+			bottom: calc(160% + 2px);
+			width: 60%;
+			transform: rotate(-45deg);
+		}
+	}
+}

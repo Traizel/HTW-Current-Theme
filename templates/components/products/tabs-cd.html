@@ -1,0 +1,119 @@
+<div class="tabs-contents" data-tab role="tablist">
+	<button type="button" class="collapsible" data-tab-description href="#tab-description" role="tab" tabindex="0" aria-selected="true" controls="tab-description">{{lang 'products.description'}}</button>
+	<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-description">
+	    <ul>
+<li><strong>This product requires mask. <a href="https://www.heattransferwarehouse.com/ktm-digital-mask/" target="_blank">KTM Mask</a>&nbsp;or <a href="https://www.heattransferwarehouse.com/850-clear-printable-transfer-mask/" target="_blank">850 Mask</a></strong></li>
+<li>If you choose the KTM Mask Option you will receive a 1 yd roll of KTM if you order a 1 yard roll of pattern or will receive a 5 yd roll of KTM if you order a 5 yard roll of pattern.</li>
+<li>11" printed workable space</li>
+<li>Matte finish</li>
+<li>We recommend if you use this product in a layered design to us this product as the top layer only.</li>
+<li>If ordering this product it may delay your standard shipping times depending on order value and time order was placed</li>
+<li>Please see our shipping policies</li>
+<li>May delay your order 1-3 business days; depending on the time the order is placed and the quantity.</li>
+<li>This is a Fargo only item, your entire order will ship from Fargo. Transit times may vary.</li>
+<li>This is a non-returnable product</li>
+<li>Colors are subject to change without notice</li>
+<li><a href="https://www.heattransferwarehouse.com/accessories/" target="_blank">Accessories</a></li>
+<li><a href="https://www.heattransferwarehouse.com/fashion-prints-adhesive-vinyl/" target="_blank">Fashion Sign Vinyl Prints</a></li>
+</ul>
+	</div>
+	{{#if product.videos.list.length}}
+		<button type="button" class="collapsible" data-tab-videos href="#tab-videos" role="tab" tabindex="0" aria-selected="true" controls="tab-videos">Videos</button>
+		<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-videos">
+			<div class="videoGallery-list">
+				<div class="videoGallery-item">
+					<h4 class="videoGallery-title">Patterned Vinyl from Start to Finish</h4>
+					<a href="//www.youtube.com/embed/cv2jIykWQFc" data-featherlight="iframe" data-featherlight-iframe-allowfullscreen="true">
+						<div class="video-figure">
+							<img alt="Patterned Vinyl from Start to Finish" class="lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="//i.ytimg.com/vi/cv2jIykWQFc/hqdefault.jpg"/>
+							<div class="shine"></div>
+						</div>
+					</a>
+				</div>
+				{{#each product.videos.list}}
+					<div class="videoGallery-item">
+						<h4 class="videoGallery-title">{{title_long}}</h4>
+						<a href="//www.youtube.com/embed/{{id}}" data-featherlight="iframe" data-featherlight-iframe-allowfullscreen="true">
+							<div class="video-figure">
+								<img alt="{{title_long}}" class="lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="//i.ytimg.com/vi/{{id}}/hqdefault.jpg"/>
+								<div class="shine"></div>
+							</div>
+						</a>
+					</div>
+				{{/each}}
+			</div>
+			<link href="//cdn.rawgit.com/noelboss/featherlight/1.7.13/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+			<script src="//code.jquery.com/jquery-latest.min.js" defer></script>
+			<script src="//cdn.rawgit.com/noelboss/featherlight/1.7.13/release/featherlight.min.js" type="text/javascript" charset="utf-8" defer></script>
+		</div>
+	{{/if}}
+	<button style="display:none;" type="button" class="collapsible" data-tab-application-instructions href="#tab-application-instructions" role="tab" tabindex="0" aria-selected="true" controls="tab-application-instructions">Application Instructions</button>
+	<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-application-instructions">
+		<div id="Application-Instructions" class="cf">
+			<ul class="application-instructions">
+				<li class="temp">Cotton, Polyester, and 50/50: 266°F | Nylon: 302°F</li>
+				<li class="time">Cotton, Polyester, and 50/50: 5 seconds Nylon: Preheat for 5 seconds and press for 5 seconds. remove liner and cover with a teflon sheet and press for another 10 seconds</li>
+				<li class="peelany">Peel warm</li>
+				<li class="pressure">Medium, even pressure</li>
+				<li class="readingrev">Cut right reading</li>
+				<li class="mats">Cotton, Polyester, Uncoated Nylon, 50/50 blends</li>
+				<li class="care">Wash inside out. Tumble dry.</li>
+			</ul>
+			<h2>Additional Instructions</h2>
+			<p>Cut your design right reading<br>Weed away excess material<br>Mask your design with a recommended mask<br>Remove the liner of the mask<br>Press your design at one of the temps and times listed above<br>Peel warm</p>
+			<h3><strong>CUT SETTINGS</strong></h3>
+			<p><strong>Cut Settings for Graphtec CE6000:</strong><br>&nbsp;Settings can alter for each cutter and how dull or sharp the blade is. Test Cutting is Recommended.<br>1. Offset: 0<br>2. Speed: 25 cm/s<br>3. Acceleration: 4<br>4. Cut Force: 16<br>*HTW uses a 45 Degree Blade</p>
+			<p><strong>Cut Settings for Silhouette Cameo:</strong><br>Settings can alter on how dull or sharp the blade is. Test Cutting is Recommended.<br>1. Smooth Heat Transfer Material Setting<br>2. Blade at a 1<br>3. Speed at 5, Pressure at 6<br>4. Double Cut/Cut on Mat&nbsp;</p>
+		</div>
+	</div>
+	{{#if product.custom_fields}}
+		<button style="display:none;" type="button" class="collapsible" data-tab-shipping href="#tab-shipping" role="tab" tabindex="0" aria-selected="true" controls="tab-shipping">Shipping</button>
+		<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-shipping">
+			<ul class="shipping-restrictions">
+				{{#each product.custom_fields}}
+					{{#if name '===' 'location'}}
+						<li class="{{name}}"><strong>{{uppercase value}}</strong> PRODUCT; will make your entire order ship from our {{value}} location.</li>
+					{{/if}}
+					{{#if name '===' 'location_colors'}}
+						{{#if value '===' 'all'}}
+						{{else}}
+							<li class="{{name}}">location specific colors: <strong>{{value}}</strong>.</li>
+						{{/if}}
+					{{/if}}
+					{{#if name '===' 'dropship_colors'}}
+						<li class="{{name}}">This product has options that are <strong>DROPSHIP ONLY</strong> and, if selected, this material will be sent via ground shipping from the manufacturer and will ship separately from your order.</li>
+					{{/if}}
+					{{#if name '===' 'shipping'}}
+						{{#if value '===' 'ground only'}}
+							<li class="{{name}}"><strong>GROUND ONLY</strong> shipping; will make your entire order ship 2-5 day ground.</li>
+						{{/if}}
+					{{/if}}
+				{{/each}}
+			</ul>
+		</div>
+			<!-- FAQ -->
+		<button style="display:none;" type="button" class="collapsible" data-tab-faq href="#tab-faq" role="tab" tabindex="0" aria-selected="true" controls="tab-faq">FAQ</button>
+		<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-faq">
+			<ul class="faq-question-list">
+				{{#each product.custom_fields}}
+					{{#if name '===' 'faq question'}}
+						<li class="{{dashcase name}}"><strong>Q: {{value}}</strong></li>
+					{{/if}}
+					{{#if name '===' 'faq answer'}}
+						<li class="{{dashcase name}}"><strong>A:</strong> {{value}}</li>
+					{{/if}}
+				{{/each}}
+			</ul>
+			<script>
+				window.addEventListener('DOMContentLoaded', function() {
+					if (document.querySelectorAll('.faq-question-list li').length > 1) {
+						document.querySelector('[data-tab-faq]').style.display = '';
+					}
+				});
+			</script>
+		</div>
+		<!-- /FAQ -->
+	{{/if}}
+	<button style="display:none;" type="button" class="collapsible" data-tab-pricing href="#tab-pricing" role="tab" tabindex="0" aria-selected="true" controls="tab-pricing">Pricing</button>
+	<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-pricing"></div>
+</div>

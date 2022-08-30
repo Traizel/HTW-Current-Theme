@@ -1,0 +1,11 @@
+<section class="section home-product-section"
+    data-list-name="{{list}}"
+>
+    <ul class="productGrid">
+        {{#each (limit products 4)}}
+        <li class="product">
+            {{> components/products/card settings=../settings theme_settings=../theme_settings customer=../customer event="list" position=(add @index 1)}}
+        </li>
+        {{/each}}
+    </ul>
+</section>

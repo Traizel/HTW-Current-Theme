@@ -1,0 +1,149 @@
+---
+cart: true
+---
+{{#partial "page"}}
+<!-- Bolt addition -->
+<script
+id="bolt-connect"
+type="text/javascript"
+src="https://connect.bolt.com/connect-bigcommerce.js"
+route-public-token="e09f49d2-1f21-4829-8529-89c096173172"
+data-publishable-key="VR52GRcCQ7ch.nhGjuMO6fSgl.0037bb0e4a255a2eba9bad964025c6dc92e6d9534941a270443f755cc482f14b"
+data-storefront-api-token="{{settings.storefront_api.token}}"
+data-shopping-cart-id="BigCommerce">
+</script>
+<!-- End Bolt addition -->
+<div class="page">
+
+	<main class="page-content" data-cart>
+		<div class="loadingOverlay"></div>
+
+		<section id="cart">
+			{{inject 'subtotal' cart.sub_total}}
+			{{#if cart.items.length}}
+				<div class="alertBox free-shipping-alert" style="display:none">
+					<div class="alertBox-column alertBox-icon">
+						<icon glyph="ic-success" class="icon" aria-hidden="true">
+							<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg>
+						</icon>
+					</div>
+					<p class="alertBox-column alertBox-message"></p>
+				</div>
+			{{/if}}
+			<div class="cart-content-container">
+				{{#if cart.items.length}}
+					<h1 class="block-title"><strong>Cart</strong></h1>
+					<div data-cart-status>
+						{{> components/cart/status-messages}}
+					</div>
+					<div data-cart-content>
+						{{> components/cart/content}}
+					</div>
+				{{else}}
+					<h1 class="block-title"><strong>{{lang 'cart.checkout.empty_cart'}}</strong></h1>
+					<div data-cart-status>
+						{{> components/cart/status-messages}}
+					</div>
+					{{{ remote_api_scripts }}}
+				{{/if}}
+			</div>
+
+			<div class="cart-totals-container">
+				<h2 class="block-title"><strong>Summary</strong></h2>
+				<div data-cart-totals>
+					{{> components/cart/totals}}
+				</div>
+                <!-- Placement v2 -->
+<klarna-placement
+  data-key="credit-promotion-badge"
+  data-locale="en-US"
+  data-purchase-amount="{{multiply cart.grand_total.value 100}}"
+></klarna-placement>
+<!-- end Placement -->
+				{{#if customer.customer_group_id '===' 2}}
+				{{else}}
+					{{#gte cart.sub_total.value 15}}
+						{{#if cart.show_primary_checkout_button}}
+							<div class="cart-actions">
+								<!-- <a class="button button--primary" href="{{urls.checkout.single_address}}" title="{{lang 'cart.checkout.title'}}">{{lang 'cart.checkout.button'}}</a> -->
+								<!-- Bolt addition -->
+								<div class="bolt-button-wrapper">
+									<div class="bolt-checkout-button bolt-multi-step-checkout responsive large-width" data-tid="instant-bolt-checkout-button">
+										<object data="https://connect.bolt.com/v1/checkout_button?publishable_key=VR52GRcCQ7ch.nhGjuMO6fSgl.0037bb0e4a255a2eba9bad964025c6dc92e6d9534941a270443f755cc482f14b"></object>
+									</div>
+									<div>
+										<img src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/cart-icons.png?t=1614195426&_ga=2.14211127.1071186501.1614003779-561192943.1605107176" alt="Payment logos">
+									</div>
+								</div>
+								<!-- End Bolt addition -->
+								{{#if cart.additional_checkout_buttons}}
+								    <div id="customAffirmPromoContainer"></div>
+									<div class="cart-additionalCheckoutButtons">
+                                     <!--   {{#gte cart.sub_total.value 250}}
+                                            <div style="text-align:center">
+                                                <br>
+                                                <a href="/checkout.php"><img src="https://cdn-assets.affirm.com/images/buttons/42x205-blue.jpg" alt=""></a>
+                                            </div> 
+                                        {{/gte}} -->
+										{{#each cart.additional_checkout_buttons}}
+											{{{this}}}
+										{{/each}}
+									</div>
+								{{/if}}
+								{{#if cart.show_multiple_address_shipping}}
+									<a class="checkoutMultiple" href="{{urls.checkout.multiple_address}}">
+										{{lang 'cart.preview.checkout_multiple'}}
+									</a>
+								{{/if}}
+							</div>
+						{{else}}
+							<div class="cart-actions">
+								<a class="button" href="{{urls.home}}" title="{{lang 'cart.continue_shopping'}}">{{lang 'cart.continue_shopping'}}</a>
+							</div>
+						{{/if}}
+						<div class="cart-total-block">
+							<h2 class="block-title"><strong>{{lang 'cart.coupon_code'}}</strong></h2>
+							{{> components/cart/coupon-input}}
+						</div>
+						<div class="cart-total-block">
+							<h2 class="block-title"><strong>{{lang 'cart.gift_certificate'}}</strong></h2>
+							{{> components/cart/gift-certificate-input}}
+						</div>
+					{{else}}
+						<div class="order-minimum-disclaimer alertBox alertBox--danger">
+							<div class="alertBox-column alertBox-icon">
+								<icon glyph="ic-success" class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg></icon>
+							</div>
+							<p class="alertBox-column alertBox-message">Minimum order of <strong>$15</strong> required to check&nbsp;out</p>
+						</div>
+					{{/gte}}
+				{{/if}}
+			</div>
+		</section>
+	</main>
+</div>
+{{/partial}}
+{{> layout/base}}
+{{#gte cart.sub_total.value 15}}
+<!-- Bolt addition -->
+<script>
+	var config = { childList: true, subtree: true };
+		// Change totalClassName
+	var totalClassName = "cart-total-grandTotal";
+	var totalPrice = "";
+	var Boltbtn = document.getElementsByClassName('bolt-button-wrapper')[0];
+	var callback = function(mutationsList) {
+		var elms = document.getElementsByClassName(totalClassName);
+		if (elms.length == 0) {
+			return;
+		}
+		var newPrice = elms[0].innerText;
+		if (newPrice !== totalPrice && window.BoltCheckout && window.BoltCheckout.reloadBigCommerceCart) {
+			window.BoltCheckout.reloadBigCommerceCart();
+		}
+		totalPrice = newPrice;
+	};
+	new MutationObserver(callback).observe(document.body, config);
+</script>
+<!-- End Bolt additiion -->
+{{/gte}}

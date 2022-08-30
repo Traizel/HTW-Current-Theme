@@ -1,0 +1,53 @@
+// =============================================================================
+// ALERTS
+// =============================================================================
+
+.alertBox {
+    border-radius: $alert-radius;
+	color: stencilColor("alert-color");
+	svg {
+		fill: currentColor;
+	}
+	&.alertBox--success {
+		color: #155724;
+		background-color: #d4edda;
+		border-color: #c3e6cb;
+	}
+	&.alertBox--danger,
+	&.alertBox--error {
+		color: #A40000;
+		background-color: #ffdddd;
+		border-color: #ffdddd;
+	}
+	&.alertBox--warning {
+		color: $yellow;
+		background-color: rgba(223, 166, 34, 0.15);
+		border-color: rgba(223, 166, 34, 0.5);
+	}
+	&.alertBox--info {
+		color: stencilColor("alert-color");
+		background-color: rgba(0, 107, 214, 0.15);
+	}
+}
+
+.alertBox-icon {
+    .icon {
+        @include square(25px);
+    }
+}
+
+.alertBox--info {
+    color: stencilColor("alert-color");
+    background-color: rgba(0, 107, 214, 0.15);
+    // border: 1px solid #006bd6;
+	svg {
+		fill: currentColor;
+	}
+    .alertBox-close {
+
+        // scss-lint:disable SelectorDepth, NestingDepth
+        svg {
+            fill: $color-infoLight;
+        }
+    }
+}

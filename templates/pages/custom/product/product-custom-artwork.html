@@ -1,0 +1,46 @@
+---
+product:
+    videos:
+        limit: {{theme_settings.productpage_videos_count}}
+    reviews:
+        limit: {{theme_settings.productpage_reviews_count}}
+    related_products:
+        limit: {{theme_settings.productpage_related_products_count}}
+    similar_by_views:
+        limit: {{theme_settings.productpage_similar_by_views_count}}
+---
+{{#partial "page"}}
+	{{inject 'product' product}}
+	{{inject 'productId' product.id}}
+	{{inject 'brand' product.brand}}
+	{{inject 'customFields' product.custom_fields}}
+	{{inject 'similarProducts' product.similar_by_views}}
+	{{inject 'bulkDiscountRates' product.bulk_discount_rates}}
+	<div class="breadcrumbs-row bg-light-gray stretch-full">
+		{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+	</div>
+
+	<div itemscope itemtype="http://schema.org/Product" data-custom-artwork>
+		{{> components/products/product-view schema=true}}
+		<section class="productView-tabs">
+			{{> components/products/tabs}}
+		</section>
+
+		{{#if product.similar_by_views}}
+			<section class="section home-product-section">
+				<h2 class="section-title text-center">Customers Also Bought</h2>
+				{{#if settings.data_tag_enabled}}
+					{{> components/products/carousel products=product.similar_by_views columns=theme_settings.homepage_new_products_column_count list="Customers Also Bought"}}
+				{{else}}
+					{{> components/products/carousel products=product.similar_by_views columns=theme_settings.homepage_new_products_column_count}}
+				{{/if}}
+
+			</section>
+		{{/if}}
+
+		{{> components/products/reviews reviews=product.reviews product=product urls=urls}}
+
+		{{> components/products/custom-transfer-forms}}
+	</div>
+{{/partial}}
+{{> layout/base}}

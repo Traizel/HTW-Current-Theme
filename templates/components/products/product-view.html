@@ -1,0 +1,370 @@
+<div class="productView" data-event-type="product" data-entity-id="{{product.id}}" data-name="{{product.title}}" data-product-category="{{#each product.category}}{{#if @last}}{{this}}{{else}}{{this}}, {{/if}}{{/each}}" data-product-brand="{{product.brand.name}}" data-product-price="{{#if product.price.with_tax}}{{product.price.with_tax.value}}{{else}}{{product.price.without_tax.value}}{{/if}}">
+    {{#if schema}}
+        <meta property="product:retailer_item_id" content="{{product.id}}">
+        <meta itemprop="url" content="{{product.url}}">
+        <meta itemprop="description" content="{{ sanitize product.description }}"/>
+	{{/if}}
+	{{#if product.brand}}
+		<div itemprop="brand" itemscope itemtype="http://schema.org/Brand">
+			<meta itemprop="name" content="{{product.brand.name}}"/>
+			<meta itemprop="url" content="{{product.brand.url}}">
+		</div>
+	{{/if}}
+	{{#each product.reviews.messages}}
+		{{#if error}}
+			{{> components/common/alert/alert-error error}}
+		{{/if}}
+		{{#if success}}
+			{{> components/common/alert/alert-success success}}
+		{{/if}}
+	{{/each}}
+
+    <section class="productView-images" data-image-gallery>
+        {{!--
+            Note that these image sizes are coupled to image sizes used in /assets/js/theme/common/product-details.js
+            for variant/rule image replacement
+        --}}
+        <figure class="productView-image"
+                data-image-gallery-main
+                {{#if product.main_image}}
+                data-zoom-image="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size }}"
+                {{/if}}
+                >
+            <div class="productView-img-container">
+                {{!-- Remove the surrounding a-element if there is no main image. --}}
+                {{#if product.main_image}}
+                    <a href="{{getImageSrcset product.main_image (cdn theme_settings.default_image_product) 1x=theme_settings.zoom_size}}"
+                        target="_blank"{{#if schema}} itemprop="image"{{/if}}>
+                {{/if}}
+                {{> components/common/responsive-img
+                    image=product.main_image
+                    class="productView-image--default"
+                    fallback_size=theme_settings.product_size
+                    lazyload=false
+                    default_image=theme_settings.default_image_product
+                    otherAttributes="data-main-image" width='358' height='358'
+				}}
+				<div class="shine"></div>
+                {{!-- Remove the surrounding a-element if there is no main image. --}}
+                {{#if product.main_image}}
+                    </a>
+                {{/if}}
+            </div>
+        </figure>
+        <ul class="productView-thumbnails"{{#gt product.images.length 5}} data-slick='{
+                "infinite": false,
+                "mobileFirst": true,
+                "slidesToShow": 5,
+                "slidesToScroll": 1
+            }'{{/gt}}>
+            {{#each product.images}}
+				<li class="productView-thumbnail">
+					<a
+						class="productView-thumbnail-link"
+						href="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"
+						data-image-gallery-item
+						data-image-gallery-new-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.product_size}}"
+						data-image-gallery-new-image-srcset="{{getImageSrcset this use_default_sizes=true}}"
+						data-image-gallery-zoom-image-url="{{getImageSrcset this (cdn ../theme_settings.default_image_product) 1x=../theme_settings.zoom_size}}"
+					>
+					{{> components/common/responsive-img
+						image=this
+						fallback_size=../theme_settings.productview_thumb_size
+						lazyload=false
+					}}
+					<div class="shine"></div>
+					</a>
+				</li>
+			{{/each}}
+        </ul>
+    </section>
+
+	<section class="productView-productTitle">
+		<h1 class="productView-title" {{#if schema}}itemprop="name"{{/if}}><strong>{{product.title}}</strong></h1>
+		<div class="productView-rating"{{#if product.num_reviews '>' 0}}{{#if schema}} itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating"{{/if}}{{/if}}>
+			{{#if settings.show_product_rating}}
+				{{#if product.num_reviews '>' 0}}
+					{{#if schema}}
+						<meta itemprop="ratingValue" content="{{product.rating}}">
+						<meta itemprop="ratingCount" content="{{product.num_reviews}}">
+						<meta itemprop="reviewCount" content="{{product.num_reviews}}">
+					{{/if}}
+				{{/if}}
+				{{> components/products/ratings rating=product.rating}}
+				{{#if product.num_reviews '>' 0}}
+					<strong>  ({{product.num_reviews}})</strong>
+				{{/if}}
+				{{#if settings.show_product_reviews}}
+					<span class="productView-reviewLink">
+						<a class="clr-blue" href="{{product.url}}{{#if is_ajax}}#write_review{{/if}}"
+							{{#unless is_ajax }}data-reveal-id="modal-review-form"{{/unless}}>
+							{{lang 'products.reviews.new'}}
+						</a>
+					</span>
+				{{/if}}
+			{{/if}}
+			{{#if settings.show_product_reviews}}
+				{{> components/products/modals/writeReview}}
+			{{/if}}
+		</div>
+    </section>
+
+    <section class="productView-details">
+		<form class="form{{#if product.options}}{{else}} text-center{{/if}}" method="post" action="{{product.cart_url}}" enctype="multipart/form-data" data-cart-item-add>
+			<div class="productView-options">
+			{{#if (limit product.sku 8) '===' 'INKSOFT-'}}
+			    <div>
+			        <p><strong>Scroll down for product information</strong></p>
+			    </div>
+			{{/if}}
+			{{#unless (limit product.sku 8) '===' 'INKSOFT-'}}
+			{{#if product.id '===' '5189'}}
+			    <div style="text-align: center;">
+			        <p><strong><a href="/supacolor-designer/">Size and create your Supacolor custom transfers with our NEW Supacolor Designer!</a></strong></p>
+			    </div>
+			{{/if}}
+			{{#if product.id '===' '5195'}}
+			    <div style="text-align: center;">
+			        <p><strong><a href="/supacolor-designer/">Size and create your Supacolor custom transfers with our NEW Supacolor Designer!</a></strong></p>
+			    </div>
+			{{/if}}
+			{{#if product.id '===' '5197'}}
+			    <div style="text-align: center;">
+			        <p><strong><a href="/supacolor-designer/">Size and create your Supacolor custom transfers with our NEW Supacolor Designer!</a></strong></p>
+			    </div>
+			{{/if}}
+			{{#if product.id '===' '5301'}}
+			    <div style="text-align: center;">
+			        <p><strong><a href="/supacolor-designer/">Size and create your Supacolor custom transfers with our NEW Supacolor Designer!</a></strong></p>
+			    </div>
+			{{/if}}
+			{{#if product.id '===' '5302'}}
+			    <div style="text-align: center;">
+			        <p><strong><a href="/supacolor-designer/">Size and create your Supacolor custom transfers with our NEW Supacolor Designer!</a></strong></p>
+			    </div>
+			{{/if}}
+			{{#if product.options}}
+				<div>
+					<div data-product-option-change style="display:none;">
+						{{#each product.options}}
+							{{{dynamicComponent 'components/products/options'}}}
+						{{/each}}
+					</div>
+				</div>
+			{{/if}}
+			{{#if theme_settings.show_product_quantity_box}}
+				<br/>
+    			<div>
+        		<label class="form-label form-label--alternate"
+               		for="qty[]">{{lang 'products.quantity'}}  *</label>
+            		<div class="form-increment" data-quantity-change>
+                		<button class="button button-xs button--icon" data-action="dec">
+                    		<span class="is-srOnly">{{lang 'products.quantity_decrease'}}</span>
+                    		<i class="icon" aria-hidden="true"><svg><use xlink:href="#icon-remove-circle"/></svg></i>
+                		</button>
+                		<input class="form-input form-input--incrementTotal"
+                       	id="qty[]"
+                       	name="qty[]"
+                     	type="tel"
+                       	value="{{#if product.min_purchase_quantity}}{{product.min_purchase_quantity}}{{else}}1{{/if}}"
+                       	data-quantity-min="{{product.min_purchase_quantity}}"
+                       	data-quantity-max="{{product.max_purchase_quantity}}"
+                       	min="1"
+                       	pattern="[0-9]*"
+                       	aria-live="polite">
+                		<button class="button button-xs button--icon" data-action="inc">
+                    		<span class="is-srOnly">{{lang 'products.quantity_increase'}}</span>
+                    		<i class="icon" aria-hidden="true"><svg><use xlink:href="#icon-add-circle"/></svg></i>
+                		</button>
+            		</div>
+    			</div>
+			{{/if}}
+			{{#if product.options}}
+				{{else}}
+					{{#if product.id '===' '2651'}}
+						<div class="productView-options">
+							{{> components/products/custom-full-color-digital-transfer-instructions}}
+						</div>
+					{{else if product.id '===' '2657'}}
+						<div class="productView-options">
+							{{> components/products/custom-dye-sublimation-transfer-instructions}}
+						</div>
+					{{else if product.id '===' '2658'}}
+						<div class="productView-options">
+							{{> components/products/custom-full-color-digital-sign-decal-instructions}}
+						</div>
+					{{else if product.id '===' '2664'}}
+						<div class="productView-options">
+							{{> components/products/custom-rhinestone-transfer-instructions}}
+						</div>
+					{{else if product.id '===' '5257'}}
+						<div class="productView-options">
+							{{> components/products/custom-wall-decal-instructions}}
+						</div>
+					{{else if product.id '===' '5314'}}
+						<div class="productView-options">
+							{{> components/products/custom-sticky-dye-sublimation-instructions}}
+						</div>
+					{{/if}}
+			{{/if}}
+			{{/unless}}
+			</div>
+			<div class="productView-price-qty bg-light-gray">
+				<input type="hidden" name="action" value="add">
+				<input type="hidden" name="product_id" value="{{product.id}}"/>
+				{{#if product.call_for_price}}
+					<p class="productView-price call-for-price">
+						<span>{{product.call_for_price}}</span>
+					</p>
+				{{else}}
+					<div class="productView-price">
+						{{> components/products/price price=product.price schema_org=schema}}
+					</div>
+					{{> components/common/login-for-pricing}}
+				{{/if}}
+				{{{region name="product_below_price"}}}
+				<div class="form-field form-field--stock{{#unless product.stock_level}} u-hiddenVisually{{/unless}}">
+					<label class="form-label form-label--alternate">
+						{{lang 'products.current_stock'}}
+						<span data-product-stock>{{product.stock_level}}</span>
+					</label>
+				</div>
+				<script>
+				document.getElementsByTagName("klarna-placement")[0].setAttribute("data-total_amount", product.price.without_tax.value);
+window.KlarnaOnsiteService = window.KlarnaOnsiteService || [];
+window.KlarnaOnsiteService.push({ eventName: 'refresh-placements' });
+</script>
+				<!-- Placement v2 -->
+<klarna-placement
+  data-key="credit-promotion-badge"
+  data-locale="en-US"
+  data-total_amount="{{product.price.without_tax.value}}"
+></klarna-placement>
+<!-- end Placement -->
+				{{#if (limit product.sku 8) '===' 'INKSOFT-'}}
+					<div class="form-action">
+                        <a href="/supacolor-designer/" id="form-action-addToCart" class="button button--primary">Start Order</a>
+                    </div>
+				{{else if product.can_purchase}}
+				<div class="add-to-cart-controls">
+					{{> components/products/add-to-cart}}
+				</div>
+				{{#if product.id '===' '5189'}}
+				<br/>
+			    <div class="form-action">
+                        <a href="/supacolor-designer/" id="form-action-addToCart" class="button button--primary">Start Designing</a>
+                </div>
+			    {{/if}}
+		    	{{#if product.id '===' '5195'}}
+		    	<br/>
+			    <div class="form-action">
+                        <a href="/supacolor-designer/" id="form-action-addToCart" class="button button--primary">Start Designing</a>
+                </div>
+			    {{/if}}
+			    {{#if product.id '===' '5197'}}
+			    <br/>
+			    <div class="form-action">
+                        <a href="/supacolor-designer/" id="form-action-addToCart" class="button button--primary">Start Designing</a>
+                </div>
+			    {{/if}}
+			    {{#if product.id '===' '5301'}}
+			    <br/>
+			    <div class="form-action">
+                        <a href="/supacolor-designer/" id="form-action-addToCart" class="button button--primary">Start Designing</a>
+                </div>
+			    {{/if}}
+			    {{#if product.id '===' '5302'}}
+			    <br/>
+			    <div class="form-action">
+                        <a href="/supacolor-designer/" id="form-action-addToCart" class="button button--primary">Start Designing</a>
+                </div>
+			    {{/if}}
+				{{else}}
+					{{#if product.id '===' '2651'}}
+						{{> components/products/custom-form-button}}
+					{{else if product.id '===' '2657'}}
+						{{> components/products/custom-form-button}}
+					{{else if product.id '===' '2658'}}
+						{{> components/products/custom-form-button}}
+					{{else if product.id '===' '2664'}}
+						{{> components/products/custom-form-button}}
+					{{else if product.id '===' '5257'}}
+						{{> components/products/custom-form-button}}
+					{{else if product.id '===' '5314'}}
+						{{> components/products/custom-form-button}}
+					{{else}}
+						<div id="klaviyo-addToCart"></div>
+					{{/if}}
+				{{/if}}
+					<br />
+					<div class="productView-sku"{{#unless product.sku}} style="display:none"{{/unless}}>
+						<span class="form-label">Sku:</span>
+						<span data-product-sku {{#if schema}} itemprop="sku"{{/if}}>{{ product.sku }}</span>
+					</div>
+				{{#if product.out_of_stock}}
+					{{#if product.out_of_stock_message}}
+						{{> components/common/alert/alert-error product.out_of_stock_message}}
+					{{else}}
+						{{> components/common/alert/alert-error (lang 'products.sold_out')}}
+					{{/if}}
+				{{/if}}
+				{{#if product.availability}}
+					<p class="product-availability-message">{{product.availability}}</p>
+				{{/if}}
+				{{#if product.release_date}}
+					<p class="product-availability-message">{{product.release_date}}</p>
+				{{/if}}
+				<br/>
+		    {{#if (limit product.sku 6) '===' 'SISER-'}}
+		    {{#unless (limit product.sku 7) '===' 'SISER-T'}}
+		    {{#unless (limit product.sku 7) '===' 'SISER-H'}}
+		    {{#unless (limit product.sku 7) '===' 'SISER-W'}}
+		    {{#unless (limit product.sku 7) '===' 'SISER-P'}}
+				<div>
+					<p>DISCLAIMER! May delay your order 1-3 business days. This product also requires a <a href="https://www.heattransferwarehouse.com/printed-htv-masks/" target="_blank">heat transfer mask </a> to properly work. <a href="https://www.heattransferwarehouse.com/patterned-adhesive-vinyl/" target="_blank">Adhesive Vinyl Patterns</p>
+				</div>
+			{{/unless}}
+			{{/unless}}
+			{{/unless}}
+		    {{/unless}}
+			{{/if}}
+		    {{#if (limit product.sku 2) '===' 'CS'}}
+				<div>
+					<p>May delay your order 1-3 business days. <a href="https://www.heattransferwarehouse.com/patterned-vinyl/" target="_blank">Patterned HTV</p>
+				</div>
+			{{/if}}
+			{{#if (limit product.sku 2) '===' 'CD'}}
+				<div>
+					<p>DISCLAIMER! May delay your order 1-3 business days. This product requires a <a href="https://www.heattransferwarehouse.com/printed-htv-masks/" target="_blank"> heat transfer mask </a> to properly work. <a href="https://www.heattransferwarehouse.com/patterned-adhesive-vinyl/" target="_blank">Adhesive Vinyl Patterns</p>
+				</div>
+			{{/if}}
+			{{#if (limit product.sku 2) '===' 'SD'}}
+				<div>
+					<p>All Stock Rhinestones currently have a 3-5 business day production time before your order will ship. </p>
+				</div>
+			{{/if}}	
+			{{#if product.id '===' '9623'}}
+				<div>
+					<p>DISCLAIMER! This product requires a heat transfer mask to properly work. We recommend <a href="https://www.heattransferwarehouse.com/siser-ttd-high-tack-mask-sheets/" target="_blank">Siser TTD High Tack Mask Sheets </p>
+				</div>
+			{{/if}}	
+			{{#if product.id '===' '9960'}}
+				<div>
+					<p>We recommend this product for <a href="https://www.heattransferwarehouse.com/siser-colorprint-easy-sheets/" target="_blank">Siser ColorPrint Easy Sheets </p>
+				</div>				
+			{{/if}}			
+			</div>
+		</form>
+	</section>
+	<div class="clearfix clear"></div>
+</div>
+
+<div id="previewModal" class="modal modal--large" data-reveal>
+    <a href="#" class="modal-close" aria-label="{{lang 'common.close'}}" role="button">
+        <span aria-hidden="true">&#215;</span>
+    </a>
+    <div class="modal-content"></div>
+	<div class="loadingOverlay"></div>
+</div>
+<div>
+</div><br></br>

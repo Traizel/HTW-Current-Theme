@@ -1,0 +1,643 @@
+<form
+	id="drag-drop-form"
+	action="https://api.heattransferwarehouse.com/custom-transfer/rhinestone"
+	method="post"
+	enctype="multipart/form-data"
+	data-current-step="1"
+>
+	<nav class="form-progress-nav">
+		<div class="progress-bar">
+			<div class="fill"></div>
+		</div>
+		<div class="step-icon contact text-center">
+			<i class="icon envelope">
+				<svg><use xlink:href="#icon-envelope" /></svg>
+			</i>
+			<i class="icon checkmark">
+				<svg><use xlink:href="#icon-checkmark" /></svg>
+			</i>
+			Contact information
+		</div>
+		<div class="step-icon artwork text-center">
+			<i class="icon upload">
+				<svg><use xlink:href="#icon-upload" /></svg>
+			</i>
+			<i class="icon checkmark">
+				<svg><use xlink:href="#icon-checkmark" /></svg>
+			</i>
+			Upload artwork
+		</div>
+		<div class="step-icon rhinestones text-center">
+			<i class="icon rhinestone">
+				<svg><use xlink:href="#icon-rhinestone" /></svg>
+			</i>
+			<i class="icon checkmark">
+				<svg><use xlink:href="#icon-checkmark" /></svg>
+			</i>
+			Rhinestones
+		</div>
+	</nav>
+	<ul id="error-msg"></ul>
+	<section class="form-section one contact">
+		<div class="form-flex-container">
+			<input
+				type="hidden"
+				name="product"
+				value="{{product.title}}"
+				required
+			/>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="contact-first-name">
+					First name
+				</label>
+				<input
+					type="text"
+					name="first-name"
+					id="contact-first-name"
+					placeholder="John"
+					required
+				/>
+			</div>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="contact-last-name">
+					Last name
+				</label>
+				<input
+					type="text"
+					name="last-name"
+					id="contact-last-name"
+					placeholder="Doe"
+					required
+				/>
+			</div>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="contact-email">Email</label>
+				<input
+					type="email"
+					name="email"
+					id="contact-email"
+					placeholder="your@email.com"
+					required
+				/>
+			</div>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="contact-phone">Phone</label>
+				<input type="tel" name="phone" id="contact-phone" />
+			</div>
+			<div class="form-input-container">
+				<label class="form-label" for="contact-company">Company</label>
+				<input type="text" name="company" id="contact-company" />
+			</div>
+		</div>
+	</section>
+	<section class="form-section two artwork">
+		<div class="form-flex-container">
+			<div class="form-input-container">
+				<div class="drag-drop-input text-center">
+					<input
+						class="drag-drop-file"
+						type="file"
+						name="files[]"
+						id="artwork-files"
+						data-multiple-caption="{count} files selected"
+						multiple
+					/>
+					<label for="artwork-files">
+						<i class="icon upload-icon">
+							<svg><use xlink:href="#icon-upload-alt" /></svg>
+						</i>
+						<span class="file-placeholder">
+							<span class="drag-drop-text">
+								Drag and drop files
+							</span>
+							<span class="clr-blue">Choose a file</span>
+						</span>
+					</label>
+					<div class="status-uploading">Uploading&hellip;</div>
+					<div class="status-success">Done!</div>
+					<div class="status-error">
+						Error!
+						<span></span>
+					</div>
+				</div>
+			</div>
+		</div>
+		<p class="upload-disclaimer">
+			Before uploading, please be sure you trust this site, have rights to
+			the data, and want to share this content to the owner of this upload
+			widget.
+		</p>
+		<div class="alertBox">
+			<div class="alertBox-column alertBox-icon">
+				<icon glyph="ic-success" class="icon" aria-hidden="true">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+					>
+						<path
+							d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+						></path>
+					</svg>
+				</icon>
+			</div>
+			<p class="alertBox-column alertBox-message">
+				Complicated designs may not work on small locations such as a
+				pocket. Complicated designs may not work at all, especially
+				those that require small lettering. When submitting your
+				artwork, please let us know if we can omit smaller letters,
+				otherwise we may not be able to complete your design.
+			</p>
+		</div>
+	</section>
+	<section class="form-section three rhinestones">
+		<div class="form-flex-container">
+			<div class="form-input-container one-half">
+				<label class="form-label" for="rhinestones-width">Width</label>
+				<input
+					type="text"
+					name="transfer-width"
+					id="rhinestones-width"
+				/>
+			</div>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="rhinestones-height">
+					Height
+				</label>
+				<input
+					type="text"
+					name="transfer-height"
+					id="rhinestones-height"
+				/>
+			</div>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="rhinestones-quantity">
+					Quantity
+				</label>
+				<input
+					type="number"
+					name="quantity"
+					min="1"
+					step="1"
+					id="rhinestones-quantity"
+				/>
+			</div>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="rhinestones-color">
+					Garment color
+				</label>
+				<input
+					type="text"
+					name="garment-color"
+					id="rhinestones-garment-color"
+				/>
+			</div>
+			<div class="form-input-container" multiple-checkboxes>
+				<label class="form-label" for="rhinestones-rhinestones">
+					Rhinestone colors
+				</label>
+				<div class="selected-rhinestones multiple-options-bin"></div>
+				<div class="row rsx_table">
+					<input
+						id="rhinestones-color-crystal"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Crystal"
+					/>
+					<label
+						for="rhinestones-color-crystal"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://www.heattransferwarehouse.com/images/rhinestones/crystal.jpg"
+						/>
+						<strong>Crystal</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-ab-crystal"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="AB Crystal"
+					/>
+					<label
+						for="rhinestones-color-ab-crystal"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://www.heattransferwarehouse.com/images/rhinestones/crystal-ab.jpg"
+						/>
+						<strong>AB Crystal</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-aquamarine"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Aquamarine"
+					/>
+					<label
+						for="rhinestones-color-aquamarine"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://www.heattransferwarehouse.com/images/rhinestones/aquamarine.jpg"
+						/>
+						<strong>Aquamarine</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-blue-zirconian"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Blue Zirconian"
+					/>
+					<label
+						for="rhinestones-color-blue-zirconian"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://www.heattransferwarehouse.com/images/rhinestones/542.jpg"
+						/>
+						<strong>Blue Zirconian</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-cobalt"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Cobalt"
+					/>
+					<label
+						for="rhinestones-color-cobalt"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://www.heattransferwarehouse.com/images/rhinestones/cobalt.jpg"
+						/>
+						<strong>Cobalt</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-light-sapphire"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Light-Sapphire"
+					/>
+					<label
+						for="rhinestones-color-light-sapphire"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://www.heattransferwarehouse.com/images/rhinestones/light-sapphire.jpg"
+						/>
+						<strong>Light-Sapphire</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-sapphire"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Sapphire"
+					/>
+					<label
+						for="rhinestones-color-sapphire"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://www.heattransferwarehouse.com/images/rhinestones/sapphire.jpg"
+						/>
+						<strong>Sapphire</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-orange"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Orange"
+					/>
+					<label
+						for="rhinestones-color-orange"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://www.heattransferwarehouse.com/images/rhinestones/orange.jpg"
+						/>
+						<strong>Orange</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-topaz"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Topaz"
+					/>
+					<label
+						for="rhinestones-color-topaz"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://www.heattransferwarehouse.com/images/rhinestones/topaz.jpg"
+						/>
+						<strong>Topaz</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-smoked-topaz"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Smoked Topaz"
+					/>
+					<label
+						for="rhinestones-color-smoked-topaz"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://www.heattransferwarehouse.com/images/rhinestones/smoked-topaz.jpg"
+						/>
+						<strong>Smoked Topaz</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-siam"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Siam"
+					/>
+					<label
+						for="rhinestones-color-siam"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://www.heattransferwarehouse.com/images/rhinestones/siam.jpg"
+						/>
+						<strong>Siam</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-green"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Green"
+					/>
+					<label
+						for="rhinestones-color-green"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://www.heattransferwarehouse.com/images/rhinestones/green.jpg"
+						/>
+						<strong>Green</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-peridot"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Peridot"
+					/>
+					<label
+						for="rhinestones-color-peridot"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://www.heattransferwarehouse.com/images/rhinestones/535.jpg"
+						/>
+						<strong>Peridot</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-amethyst"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Amethyst"
+					/>
+					<label
+						for="rhinestones-color-amethyst"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://www.heattransferwarehouse.com/images/rhinestones/amethyst.jpg"
+						/>
+						<strong>Amethyst</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-tanzanite"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Tanzanite"
+					/>
+					<label
+						for="rhinestones-color-tanzanite"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://www.heattransferwarehouse.com/images/rhinestones/544.jpg"
+						/>
+						<strong>Tanzanite</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-pink"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Pink"
+					/>
+					<label
+						for="rhinestones-color-pink"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://www.heattransferwarehouse.com/images/rhinestones/pink.jpg"
+						/>
+						<strong>Pink</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-light-rose"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Light Rose"
+					/>
+					<label
+						for="rhinestones-color-light-rose"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://www.heattransferwarehouse.com/images/rhinestones/light-rose.jpg"
+						/>
+						<strong>Light Rose</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-yellow"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Yellow"
+					/>
+					<label
+						for="rhinestones-color-yellow"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://www.heattransferwarehouse.com/images/rhinestones/yellow.jpg"
+						/>
+						<strong>Yellow</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-black-diamond"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Black Diamond"
+					/>
+					<label
+						for="rhinestones-color-black-diamond"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://www.heattransferwarehouse.com/images/rhinestones/black-diamond.jpg"
+						/>
+						<strong>Black Diamond</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-jet-black"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Jet Black"
+					/>
+					<label
+						for="rhinestones-color-jet-black"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://www.heattransferwarehouse.com/images/rhinestones/jet-black.jpg"
+						/>
+						<strong>Jet Black</strong>
+					</label>
+				</div>
+				<!-- <div class="color-swatch-dropdown">
+					<div class="option-swatch-placeholder">
+						<span class="form-option-variant form-option-variant--color"></span>
+						<input class="initial-value swatch-text" type="text" placeholder="Select Color">
+					</div>
+					<div class="option-swatch-container">
+						<label class="form-option form-option-swatch" for="rhinestone-color-500" data-title="500 crystal">
+							<span class="form-option-variant form-option-variant--pattern" title="500 Crystal" style="background-image: url('https://cdn11.bigcommerce.com/s-et4qthkygq/images/stencil/22x22/attribute_value_images/677.preview.jpg?t=1560799567');"></span>
+							<input class="form-radio" type="radio" value="crystal" id="rhinestone-color-500" required>
+						</label>
+						<label class="form-option form-option-swatch" for="rhinestone-color-522" data-title="522 ab crystal">
+							<span class="form-option-variant form-option-variant--pattern" title="522 AB Crystal" style="background-image: url('https://cdn11.bigcommerce.com/s-et4qthkygq/images/stencil/22x22/attribute_value_images/696.preview.jpg?t=1560799583');"></span>
+							<input class="form-radio" type="radio" value="696" id="rhinestone-color-522" required>
+						</label>
+						<label class="form-option form-option-swatch" for="rhinestone-color-519" data-title="519 aquamarine">
+							<span class="form-option-variant form-option-variant--pattern" title="519 Aquamarine" style="background-image: url('https://cdn11.bigcommerce.com/s-et4qthkygq/images/stencil/22x22/attribute_value_images/681.preview.jpg?t=1560799570');"></span>
+							<input class="form-radio" type="radio" value="681" id="rhinestone-color-519" required>
+						</label>
+						<label class="form-option form-option-swatch" for="rhinestone-color-542" data-title="542 blue zircon">
+							<span class="form-option-variant form-option-variant--pattern" title="542 Blue Zircon" style="background-image: url('https://cdn11.bigcommerce.com/s-et4qthkygq/images/stencil/22x22/attribute_value_images/682.preview.jpg?t=1560799571');"></span>
+							<input class="form-radio" type="radio" value="682" id="rhinestone-color-542" required>
+						</label>
+						<label class="form-option form-option-swatch" for="rhinestone-color-508" data-title="508 cobalt">
+							<span class="form-option-variant form-option-variant--pattern" title="508 Cobalt" style="background-image: url('https://cdn11.bigcommerce.com/s-et4qthkygq/images/stencil/22x22/attribute_value_images/678.preview.jpg?t=1560799567');"></span>
+							<input class="form-radio" type="radio" value="cobalt" id="rhinestone-color-508" required>
+						</label>
+						<label class="form-option form-option-swatch" for="rhinestone-color-506" data-title="506 light sapphire">
+							<span class="form-option-variant form-option-variant--pattern" title="506 Light Sapphire" style="background-image: url('https://cdn11.bigcommerce.com/s-et4qthkygq/images/stencil/22x22/attribute_value_images/680.preview.jpg?t=1560799569');"></span>
+							<input class="form-radio" type="radio" value="680" id="rhinestone-color-506" required>
+						</label>
+						<label class="form-option form-option-swatch" for="rhinestone-color-507" data-title="507 sapphire">
+							<span class="form-option-variant form-option-variant--pattern" title="507 Sapphire" style="background-image: url('https://cdn11.bigcommerce.com/s-et4qthkygq/images/stencil/22x22/attribute_value_images/679.preview.jpg?t=1560799568');"></span>
+							<input class="form-radio" type="radio" value="sapphire" id="rhinestone-color-507" required>
+						</label>
+						<label class="form-option form-option-swatch" for="rhinestone-color-505" data-title="505 orange">
+							<span class="form-option-variant form-option-variant--pattern" title="505 Orange" style="background-image: url('https://cdn11.bigcommerce.com/s-et4qthkygq/images/stencil/22x22/attribute_value_images/687.preview.jpg?t=1560799575');"></span>
+							<input class="form-radio" type="radio" value="687" id="rhinestone-color-505" required>
+						</label>
+						<label class="form-option form-option-swatch" for="rhinestone-color-511" data-title="511 topaz">
+							<span class="form-option-variant form-option-variant--pattern" title="511 Topaz" style="background-image: url('https://cdn11.bigcommerce.com/s-et4qthkygq/images/stencil/22x22/attribute_value_images/686.preview.jpg?t=1560799574');"></span>
+							<input class="form-radio" type="radio" value="686" id="rhinestone-color-511" required>
+						</label>
+						<label class="form-option form-option-swatch" for="rhinestone-color-512" data-title="512 smoked topaz">
+							<span class="form-option-variant form-option-variant--pattern" title="512 Smoked Topaz" style="background-image: url('https://cdn11.bigcommerce.com/s-et4qthkygq/images/stencil/22x22/attribute_value_images/691.preview.jpg?t=1560799579');"></span>
+							<input class="form-radio" type="radio" value="691" id="rhinestone-color-512" required>
+						</label>
+						<label class="form-option form-option-swatch" for="rhinestone-color-503" data-title="503 siam">
+							<span class="form-option-variant form-option-variant--pattern" title="503 Siam" style="background-image: url('https://cdn11.bigcommerce.com/s-et4qthkygq/images/stencil/22x22/attribute_value_images/688.preview.jpg?t=1560799576');"></span>
+							<input class="form-radio" type="radio" value="688" id="rhinestone-color-503" required>
+						</label>
+						<label class="form-option form-option-swatch" for="rhinestone-color-514" data-title="514 green">
+							<span class="form-option-variant form-option-variant--pattern" title="514 Green" style="background-image: url('https://cdn11.bigcommerce.com/s-et4qthkygq/images/stencil/22x22/attribute_value_images/683.preview.jpg?t=1560799572');"></span>
+							<input class="form-radio" type="radio" value="683" id="rhinestone-color-514" required>
+						</label>
+						<label class="form-option form-option-swatch" for="rhinestone-color-535" data-title="535 peridot">
+							<span class="form-option-variant form-option-variant--pattern" title="535 Peridot" style="background-image: url('https://cdn11.bigcommerce.com/s-et4qthkygq/images/stencil/22x22/attribute_value_images/684.preview.jpg?t=1560799573');"></span>
+							<input class="form-radio" type="radio" value="684" id="rhinestone-color-535" required>
+						</label>
+						<label class="form-option form-option-swatch" for="rhinestone-color-502" data-title="502 amethyst">
+							<span class="form-option-variant form-option-variant--pattern" title="502 Amethyst" style="background-image: url('https://cdn11.bigcommerce.com/s-et4qthkygq/images/stencil/22x22/attribute_value_images/695.preview.jpg?t=1560799582');"></span>
+							<input class="form-radio" type="radio" value="695" id="rhinestone-color-502" required>
+						</label>
+						<label class="form-option form-option-swatch" for="rhinestone-color-544" data-title="544 tanzanite">
+							<span class="form-option-variant form-option-variant--pattern" title="544 Tanzanite" style="background-image: url('https://cdn11.bigcommerce.com/s-et4qthkygq/images/stencil/22x22/attribute_value_images/694.preview.jpg?t=1560799581');"></span>
+							<input class="form-radio" type="radio" value="694" id="rhinestone-color-544" required>
+						</label>
+						<label class="form-option form-option-swatch" for="rhinestone-color-525" data-title="525 pink">
+							<span class="form-option-variant form-option-variant--pattern" title="525 Pink" style="background-image: url('https://cdn11.bigcommerce.com/s-et4qthkygq/images/stencil/22x22/attribute_value_images/689.preview.jpg?t=1560799577');"></span>
+							<input class="form-radio" type="radio" value="689" id="rhinestone-color-525" required>
+						</label>
+						<label class="form-option form-option-swatch" for="rhinestone-color-533" data-title="533 light rose">
+							<span class="form-option-variant form-option-variant--pattern" title="533 Light Rose" style="background-image: url('https://cdn11.bigcommerce.com/s-et4qthkygq/images/stencil/22x22/attribute_value_images/690.preview.jpg?t=1560799578');"></span>
+							<input class="form-radio" type="radio" value="690" id="rhinestone-color-533" required>
+						</label>
+						<label class="form-option form-option-swatch" for="rhinestone-color-527" data-title="527 citrine">
+							<span class="form-option-variant form-option-variant--pattern" title="527 Citrine" style="background-image: url('https://cdn11.bigcommerce.com/s-et4qthkygq/images/stencil/22x22/attribute_value_images/685.preview.jpg?t=1560799574');"></span>
+							<input class="form-radio" type="radio" value="685" id="rhinestone-color-527" required>
+						</label>
+						<label class="form-option form-option-swatch" for="rhinestone-color-516" data-title="516 black diamond">
+							<span class="form-option-variant form-option-variant--pattern" title="516 Black Diamond" style="background-image: url('https://cdn11.bigcommerce.com/s-et4qthkygq/images/stencil/22x22/attribute_value_images/693.preview.jpg?t=1560799581');"></span>
+							<input class="form-radio" type="radio" value="693" id="rhinestone-color-516" required>
+						</label>
+						<label class="form-option form-option-swatch" for="rhinestone-color-517" data-title="517 jet black">
+							<span class="form-option-variant form-option-variant--pattern" title="517 Jet Black" style="background-image: url('https://cdn11.bigcommerce.com/s-et4qthkygq/images/stencil/22x22/attribute_value_images/692.preview.jpg?t=1560799580');"></span>
+							<input class="form-radio" type="radio" value="692" id="rhinestone-color-517" required>
+						</label>
+					</div>
+				</div> -->
+			</div>
+		</div>
+	</section>
+	<div class="form-actions text-center">
+		<button class="button button--ghost back" data-step="back">Back</button>
+		<button class="button button--primary next" data-step="next">
+			Next
+		</button>
+		<button class="button button--ghost skip" data-step="next">Skip</button>
+		<button class="button button--primary submit" data-step="submit">
+			Submit
+		</button>
+	</div>
+</form>

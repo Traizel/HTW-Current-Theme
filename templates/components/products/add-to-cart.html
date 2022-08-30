@@ -1,0 +1,78 @@
+<!-- Bolt changed -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+<script
+  id="bolt-connect"
+  type="text/javascript"
+  src="https://connect.bolt.com/connect-bigcommerce.js"
+  data-publishable-key="VR52GRcCQ7ch.nhGjuMO6fSgl.0037bb0e4a255a2eba9bad964025c6dc92e6d9534941a270443f755cc482f14b"
+  data-shopping-cart-id="BigCommerce"
+  data-storefront-api-token="{{settings.storefront_api.token}}">
+</script>
+<script>
+    // logic is used to detect if we need to show PPC
+    jQuery(document).ready(function(){
+        let showPPC = false;
+        let categoriesWrapEl = jQuery("#bolt-changed-product-categories-list");
+        let categoriesList = categoriesWrapEl.find("div");
+        let showPPCCategories = [
+            "Heat Press Machines",
+            "Vinyl Cutters",
+            "Sublimation Printers"
+        ];
+        if(categoriesList[0]){
+            jQuery.each(categoriesList, function(){
+                let currentCategory = jQuery(this).text();
+                showPPCCategories.forEach(function(targetCategory, i, arr) {
+                    if (currentCategory.search(targetCategory) != "-1"){
+                        showPPC = true;
+                    }
+                });
+            });
+        }
+        if (showPPC){
+            jQuery("#product-page-checkout-wrapper").removeClass("display-none-important");
+        }
+    });
+</script>
+<style>
+    .display-none-important {
+        display: none !important;
+    }
+</style>
+<!-- Bolt changed -->
+
+
+
+<!-- Bolt changed -->
+<div class="bolt-changed">
+    <!-- All categories list used to detect if we need to show PPC depending on product category -->
+    <div id="bolt-changed-product-categories-list" style="display:none">
+        {{#each product.category}}
+            <div>{{this}}</div>
+        {{/each}}
+    </div>
+</div>
+<!-- Bolt changed -->
+
+<div class="alertBox productAttributes-message" style="display:none">
+    <div class="alertBox-column alertBox-icon">
+        <icon glyph="ic-success" class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg></icon>
+    </div>
+    <p class="alertBox-column alertBox-message"></p>
+</div>
+{{#or customer (if theme_settings.restrict_to_login '!==' true)}}
+    <div class="form-action">
+        <input onclick="pintrk('track', 'addtocart', {value:{{product.price.without_tax.value}}, order_quantity: 1, currency: 'USD', product_id:'{{product.id}}'});" 
+ id="form-action-addToCart" data-wait-message="{{lang 'products.adding_to_cart'}}" class="button button--primary" type="submit"
+            value="{{#if product.pre_order}}{{lang 'products.pre_order'}}{{else}}{{lang 'products.add_to_cart'}}{{/if}}">
+    </div>
+
+    <!-- Bolt changed -->
+    <div id="product-page-checkout-wrapper" class="bolt-button-wrapper display-none-important" style="display:none">
+        <div class="bolt-product-checkout-button bolt-multi-step-checkout"></div>
+    </div>
+    <!-- Bolt changed -->
+    
+{{/or}}

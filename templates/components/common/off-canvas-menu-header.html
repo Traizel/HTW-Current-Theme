@@ -1,0 +1,14 @@
+<div class="off-canvas-header">
+	<a href="/"><img class="off-canvas-logo" src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/htwmark-web.png?t=1574264243&_ga=2.239342851.1615074976.1574264048-1613878204.1574264048" alt="Heat Transfer Warehouse Inc"></a>
+	{{#if customer}}
+		<a class="off-canvas-user" href="{{urls.account.index}}">
+			<span>{{customer.name}}</span>
+			<i class="icon navPages-action-userIcon" aria-hidden="true"><svg><use xlink:href="#icon-person" /></svg></i>
+		</a>
+	{{else}}
+		<a class="off-canvas-user" href="{{urls.auth.login}}">
+			<span>My Account</span>
+			<i class="icon navPages-action-userIcon" aria-hidden="true"><svg><use xlink:href="#icon-person" /></svg></i>
+		</a>
+	{{/if}}
+</div>

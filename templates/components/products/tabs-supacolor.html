@@ -1,0 +1,122 @@
+<div class="tabs-contents" data-tab role="tablist">
+	<button type="button" class="collapsible" data-tab-description href="#tab-description" role="tab" tabindex="0" aria-selected="true" controls="tab-description">{{lang 'products.description'}}</button>
+	<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-description">
+        <h2>Stock Supacolor Transfers! The Supacolor wearable transfers you love, but come in designs created from our Art
+	    Department!</h2>
+        <ul>
+	        <li><span>Free for Personal/Commercial Use</span></li>
+	        <li><span>Product Dimensions:</span></li>
+	        {{> components/products/description}}
+	        <li>Most popular garment heat transfer and most versatile.</li>
+	        <li>Suitable for cotton, poly-cotton and polyester fabrics</li>
+	        <li>Not Suitable for fabrics that are sublimated or ones that migrate</li>
+	        <li>Supacolor transfers have a lifespan up to 6 months. For best results, make sure to store the transfers at room temperature.</li>
+	        <li>Tested to 50+ domestic wash cycles</li>
+	        <li>Good stretch and great soft hand feel</li>
+	        <li><strong>We do NOT recommend</strong>&nbsp;the Cricut Easy Press or any manual hand heat press as it is difficult
+		to achieve and maintain the pressure needed for these transfers</li>
+	        <li>Stock Supacolor Transfer is considered a custom ordered product, this makes it a non-returnable product.&nbsp;<a
+			href="https://www.heattransferwarehouse.com/suapcolor-refund-policy/" target="_blank">See Supacolor Return
+			Policy</a>.</li>
+	        <li><a href="https://www.heattransferwarehouse.com/supacolor-wearables-screen-print-transfer/"
+			target="_blank">Custom Supacolor Wearables Transfer</a></li>
+	        <li><a href="https://www.heattransferwarehouse.com/supacolor-heat-transfers/" target="_blank">Custom Supacolor
+			Transfers</a></li>
+        </ul>
+	</div>
+	{{#if product.videos.list.length}}
+		<button type="button" class="collapsible" data-tab-videos href="#tab-videos" role="tab" tabindex="0" aria-selected="true" controls="tab-videos">Videos</button>
+		<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-videos">
+			<div class="videoGallery-list">
+				<div class="videoGallery-item">
+					<h4 class="videoGallery-title">Patterned Vinyl from Start to Finish</h4>
+					<a href="//www.youtube.com/embed/cv2jIykWQFc" data-featherlight="iframe" data-featherlight-iframe-allowfullscreen="true">
+						<div class="video-figure">
+							<img alt="Patterned Vinyl from Start to Finish" class="lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="//i.ytimg.com/vi/cv2jIykWQFc/hqdefault.jpg"/>
+							<div class="shine"></div>
+						</div>
+					</a>
+				</div>
+				{{#each product.videos.list}}
+					<div class="videoGallery-item">
+						<h4 class="videoGallery-title">{{title_long}}</h4>
+						<a href="//www.youtube.com/embed/{{id}}" data-featherlight="iframe" data-featherlight-iframe-allowfullscreen="true">
+							<div class="video-figure">
+								<img alt="{{title_long}}" class="lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="//i.ytimg.com/vi/{{id}}/hqdefault.jpg"/>
+								<div class="shine"></div>
+							</div>
+						</a>
+					</div>
+				{{/each}}
+			</div>
+			<link href="//cdn.rawgit.com/noelboss/featherlight/1.7.13/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+			<script src="//code.jquery.com/jquery-latest.min.js" defer></script>
+			<script src="//cdn.rawgit.com/noelboss/featherlight/1.7.13/release/featherlight.min.js" type="text/javascript" charset="utf-8" defer></script>
+		</div>
+	{{/if}}
+	<button style="display:none;" type="button" class="collapsible" data-tab-application-instructions href="#tab-application-instructions" role="tab" tabindex="0" aria-selected="true" controls="tab-application-instructions">Application Instructions</button>
+	<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-application-instructions">
+		<div id="Application-Instructions" class="cf">
+			<ul class="application-instructions">
+		        <li class="temp">290&deg; F - 320&deg; F</li>
+		        <li class="time">10-15 seconds</li>
+		        <li class="peelany">Peel hot an immediately</li>
+		        <li class="pressure">High pressure</li>
+		        <li class="mats">Polyester, cotton, poly/cotton blends</li>
+		        <li class="care">Domestic wash. Tumble or line dry. DO NOT dry clean.</li>
+		        <li>For best results use a Heat Press Machine</li>
+	        </ul>
+	        <img class="__mce_add_custom__" title="wearable.jpg" src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/wearable.jpg" alt="wearable.jpg" width="1066" height="1058" />
+		</div>
+	</div>
+	{{#if product.custom_fields}}
+		<button style="display:none;" type="button" class="collapsible" data-tab-shipping href="#tab-shipping" role="tab" tabindex="0" aria-selected="true" controls="tab-shipping">Shipping</button>
+		<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-shipping">
+			<ul class="shipping-restrictions">
+				{{#each product.custom_fields}}
+					{{#if name '===' 'location'}}
+						<li class="{{name}}"><strong>{{uppercase value}}</strong> PRODUCT; will make your entire order ship from our {{value}} location.</li>
+					{{/if}}
+					{{#if name '===' 'location_colors'}}
+						{{#if value '===' 'all'}}
+						{{else}}
+							<li class="{{name}}">location specific colors: <strong>{{value}}</strong>.</li>
+						{{/if}}
+					{{/if}}
+					{{#if name '===' 'dropship_colors'}}
+						<li class="{{name}}">This product has options that are <strong>DROPSHIP ONLY</strong> and, if selected, this material will be sent via ground shipping from the manufacturer and will ship separately from your order.</li>
+					{{/if}}
+					{{#if name '===' 'shipping'}}
+						{{#if value '===' 'ground only'}}
+							<li class="{{name}}"><strong>GROUND ONLY</strong> shipping; will make your entire order ship 2-5 day ground.</li>
+						{{/if}}
+					{{/if}}
+				{{/each}}
+			</ul>
+		</div>
+			<!-- FAQ -->
+		<button style="display:none;" type="button" class="collapsible" data-tab-faq href="#tab-faq" role="tab" tabindex="0" aria-selected="true" controls="tab-faq">FAQ</button>
+		<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-faq">
+			<ul class="faq-question-list">
+				{{#each product.custom_fields}}
+					{{#if name '===' 'faq question'}}
+						<li class="{{dashcase name}}"><strong>Q: {{value}}</strong></li>
+					{{/if}}
+					{{#if name '===' 'faq answer'}}
+						<li class="{{dashcase name}}"><strong>A:</strong> {{value}}</li>
+					{{/if}}
+				{{/each}}
+			</ul>
+			<script>
+				window.addEventListener('DOMContentLoaded', function() {
+					if (document.querySelectorAll('.faq-question-list li').length > 1) {
+						document.querySelector('[data-tab-faq]').style.display = '';
+					}
+				});
+			</script>
+		</div>
+		<!-- /FAQ -->
+	{{/if}}
+	<button style="display:none;" type="button" class="collapsible" data-tab-pricing href="#tab-pricing" role="tab" tabindex="0" aria-selected="true" controls="tab-pricing">Pricing</button>
+	<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-pricing"></div>
+</div>

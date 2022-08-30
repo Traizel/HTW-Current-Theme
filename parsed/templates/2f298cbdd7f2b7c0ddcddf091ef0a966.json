@@ -1,0 +1,1 @@
+{"components/common/login-for-pricing":"<p translate class=\"productView-price login-for-pricing\" style=\"display:none;\">\n    <a class=\"button button--block button--primary\" href=\"{{urls.auth.login}}\">Log in for pricing</a>\n</p>\n"}

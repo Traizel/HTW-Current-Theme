@@ -1,0 +1,224 @@
+// =============================================================================
+// PRODUCT VIEW (CSS)
+// =============================================================================
+
+// Product view layout
+// -----------------------------------------------------------------------------
+
+.productView {
+	@include grid-row($behavior: 'nest');
+	margin: 0;
+	padding: 1rem 0 0;
+	.modal & {
+		padding-bottom: 0;
+		padding-top: 0;
+	}
+	@include breakpoint('small') {
+		padding: 0;
+	}
+}
+
+.productView--quickView {
+	.socialLinks-item--print {
+		display: none;
+	}
+}
+
+.productView-images {
+	@include grid-column(12);
+	padding-left: 0;
+	padding-right: 0;
+	border-radius: 10%;
+
+	@include breakpoint('small') {
+		padding-left: spacing('base');
+		padding-right: spacing('base');
+		border-radius: 10%;
+	}
+	@include breakpoint('medium') {
+		width: grid-calc(6, $total-columns);
+		border-radius: 10%;
+	}
+	@include breakpoint('large') {
+		width: grid-calc(4, $total-columns);
+		max-width: 400px;
+		border-radius: 10%;
+	}
+}
+
+.productView-details {
+	@include grid-column(12);
+	padding-left: 0;
+	padding-right: 0;
+
+	.form {
+		font-size: 0;
+	}
+
+	.productView-price-qty,
+	.productView-options {
+		color: #424548;
+		font-size: 0.875rem;
+		margin-left: auto;
+		margin-right: auto;
+		max-width: 360px;
+		padding: 30px;
+		text-align: left;
+		width: 100%;
+	}
+	.productView-options {
+		padding-top: 0;
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	@include breakpoint('small') {
+		padding-left: spacing('base');
+		padding-right: spacing('base');
+		.productView-options,
+		.productView-price-qty {
+			display: inline-block;
+			vertical-align: top;
+			width: 50%;
+		}
+		.productView-options {
+			padding-right: 30px;
+		}
+	}
+	@include breakpoint('medium') {
+		clear: right;
+		float: right;
+		width: grid-calc(6, $total-columns);
+		.productView-options,
+		.productView-price-qty {
+			width: 100%;
+			float: none;
+		}
+		input + .productView-price-qty {
+			float: right;
+		}
+	}
+	@include breakpoint('large') {
+		width: calc(100% - 400px);
+		.productView-options,
+		.productView-price-qty {
+			width: calc(100% - 360px);
+		}
+		.productView-options {
+			max-width: unset;
+			padding-left: 30px;
+			padding-right: 30px;
+		}
+		.productView-price-qty {
+			border-radius: 0.25rem;
+			width: 360px;
+			max-width: 360px;
+		}
+	}
+}
+
+.productView-options {
+	.cross-sell-link {
+		color: $brand-blue;
+		display: inline-block;
+		margin: 0.5rem 0;
+		&:hover,
+		&:focus {
+			color: #0050a2;
+		}
+	}
+}
+
+.productView-price-qty {
+	.alertBox {
+		padding-left: 0.5rem;
+		padding-right: 0.5rem;
+		font-size: 12px;
+		font-weight: 600;
+		// color: #A40000;
+		// background-color: #ffdddd;
+		// border-color: #ffdddd;
+		// svg {
+		// 	fill: currentColor;
+		// }
+		// &.success {
+		// 	color: #155724;
+		// 	background-color: #d4edda;
+		// 	border-color: #c3e6cb;
+		// }
+		// &.warning {
+		// 	color: #155724;
+		// 	background-color: #d4edda;
+		// 	border-color: #c3e6cb;
+		// }
+		// &.danger {
+		// 	color: #155724;
+		// 	background-color: #d4edda;
+		// 	border-color: #c3e6cb;
+		// }
+	}
+	.alertBox-icon {
+		padding-right: 0.5rem;
+	}
+}
+
+.productView-tabs {
+	@include grid-column(12);
+	float: none;
+	padding-left: spacing('base');
+	padding-right: spacing('base');
+	.tabs {
+		display: none;
+	}
+	@include breakpoint('small') {
+		.tabs {
+			display: block;
+		}
+		.mobile-tab {
+			display: none;
+			text-align: left;
+		}
+	}
+}
+
+.collapsible {
+	@media only screen and (min-width: 600px) {
+		size: 2rem;
+	}
+	background-color: #eee;
+	color: #444;
+	cursor: pointer;
+	padding: 18px;
+	width: 100%;
+	border: none;
+	text-align: left;
+	outline: none;
+	font-size: 15px;
+}
+
+.collapsible:hover {
+	background-color: #ccc;
+}
+
+.content {
+	padding: 0 18px;
+	display: none;
+	overflow: hidden;
+	background-color: #f1f1f1;
+	max-height: 0;
+	transition: max-height 0.2s ease-out;
+}
+
+.collapsible:after {
+	content: '\02795';
+	/* Unicode character for "plus" sign (+) */
+	font-size: 13px;
+	color: white;
+	float: right;
+	margin-left: 5px;
+}
+
+.is-active:after {
+	content: "\2796";
+	/* Unicode character for "minus" sign (-) */
+}

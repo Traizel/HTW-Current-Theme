@@ -1,0 +1,41 @@
+{{#if reviews.total}}
+<section class="toggle productReviews" id="product-reviews" data-product-reviews>
+    <h4 class="toggle-title">
+        {{lang 'products.reviews.header' total=reviews.total}}
+        <span class="productView-reviewLink">
+            <a class="clr-blue" href="{{product.url}}{{#if is_ajax}}#write_review{{/if}}"
+                {{#unless is_ajax }}data-reveal-id="modal-review-form"{{/unless}}>
+                {{lang 'products.reviews.new'}}
+            </a>
+        </span>
+    </h4>
+    <div class="toggle-content is-open" id="productReviews-content" aria-hidden="false">
+        <ul class="productReviews-list" id="productReviews-list">
+            {{#each reviews.list}}
+            <li class="productReview">
+                <article itemprop="review" itemscope itemtype="http://schema.org/Review">
+                    <header>
+						<i class="icon userIcon" aria-hidden="true"><svg><use xlink:href="#icon-person" /></svg></i>
+						<div>
+							<h5 itemprop="name" class="productReview-title">{{ title }}</h5>
+							{{#if name}}
+								<meta itemprop="author" content="{{name}}">
+								<p class="productReview-author">{{{name}}}</p>
+							{{else}}
+								<p class="productReview-author">Guest</p>
+							{{/if}}
+							<span class="productReview-rating rating--small" itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating">
+								{{> components/products/ratings rating=rating}}
+								<span class="productReview-ratingNumber" itemprop="ratingValue">{{ rating }}</span>
+							</span>
+						</div>
+                    </header>
+                    <p itemprop="reviewBody" class="productReview-body">{{{text}}}</p>
+                </article>
+            </li>
+            {{/each}}
+        </ul>
+        {{> components/common/paginator pagination.reviews}}
+    </div>
+</section>
+{{/if}}

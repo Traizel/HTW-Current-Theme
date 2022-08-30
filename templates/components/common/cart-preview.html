@@ -1,0 +1,111 @@
+<!-- Bolt addition -->
+<script
+  id="bolt-connect"
+  type="text/javascript"
+  src="https://connect.bolt.com/connect-bigcommerce.js"
+  route-public-token="e09f49d2-1f21-4829-8529-89c096173172"
+  data-publishable-key="VR52GRcCQ7ch.nhGjuMO6fSgl.0037bb0e4a255a2eba9bad964025c6dc92e6d9534941a270443f755cc482f14b"
+  data-storefront-api-token="{{settings.storefront_api.token}}"
+  data-shopping-cart-id="BigCommerce">
+</script>
+<!-- End Bolt addition -->
+<div class="previewCart">
+    {{#if cart.items.length}}
+        <ul class="previewCartList">
+            {{#each cart.items}}
+                <li class="previewCartItem" data-item-row data-id="{{id}}" data-product-id="{{product_id}}" data-quantity="{{quantity}}" data-unit-price="{{#if price_discounted}}{{price_discounted.value}}{{else}}{{price.value}}{{/if}}">
+                    <div class="previewCartItem-image">
+                        {{#if type '==' 'GiftCertificate'}}
+                            <img class="lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{cdn ../../theme_settings.default_image_gift_certificate}}" alt="GiftCertificate" title="GiftCertificate">
+                        {{else}}
+                            <img class="lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="{{getImage image 'productthumb_size' (cdn ../../theme_settings.default_image_product)}}" alt="{{image.alt}}" title="{{image.alt}}">
+						{{/if}}
+						<div class="shine"></div>
+                    </div>
+
+                    <div class="previewCartItem-content">
+                        <h6 class="previewCartItem-name">
+                            <a href="{{url}}" alt="{{name}}" title="{{name}}">{{name}}</a>
+						</h6>
+						{{#if options}}
+							<ul class="previewCartItem-options">
+								{{#each options}}
+                                    {{#if name '===' 'Transfer Count'}}
+                                    {{else}}
+                                        <li data-option-id="{{id}}">
+                                            {{#contains name 'Comments'}}<em>&ldquo;{{/contains}}
+                                            {{{value}}}
+                                            {{#contains name 'Comments'}}&rdquo;</em>{{/contains}}
+                                        </li>
+                                    {{/if}}
+								{{/each}}
+							</ul>
+						{{/if}}
+					</div>
+					<div class="previewCartItem-qty">
+						Quantity: {{quantity}}
+					</div>
+                </li>
+            {{/each}}
+        </ul>
+        <div class="previewCartAction bg-light-gray">
+				<div class="previewCartAction-subtotal">
+					<label class="previewCartAction-subtotal-label">Subtotal</label>
+					<span class="previewCartAction-subtotal-price">{{cart.sub_total.formatted}}</span>
+				</div>
+				<div class="previewCartAction-checkout">
+					{{#if customer.customer_group_id '===' 2}}
+					{{else}}
+						{{#gte cart.sub_total.value 15}}
+							<!-- Bolt addition -->
+                    <div class="bolt-button-wrapper">
+                        <div class="bolt-checkout-button bolt-multi-step-checkout responsive large-width"
+                            data-tid="instant-bolt-checkout-button">
+                            <object
+                                data="https://connect.bolt.com/v1/checkout_button?publishable_key=VR52GRcCQ7ch.nhGjuMO6fSgl.0037bb0e4a255a2eba9bad964025c6dc92e6d9534941a270443f755cc482f14b"></object>
+                        </div>
+                        <div>
+                            <img src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/cart-icons.png?t=1614195426&_ga=2.14211127.1071186501.1614003779-561192943.1605107176"
+                                alt="Payment logos">
+                        </div>
+                    </div>
+							<!-- End Bolt addition -->
+						{{else}}
+							<div class="order-minimum-disclaimer alertBox alertBox--danger">
+								<div class="alertBox-column alertBox-icon">
+									<icon glyph="ic-success" class="icon" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"></path></svg></icon>
+								</div>
+								<p class="alertBox-column alertBox-message">Minimum order of <strong>$15</strong> required to check&nbsp;out</p>
+							</div>
+						{{/gte}}
+					{{/if}}
+				</div>
+        </div>
+    {{else}}
+        <div class="previewCart-emptyBody">
+            {{lang 'cart.checkout.empty_cart'}}
+        </div>
+    {{/if}}
+</div>
+{{#gte cart.sub_total.value 15}}
+<!-- Bolt addition -->
+<script>
+    var config = { childList: true, subtree: true };
+		// Change totalClassName
+    var previewTotalClassName = "previewCartAction-subtotal-price";
+    var totalPrice = "";
+    var callback = function(mutationsList) {
+        var elms = document.getElementsByClassName(previewTotalClassName);
+        if (elms.length == 0) {
+            return;
+        }
+        var newPrice = elms[0].innerHTML;
+        if (newPrice !== totalPrice && window.BoltCheckout) {
+            window.BoltCheckout.reloadBigCommerceCart();
+        }
+        totalPrice = newPrice;
+    };
+    new MutationObserver(callback).observe(document.body, config);
+</script>
+<!-- End Bolt additiion -->
+{{/gte}}

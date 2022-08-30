@@ -1,0 +1,112 @@
+<div class="off-canvas-menu bg-light-gray">
+	<div class="off-canvas-menu-container">
+		{{> components/common/off-canvas-menu-header}}
+		<nav class="navPages mobile-menu">
+			<ul class="navPages-list" data-level="0">
+				<li class="navPage-item">
+					<a class="navPages-action has-subMenu" href="javascript:void(0)" data-level="1">
+						Heat Transfer Vinyl {{> components/common/more-icon}}
+					</a>
+					{{> components/common/megamenu/heat-transfer-vinyl show_back=true view_all_url='/heat-transfer-vinyl/' view_all_name='Heat Transfer Vinyl' }}
+				</li>
+				<li class="navPage-item">
+					<a class="navPages-action has-subMenu" href="javascript:void(0)" data-level="1">
+						Adhesive Vinyl {{> components/common/more-icon}}
+					</a>
+					{{> components/common/megamenu/sign-making show_back=true view_all_url='/adhesive-vinyl/' view_all_name='Adhesive & Craft Vinyl'}}
+				</li>
+				<li class="navPage-item">
+					<a class="navPages-action has-subMenu" href="javascript:void(0)" data-level="1">
+						Blanks {{> components/common/more-icon}}
+					</a>
+					{{> components/common/megamenu/blanks show_back=true view_all_url='/blanks/' view_all_name='Blanks'}}
+				</li>
+				<li class="navPage-item">
+					<a class="navPages-action has-subMenu" href="javascript:void(0)" data-level="1">
+						Equipment {{> components/common/more-icon}}
+					</a>
+					{{> components/common/megamenu/equipment show_back=true view_all_url='/heat-transfer-vinyl-equipment/' view_all_name='Equipment'}}
+				</li>
+				<li class="navPage-item">
+					<a class="navPages-action has-subMenu" href="javascript:void(0)" data-level="1">
+						Printables {{> components/common/more-icon}}
+					</a>
+					{{> components/common/megamenu/printables show_back=true view_all_url='/printables/' view_all_name='Printables'}}
+				</li>
+				<li class="navPage-item">
+					<a class="navPages-action has-subMenu" href="javascript:void(0)" data-level="1">
+						Sublimation {{> components/common/more-icon}}
+					</a>
+					{{> components/common/megamenu/dye-sublimation show_back=true view_all_url='/dye-sublimation/' view_all_name='Dye Sublimation'}}
+				</li>
+				<li class="navPage-item">
+					<a class="navPages-action has-subMenu" href="javascript:void(0)" data-level="1">
+						Rhinestones {{> components/common/more-icon}}
+					</a>
+					{{> components/common/megamenu/rhinestones show_back=true view_all_url='/rhinestones/' view_all_name='Rhinestones'}}
+				</li>
+				<li class="navPage-item">
+					<a class="navPages-action has-subMenu" href="javascript:void(0)" data-level="1">
+						Clothing {{> components/common/more-icon}}
+					</a>
+					{{> components/common/megamenu/clothing show_back=true view_all_url='/clothing/' view_all_name='Clothing'}}
+				</li>
+				<li class="navPage-item">
+					<a class="navPage-subMenu-action navPages-action" href="javascript:void(0)" data-level="1">
+						Custom Transfers {{> components/common/more-icon}}
+					</a>
+					{{> components/common/megamenu/custom-transfers show_back=true view_all_url='/custom-transfers/' view_all_name='Custom Transfers'}}
+				</li>
+				<li class="navPage-item">
+					<a class="navPages-action has-subMenu" href="javascript:void(0)" data-level="1">
+						Accessories {{> components/common/more-icon}}
+					</a>
+					{{> components/common/megamenu/accessories show_back=true view_all_url='/accessories/' view_all_name='Accessories'}}
+				</li>
+				<li class="navPage-item">
+					<a class="navPages-action has-subMenu" href="javascript:void(0)" data-level="1">
+						Resources {{> components/common/more-icon}}
+					</a>
+					{{> components/common/megamenu/education show_back=true view_all_url='/education/' view_all_name='Education'}}
+				</li>
+				<!--<li class="navPages-item">-->
+				<!--	<a class="navPages-action" href="/whats-new/">New</a>-->
+				<!--</li>-->
+				<li class="navPages-item">
+					<a class="navPages-action" href="/sale/">Sale</a>
+				</li>
+				<li class="navPage-item">
+					<a class="navUser-action bolt-sso-custom" data-logged-in="true">{{lang 'common.logout'}}</a>
+				</li>
+			</ul>
+		</nav>
+		<a class="button button--secondary" href="/contact/">Contact Us</a>
+	</div>
+</div>
+<div class="off-canvas-overlay"></div>
+<script>
+        var insertAccountScript = function () {
+            var scriptTag = document.getElementById('bolt-account');
+            if (scriptTag) {
+                return;
+            }
+            scriptTag = document.createElement('script');
+            scriptTag.setAttribute('type', 'text/javascript');
+            scriptTag.setAttribute('async', '');
+            scriptTag.setAttribute('src', 'https://account.bolt.com/account.js');
+            scriptTag.setAttribute('id', 'bolt-account');
+            scriptTag.setAttribute('data-publishable-key', 'VR52GRcCQ7ch.nhGjuMO6fSgl.0037bb0e4a255a2eba9bad964025c6dc92e6d9534941a270443f755cc482f14b');
+            document.head.appendChild(scriptTag);
+        }
+      
+        function insertButtons() {
+            if (typeof BoltAccount === 'undefined') {
+                window.setTimeout(insertButtons, 100);
+                return;
+            }
+            BoltAccount.injectButtons();
+        }
+
+        insertAccountScript();
+        insertButtons();
+</script>

@@ -1,0 +1,660 @@
+<form
+	id="drag-drop-form"
+	action="https://api.heattransferwarehouse.com/custom-transfer/rhinestone"
+	method="post"
+	enctype="multipart/form-data"
+	data-current-step="1"
+>
+	<h2 class="form-title">Request a quote</h2>
+	<nav class="form-progress-nav">
+		<div class="progress-bar">
+			<div class="fill"></div>
+		</div>
+		<div class="step-icon contact text-center" data-step="1">
+			<i class="icon envelope">
+				<svg>
+					<use xlink:href="#icon-envelope" />
+				</svg>
+			</i>
+			<i class="icon checkmark">
+				<svg>
+					<use xlink:href="#icon-checkmark" />
+				</svg>
+			</i>
+			Contact information
+		</div>
+		<div class="step-icon artwork text-center" data-step="2">
+			<i class="icon upload">
+				<svg>
+					<use xlink:href="#icon-upload" />
+				</svg>
+			</i>
+			<i class="icon checkmark">
+				<svg>
+					<use xlink:href="#icon-checkmark" />
+				</svg>
+			</i>
+			Upload artwork
+		</div>
+		<div class="step-icon rhinestones text-center" data-step="3">
+			<i class="icon rhinestone">
+				<svg>
+					<use xlink:href="#icon-rhinestone" />
+				</svg>
+			</i>
+			<i class="icon checkmark">
+				<svg>
+					<use xlink:href="#icon-checkmark" />
+				</svg>
+			</i>
+			Rhinestones
+		</div>
+	</nav>
+	<ul id="error-msg"></ul>
+	<section class="form-section one contact">
+		<div class="form-flex-container">
+			<input
+				type="hidden"
+				name="product"
+				value="{{product.title}}"
+				required
+				aria-required="true"
+			/>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="contact-first-name">
+					First name
+				</label>
+				<input
+					type="text"
+					name="first-name"
+					id="contact-first-name"
+					placeholder="John"
+					required
+					aria-required="true"
+				/>
+			</div>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="contact-last-name">
+					Last name
+				</label>
+				<input
+					type="text"
+					name="last-name"
+					id="contact-last-name"
+					placeholder="Doe"
+					required
+					aria-required="true"
+				/>
+			</div>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="contact-email">Email</label>
+				<input
+					type="email"
+					name="email"
+					id="contact-email"
+					placeholder="your@email.com"
+					required
+					aria-required="true"
+				/>
+			</div>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="contact-phone">Phone</label>
+				<input
+					type="tel"
+					name="phone"
+					id="contact-phone"
+					required
+					aria-required="true"
+				/>
+			</div>
+			<div class="form-input-container">
+				<label class="form-label" for="contact-company">Company</label>
+				<input type="text" name="company" id="contact-company" />
+			</div>
+		</div>
+	</section>
+	<section class="form-section two artwork">
+		<div class="form-flex-container">
+			<div class="form-input-container">
+				<div class="drag-drop-input text-center">
+					<input
+						class="drag-drop-file"
+						type="file"
+						name="files[]"
+						id="artwork-files"
+						data-multiple-caption="{count} files selected"
+						multiple
+						accept="image/*,.ai,.eps,.pdf"
+					/>
+					<label for="artwork-files">
+						<i class="icon upload-icon">
+							<svg>
+								<use xlink:href="#icon-upload-alt" />
+							</svg>
+						</i>
+						<span class="file-placeholder">
+							<span class="drag-drop-text">
+								Drag and drop files
+							</span>
+							<span class="clr-blue">Choose a file</span>
+						</span>
+						<span class="file-clear">
+							<i class="icon clear-icon">
+								<svg>
+									<use xlink:href="#icon-close" />
+								</svg>
+							</i>
+						</span>
+					</label>
+				</div>
+			</div>
+		</div>
+		<p class="upload-disclaimer">
+			Before uploading, please be sure you trust this site, have rights to
+			the data, and want to share this content to the owner of this upload
+			widget.
+		</p>
+		<div class="alertBox">
+			<div class="alertBox-column alertBox-icon">
+				<icon glyph="ic-success" class="icon" aria-hidden="true">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+					>
+						<path
+							d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+						></path>
+					</svg>
+				</icon>
+			</div>
+			<p class="alertBox-column alertBox-message">
+				Complicated designs may not work on small locations such as a
+				pocket. Complicated designs may not work at all, especially
+				those that require small lettering. When submitting your
+				artwork, please let us know if we can omit smaller letters,
+				otherwise we may not be able to complete your design.
+			</p>
+		</div>
+	</section>
+	<section class="form-section three rhinestones">
+		<div class="form-flex-container">
+			<div class="form-input-container one-half">
+				<label class="form-label" for="transfer-width">
+					Transfer width
+				</label>
+				<input
+					type="text"
+					name="transfer-width"
+					id="transfer-width"
+					required
+					aria-required="true"
+				/>
+			</div>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="transfer-height">
+					Transfer height
+				</label>
+				<input
+					type="text"
+					name="transfer-height"
+					id="transfer-height"
+					required
+					aria-required="true"
+				/>
+			</div>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="transfer-quantity">
+					Quantity
+				</label>
+				<input
+					type="number"
+					name="quantity"
+					min="1"
+					step="1"
+					id="transfer-quantity"
+					required
+					aria-required="true"
+				/>
+			</div>
+			<div class="form-input-container one-half spacer"></div>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="garment-type">
+					Garment type
+				</label>
+				<input
+					type="text"
+					name="garment-type"
+					id="garment-type"
+					required
+					aria-required="true"
+				/>
+			</div>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="garment-color">
+					Garment color
+				</label>
+				<input
+					type="text"
+					name="garment-color"
+					id="garment-color"
+					required
+					aria-required="true"
+				/>
+			</div>
+			<div class="form-input-container" multiple-checkboxes>
+				<label class="form-label" for="rhinestones-rhinestones">
+					Rhinestone colors
+				</label>
+				<div class="selected-rhinestones multiple-options-bin"></div>
+				<div class="row rsx_table">
+					<input
+						id="rhinestones-color-crystal"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Crystal"
+					/>
+					<label
+						for="rhinestones-color-crystal"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/crystal.jpg"
+							alt="Crystal"
+						/>
+						<strong>Crystal</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-ab-crystal"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="AB Crystal"
+					/>
+					<label
+						for="rhinestones-color-ab-crystal"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/ab-crystal.jpg"
+							alt="AB Crystal"
+						/>
+						<strong>AB Crystal</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-aquamarine"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Aquamarine"
+					/>
+					<label
+						for="rhinestones-color-aquamarine"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/aquamarine.jpg"
+							alt="Aquamarine"
+						/>
+						<strong>Aquamarine</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-blue-zirconian"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Blue Zirconian"
+					/>
+					<label
+						for="rhinestones-color-blue-zirconian"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/blue-zircon.jpg"
+							alt="Blue Zirconian"
+						/>
+						<strong>Blue Zirconian</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-cobalt"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Cobalt"
+					/>
+					<label
+						for="rhinestones-color-cobalt"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/cobalt.jpg"
+							alt="Cobalt"
+						/>
+						<strong>Cobalt</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-light-sapphire"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Light-Sapphire"
+					/>
+					<label
+						for="rhinestones-color-light-sapphire"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/light-sapphire.jpg"
+							alt="Light Sapphire"
+						/>
+						<strong>Light Sapphire</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-sapphire"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Sapphire"
+					/>
+					<label
+						for="rhinestones-color-sapphire"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/sapphire.jpg"
+							alt="Sapphire"
+						/>
+						<strong>Sapphire</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-orange"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Orange"
+					/>
+					<label
+						for="rhinestones-color-orange"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/orange.jpg"
+							alt="Orange"
+						/>
+						<strong>Orange</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-topaz"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Topaz"
+					/>
+					<label
+						for="rhinestones-color-topaz"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/topaz.jpg"
+							alt="Topaz"
+						/>
+						<strong>Topaz</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-smoked-topaz"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Smoked Topaz"
+					/>
+					<label
+						for="rhinestones-color-smoked-topaz"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/smoked-topaz.jpg"
+							alt="Smoked Topaz"
+						/>
+						<strong>Smoked Topaz</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-siam"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Siam"
+					/>
+					<label
+						for="rhinestones-color-siam"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/siam.jpg"
+							alt="Siam"
+						/>
+						<strong>Siam</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-green"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Green"
+					/>
+					<label
+						for="rhinestones-color-green"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/green.jpg"
+							alt="Green"
+						/>
+						<strong>Green</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-peridot"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Peridot"
+					/>
+					<label
+						for="rhinestones-color-peridot"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/peridot.jpg"
+							alt="Peridot"
+						/>
+						<strong>Peridot</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-amethyst"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Amethyst"
+					/>
+					<label
+						for="rhinestones-color-amethyst"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/amethyst.jpg"
+							alt="Amethyst"
+						/>
+						<strong>Amethyst</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-tanzanite"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Tanzanite"
+					/>
+					<label
+						for="rhinestones-color-tanzanite"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/tanzanite.jpg"
+							alt="Tanzanite"
+						/>
+						<strong>Tanzanite</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-pink"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Pink"
+					/>
+					<label
+						for="rhinestones-color-pink"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/pink.jpg"
+							alt="Pink"
+						/>
+						<strong>Pink</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-light-rose"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Light Rose"
+					/>
+					<label
+						for="rhinestones-color-light-rose"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/light-pink.jpg"
+							alt="Light Rose"
+						/>
+						<strong>Light Rose</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-yellow"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Yellow"
+					/>
+					<label
+						for="rhinestones-color-yellow"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/citrine.jpg"
+							alt="Yellow"
+						/>
+						<strong>Yellow</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-black-diamond"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Black Diamond"
+					/>
+					<label
+						for="rhinestones-color-black-diamond"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/black-diamond.jpg"
+							alt="Black Diamond"
+						/>
+						<strong>Black Diamond</strong>
+					</label>
+
+					<input
+						id="rhinestones-color-jet-black"
+						class="is-srOnly"
+						type="checkbox"
+						name="rhinestones[]"
+						value="Jet Black"
+					/>
+					<label
+						for="rhinestones-color-jet-black"
+						class="col-25 text-center"
+					>
+						<img
+							src="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/jet-black.jpg"
+							alt="Jet Black"
+						/>
+						<strong>Jet Black</strong>
+					</label>
+				</div>
+			</div>
+		</div>
+	</section>
+	<section class="form-section four success">
+		<h3 class="form-section-heading">Thank you for your Submission!</h3>
+		<div class="success-icon">
+			<i class="icon checkmark"><svg><use xlink:href="#icon-checkmark" /></svg></i>
+		</div>
+		<p>We will review your artwork and get back to you within one business day!</p>
+	</section>
+	<div class="form-actions text-center">
+		<button class="button button--ghost back" data-step="back">Back</button>
+		<button class="button button--primary next" data-step="next">Next</button>
+		<button class="button button--primary submit" data-step="submit">
+			Submit Request
+			<i class="icon uploading-icon">
+				<svg
+					width="100%"
+					height="100%"
+					viewBox="0 0 100 100"
+					preserveAspectRatio="xMidYMid"
+					class="lds-rolling"
+				>
+					<circle
+						cx="50"
+						cy="50"
+						fill="none"
+						stroke="#ffffff"
+						stroke-width="10"
+						r="35"
+						stroke-dasharray="164.93361431346415 56.97787143782138"
+						transform="rotate(323.598 50 50)"
+					>
+						<animateTransform
+							attributeName="transform"
+							type="rotate"
+							calcMode="linear"
+							values="0 50 50;360 50 50"
+							keyTimes="0;1"
+							dur="1s"
+							begin="0s"
+							repeatCount="indefinite"
+						></animateTransform>
+					</circle>
+				</svg>
+			</i>
+		</button>
+	</div>
+</form>

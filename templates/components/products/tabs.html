@@ -1,0 +1,87 @@
+<div class="tabs-contents" data-tab role="tablist">
+	<button type="button" class="collapsible is-active" data-tab-description href="#tab-description" role="tab" tabindex="0" aria-selected="true" controls="tab-description">{{lang 'products.description'}}</button>
+	<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent is-active" id="tab-description">
+		{{> components/products/description}}
+		<br/>
+	</div>
+	{{#if product.videos.list.length}}
+		<button type="button" class="collapsible" data-tab-videos href="#tab-videos" role="tab" tabindex="0" aria-selected="true" controls="tab-videos">Videos</button>
+		<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-videos">
+			<div class="videoGallery-list">
+				{{#each (limit product.videos.list 4)}}
+					<div class="videoGallery-item">
+						<a href="//www.youtube.com/embed/{{id}}" data-featherlight="iframe" data-featherlight-iframe-allowfullscreen="true">
+							<div class="video-figure">
+								<img alt="{{title_long}}" class="lazyload" data-sizes="auto" src="{{cdn 'img/loading.svg'}}" data-src="//i.ytimg.com/vi/{{id}}/hqdefault.jpg"/>
+								<div class="shine"></div>
+							</div>
+						</a>
+						<h4 class="videoGallery-title"><a href="//www.youtube.com/embed/{{id}}" data-featherlight="iframe" data-featherlight-iframe-allowfullscreen="true">{{title_long}}</a></h4>
+					</div>
+				{{/each}}
+			</div>
+			<link href="//cdn.rawgit.com/noelboss/featherlight/1.7.13/release/featherlight.min.css" type="text/css" rel="stylesheet" />
+			<script src="//code.jquery.com/jquery-latest.min.js" defer></script>
+			<script src="//cdn.rawgit.com/noelboss/featherlight/1.7.13/release/featherlight.min.js" type="text/javascript" charset="utf-8" defer></script>
+			<br/>
+		</div>
+	{{/if}}
+	<button style="display:none;" type="button" class="collapsible" data-tab-application-instructions href="#tab-application-instructions" role="tab" tabindex="0" aria-selected="true" controls="tab-application-instructions">Application Instructions</button>
+	<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-application-instructions"></div>
+	{{#if product.custom_fields}}
+		<button style="display:none;" type="button" class="collapsible" data-tab-shipping href="#tab-shipping" role="tab" tabindex="0" aria-selected="true" controls="tab-shipping">Shipping</button>
+		<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-shipping">
+			<ul class="shipping-restrictions">
+				{{#each product.custom_fields}}
+					{{#if name '===' 'location'}}
+						<li class="{{name}}"><strong>{{uppercase value}}</strong> PRODUCT; will make your entire order ship from our {{value}} location.</li>
+					{{/if}}
+					{{#if name '===' 'location_colors'}}
+						{{#if value '===' 'all'}}
+						{{else}}
+							<li class="{{name}}">location specific colors: <strong>{{value}}</strong>.</li>
+						{{/if}}
+					{{/if}}
+					{{#if name '===' 'dropship_colors'}}
+						<li class="{{name}}">This product has options that are <strong>DROPSHIP ONLY</strong> and, if selected, this material will be sent via ground shipping from the manufacturer and will ship separately from your order.</li>
+					{{/if}}
+					{{#if name '===' 'shipping'}}
+						{{#if value '===' 'ground only'}}
+							<li class="{{name}}"><strong>GROUND ONLY</strong> shipping; will make your entire order ship 2-5 day ground.</li>
+						{{/if}}
+					{{/if}}
+				{{/each}}
+			</ul>
+		</div>
+		<button style="display:none;" type="button" class="collapsible" data-tab-blog href="#tab-blog" role="tab" tabindex="0" aria-selected="true" controls="tab-blog">Blog</button>
+		<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-blog">
+			<div class="productBlogPost-list"></div>
+			<br/>
+		</div>
+			<!-- FAQ -->
+		<button style="display:none;" type="button" class="collapsible" data-tab-faq href="#tab-faq" role="tab" tabindex="0" aria-selected="true" controls="tab-faq">FAQ</button>
+		<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-faq">
+			<ul class="faq-question-list">
+				{{#each product.custom_fields}}
+					{{#if name '===' 'faq question'}}
+						<li class="{{dashcase name}}"><strong>Q: {{value}}</strong></li>
+					{{/if}}
+					{{#if name '===' 'faq answer'}}
+						<li class="{{dashcase name}}"><strong>A:</strong> {{value}}</li>
+					{{/if}}
+				{{/each}}
+			</ul>
+			<script>
+				window.addEventListener('DOMContentLoaded', function() {
+					if (document.querySelectorAll('.faq-question-list li').length > 1) {
+						document.querySelector('[data-tab-faq]').style.display = '';
+					}
+				});
+			</script>
+			<br/>
+		</div>
+		<!-- /FAQ -->
+	{{/if}}
+	<button style="display:none;" type="button" class="collapsible" data-tab-pricing href="#tab-pricing" role="tab" tabindex="0" aria-selected="true" controls="tab-pricing">Pricing</button>
+	<div role="tabpanel" aria-hidden="false" class="tab-content has-jsContent" id="tab-pricing"></div>
+</div>

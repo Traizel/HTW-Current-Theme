@@ -1,0 +1,110 @@
+---
+product:
+    videos:
+        limit: {{theme_settings.productpage_videos_count}}
+    reviews:
+        limit: {{theme_settings.productpage_reviews_count}}
+    related_products:
+        limit: {{theme_settings.productpage_related_products_count}}
+    similar_by_views:
+        limit: {{theme_settings.productpage_similar_by_views_count}}
+---
+{{#partial "page"}}
+	{{inject 'product' product}}
+	{{inject 'productId' product.id}}
+	{{inject 'brand' product.brand}}
+	{{inject 'customFields' product.custom_fields}}
+	{{inject 'similarProducts' product.similar_by_views}}
+	{{inject 'bulkDiscountRates' product.bulk_discount_rates}}
+	{{inject "zoomSize" theme_settings.zoom_size}}
+	{{inject "productSize" theme_settings.product_size}}
+	<div class="breadcrumbs-row bg-light-gray stretch-full">
+		{{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
+	</div>
+
+	<div itemscope itemtype="http://schema.org/Product">
+		{{> components/products/product-view schema=true}}
+		<section class="productView-tabs">
+			{{> components/products/tabs}}
+		</section>
+
+		{{#if product.similar_by_views}}
+			<section class="section home-product-section">
+				<h2 class="section-title text-center">Customers Also Bought</h2>
+				{{#if settings.data_tag_enabled}}
+					{{> components/products/carousel products=product.similar_by_views columns=theme_settings.homepage_new_products_column_count list="Customers Also Bought"}}
+				{{else}}
+					{{> components/products/carousel products=product.similar_by_views columns=theme_settings.homepage_new_products_column_count}}
+				{{/if}}
+
+			</section>
+		{{/if}}
+
+		{{> components/products/reviews reviews=product.reviews product=product urls=urls}}
+
+		{{> components/products/custom-transfer-forms}}
+	</div>
+{{/partial}}
+{{> layout/base}}
+<script>
+ pintrk('track', 'pagevisit', {value: {{product.price.without_tax.value}}, product_id:'{{product.id}}' });
+</script>
+<script type="text/javascript"> 
+var _learnq = _learnq || []; 
+
+ var item = {
+   Name: "{{product.title}}", 
+   ProductID: "{{product.id}}",
+   ImageURL: "{{getImage product.main_image 'product_size' (cdn theme_settings.default_image_product)}}", 
+   URL: "{{product.url}}",
+   Brand: "{{product.brand.name}}", 
+   Price: "{{product.price.without_tax.value}}",
+   CompareAtPrice: "{{product.price.rrp_without_tax.value}}"
+  };
+
+_learnq.push(['track', 'Viewed Product', item]); 
+
+_learnq.push(['trackViewedItem', {
+   Title: item.Name, 
+   ItemId: item.ProductID,
+   ImageUrl: item.ImageURL, 
+   Url: item.URL,
+
+   Metadata: { 
+     Brand: item.Brand,
+     Price: item.Price, 
+     CompareAtPrice: item.CompareAtPrice
+ } 
+ }]);
+</script>
+<script>
+    //GTM  View product
+    dataLayer.push({
+        'event': 'view_item',
+        'items': [{
+            'id': {{product.id}},
+             'google_business_vertical': 'retail'
+        }],
+        'value': "{{product.price.without_tax.value}}",
+        
+    });
+    
+
+
+    //GTM Add To Cart
+	document.getElementById("form-action-addToCart").addEventListener('click',function (){
+ 		dataLayer.push({
+            'event': 'add_to_cart',
+            'items': [{
+                'id': {{product.id}},
+                'google_business_vertical': 'retail'
+            }],
+            'value': "{{product.price.without_tax.value}}"
+        });
+        
+        hj('event', 'add_to_cart');
+	});
+</script>
+<noscript>
+ <img height="1" width="1" style="display:none;" alt="" src="https://ct.pinterest.com/v3/?tid=2613970870262&event=pagevisit&noscript=1" />
+</noscript>

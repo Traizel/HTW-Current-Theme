@@ -1,0 +1,1 @@
+{"components/custom/home-customer":"<section class=\"section customer-bia-section\" style=\"display: none;\" aria-hidden=\"true\" data-buy-it-again data-customer-id=\"{{customer.id}}\">\n\t<h2 class=\"section-title text-center\">Buy it again</h2>\n\t<div class=\"productCarousel\"></div>\n</section>\n"}

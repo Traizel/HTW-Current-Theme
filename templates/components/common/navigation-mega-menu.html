@@ -1,0 +1,40 @@
+<div class="navPage-subMenu" id="navCategories" aria-hidden="true" tabindex="-1">
+	<ul class="navPage-subMenu-list tier-1">
+		<!-- level 1 -->
+		{{#each categories}}
+			<li class="navPage-subMenu-item {{#if @first}}active{{/if}}">
+				{{#if children}}
+					<a class="navPage-subMenu-action navPages-action has-subMenu" href="{{url}}">{{name}} <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xlink:href="#icon-chevron-down" /></svg></i></a>
+					<ul class="navPage-childList tier-2">
+						<!-- level 2 -->
+						{{#each children}}
+						<li class="navPage-childList-item">
+							{{#if children}}
+								<a class="navPage-childList-action navPages-action has-childMenu" href="{{url}}">{{name}}</a>
+								<ul class="navPage-childList tier-3">
+									<!-- level 3 -->
+									{{#each children}}
+									<li class="navPage-childList-item">
+										<a class="navPage-childList-action navPages-action{{#if is_active}} activePage{{/if}}" href="{{url}}">{{name}}</a>
+									</li>
+									{{/each}}
+									<li class="navPage-childList-item">
+										<a class="navPage-childList-action navPages-action all" href="{{url}}">View All</a>
+									</li>
+								</ul>
+							{{else}}
+								<a class="navPage-subMenu-action navPages-action{{#if is_active}} activePage{{/if}}" href="{{url}}">{{name}}</a>
+							{{/if}}
+						</li>
+						{{/each}}
+					</ul>
+				{{else}}
+					<a class="navPage-subMenu-action navPages-action{{#if is_active}} activePage{{/if}}" href="{{url}}">{{name}}</a>
+				{{/if}}
+			</li>
+		{{/each}}
+		<li class="navPage-subMenu-item clothing">
+			<a class="navPage-subMenu-action navPages-action" href="https://heattransferwarehouse.com" target="_blank">Clothing <i class="icon navPages-action-moreIcon" aria-hidden="true"><svg><use xlink:href="#icon-launch" /></svg></i></a>
+		</li>
+	</ul>
+</div>

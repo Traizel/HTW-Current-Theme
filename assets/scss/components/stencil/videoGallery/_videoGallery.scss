@@ -1,0 +1,71 @@
+// =============================================================================
+// VIDEO GALLERY
+// =============================================================================
+
+.videoGallery-main {
+	@include flex-video-container();
+	margin-bottom: $videoGallery-spacing;
+}
+
+.videoGallery-list {
+	@include u-listBullets('none');
+	@include grid-row($behavior: 'nest');
+	font-size: 0;
+}
+
+.videoGallery-item {
+	@include grid-column(12);
+	display: inline-block;
+	float: none;
+	text-align: center;
+	vertical-align: top;
+
+	@include breakpoint('medium') {
+		width: grid-calc(6, $total-columns);
+	}
+}
+.videoGallery-title {
+	margin-top: 0;
+	padding: 0 0.5rem;
+	@include breakpoint('medium') {
+		padding: 0 1rem;
+	}
+}
+
+.video {
+	@include media;
+	display: block;
+	margin-bottom: $videoGallery-spacing;
+	opacity: 0.4;
+	text-decoration: none;
+	transition: opacity 100ms ease-out;
+
+	@include breakpoint('medium') {
+		margin-bottom: $videoGallery-spacing;
+	}
+
+	&:hover,
+	&.is-active {
+		color: color('greys', 'darker');
+		opacity: 1;
+	}
+}
+
+.video-figure {
+	float: none;
+	margin-right: 0;
+	> img {
+		display: inline-block;
+	}
+}
+
+.video-title {
+	margin-bottom: 0;
+	margin-top: 0;
+	text-transform: none;
+}
+
+.video-description {
+	font-size: fontSize('base');
+	margin-bottom: 0;
+}

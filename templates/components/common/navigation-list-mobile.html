@@ -1,0 +1,50 @@
+{{#if children}}
+	<a class="navPages-action has-subMenu" 
+		href="javascript:void(0)" 
+		data-level="1">
+		{{name}} {{> components/common/more-icon}}
+	</a>
+	<div class="navPage-subMenu {{name}}" id="navPages-{{id}}" aria-hidden="true" tabindex="-1">
+		<a class="navPages-action back" href="javascript:void(0)">
+			{{> components/common/more-icon}}
+			Back
+		</a>
+		<ul class="navPage-subMenu-list">
+			<li class="navPage-subMenu-item">
+				<a class="navPage-subMenu-action navPages-action" href="{{url}}" data-category-id="{{id}}">{{lang 'category.view_all.name' category=name}}</a>
+			</li>
+			{{#each children}}
+				<li class="navPage-subMenu-item">
+					{{#if children}}
+						<a
+							class="navPage-subMenu-action navPages-action has-subMenu"
+							href="javascript:void(0)"
+							data-level="2">
+							{{name}} {{> components/common/more-icon}}
+						</a>
+						<div class="navPage-subMenu {{name}}" id="navPages-{{id}}" aria-hidden="true" tabindex="-1">
+							<a class="navPages-action back" href="javascript:void(0)">
+								{{> components/common/more-icon}}
+								Back
+							</a>
+							<ul class="navPage-subMenu-list" id="navPages-{{id}}">
+								<li class="navPage-subMenu-item">
+									<a class="navPage-subMenu-action navPages-action shop-all" href="{{url}}">All {{name}}</a>
+								</li>
+								{{#each children}}
+								<li class="navPage-subMenu-item">
+									<a class="navPage-subMenu-action navPages-action" href="{{url}}">{{name}}</a>
+								</li>
+								{{/each}}
+							</ul>
+						</div>
+					{{else}}
+						<a class="navPage-subMenu-action navPages-action" href="{{url}}" data-category-id="{{id}}">{{name}}</a>
+					{{/if}}
+				</li>
+			{{/each}}
+		</ul>
+	</div>
+{{else}}
+	<a class="navPages-action" href="{{url}}">{{name}}</a>
+{{/if}}

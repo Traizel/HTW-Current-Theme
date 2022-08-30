@@ -1,0 +1,19 @@
+<section><div>
+    <input type="text" id="searchblogs" name="search" placeholder="Search Education">
+    <input type="submit" id="searchblogsbutton" value="Search" onclick=searchblogs()>
+</div>
+<script>
+   let searchBlogs = document.getElementById('searchblogs')
+    function searchblogs() {
+            searchBlogs = searchBlogs.value
+        window.open(`https://www.heattransferwarehouse.com/search.php?section=content&search_query=${searchBlogs}`, "_self");
+    }
+    
+    searchBlogs.addEventListener("keyup", function(event) {
+    if (event.keyCode === 13) {
+        event.preventDefault();
+        document.getElementById("searchblogsbutton").click();
+    }
+});
+</script>
+</section>

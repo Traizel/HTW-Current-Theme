@@ -1,0 +1,271 @@
+<form
+	id="drag-drop-form"
+	action="https://api.heattransferwarehouse.com/custom-transfer/dye-sublimation"
+	method="post"
+	enctype="multipart/form-data"
+	data-current-step="1"
+>
+	<h2 class="form-title">Request a quote</h2>
+	<nav class="form-progress-nav">
+		<div class="progress-bar">
+			<div class="fill"></div>
+		</div>
+		<div class="step-icon contact text-center" data-step="1">
+			<i class="icon envelope">
+				<svg><use xlink:href="#icon-envelope" /></svg>
+			</i>
+			<i class="icon checkmark">
+				<svg><use xlink:href="#icon-checkmark" /></svg>
+			</i>
+			Contact information
+		</div>
+		<div class="step-icon artwork text-center" data-step="2">
+			<i class="icon upload">
+				<svg><use xlink:href="#icon-upload" /></svg>
+			</i>
+			<i class="icon checkmark">
+				<svg><use xlink:href="#icon-checkmark" /></svg>
+			</i>
+			Upload artwork
+		</div>
+		<div class="step-icon garment text-center" data-step="3">
+			<i class="icon ruler">
+				<svg><use xlink:href="#icon-ruler" /></svg>
+			</i>
+			<i class="icon checkmark">
+				<svg><use xlink:href="#icon-checkmark" /></svg>
+			</i>
+			Sizing and Garment
+		</div>
+	</nav>
+	<ul id="error-msg"></ul>
+	<section class="form-section one contact">
+		<div class="form-flex-container">
+			<input
+				type="hidden"
+				name="product"
+				value="{{product.title}}"
+				required
+			/>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="contact-first-name">
+					First name
+				</label>
+				<input
+					type="text"
+					name="first-name"
+					id="contact-first-name"
+					placeholder="John"
+					required
+					aria-required="true"
+				/>
+			</div>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="contact-last-name">
+					Last name
+				</label>
+				<input
+					type="text"
+					name="last-name"
+					id="contact-last-name"
+					placeholder="Doe"
+					required
+					aria-required="true"
+				/>
+			</div>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="contact-email">Email</label>
+				<input
+					type="email"
+					name="email"
+					id="contact-email"
+					placeholder="your@email.com"
+					required
+					aria-required="true"
+				/>
+			</div>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="contact-phone">Phone</label>
+				<input type="tel" name="phone" id="contact-phone" required />
+			</div>
+			<div class="form-input-container">
+				<label class="form-label" for="contact-company">Company</label>
+				<input type="text" name="company" id="contact-company" />
+			</div>
+		</div>
+	</section>
+	<section class="form-section two artwork">
+		<div class="form-flex-container">
+			<div class="form-input-container">
+				<div class="drag-drop-input text-center">
+					<input
+						class="drag-drop-file"
+						type="file"
+						name="files[]"
+						id="artwork-files"
+						data-multiple-caption="{count} files selected"
+						multiple
+						accept="image/*,.pdf,.ai,.eps,.cdr"
+					/>
+					<label for="artwork-files">
+						<i class="icon upload-icon">
+							<svg><use xlink:href="#icon-upload-alt" /></svg>
+						</i>
+						<span class="file-placeholder">
+							<span class="drag-drop-text">
+								Drag and drop files
+							</span>
+							<span class="clr-blue">Choose a file</span>
+						</span>
+						<span class="file-clear">
+							<i class="icon clear-icon">
+								<svg><use xlink:href="#icon-close" /></svg>
+							</i>
+						</span>
+					</label>
+				</div>
+			</div>
+		</div>
+		<p class="upload-disclaimer">
+			Before uploading, please be sure you trust this site, have rights to
+			the data, and want to share this content to the owner of this upload
+			widget.
+		</p>
+		<div class="alertBox">
+			<div class="alertBox-column alertBox-icon">
+				<icon glyph="ic-success" class="icon" aria-hidden="true">
+					<svg
+						xmlns="http://www.w3.org/2000/svg"
+						width="24"
+						height="24"
+						viewBox="0 0 24 24"
+					>
+						<path
+							d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+						></path>
+					</svg>
+				</icon>
+			</div>
+			<p class="alertBox-column alertBox-message">
+				Complicated designs may not work on small locations such as a
+				pocket. Complicated designs may not work at all, especially
+				those that require small lettering. When submitting your
+				artwork, please let us know if we can omit smaller letters,
+				otherwise we may not be able to complete your design.
+			</p>
+		</div>
+	</section>
+	<section class="form-section three garment">
+		<div class="form-flex-container">
+			<div class="form-input-container one-half">
+				<label class="form-label" for="transfer-width">
+					Transfer width
+				</label>
+				<input
+					type="text"
+					name="transfer-width"
+					id="transfer-width"
+					required
+					aria-required="true"
+				/>
+			</div>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="transfer-height">
+					Transfer height
+				</label>
+				<input
+					type="text"
+					name="transfer-height"
+					id="transfer-height"
+					required
+					aria-required="true"
+				/>
+			</div>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="transfer-quantity">
+					Quantity
+				</label>
+				<input
+					type="number"
+					name="quantity"
+					min="1"
+					step="1"
+					id="transfer-quantity"
+					required
+					aria-required="true"
+				/>
+			</div>
+			<div class="form-input-container one-half spacer"></div>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="garment-type">
+					Garment type
+				</label>
+				<input
+					type="text"
+					name="garment-type"
+					id="garment-type"
+					required
+					aria-required="true"
+				/>
+			</div>
+			<div class="form-input-container one-half">
+				<label class="form-label" for="garment-color">
+					Garment color
+				</label>
+				<input
+					type="text"
+					name="garment-color"
+					id="garment-color"
+					required
+					aria-required="true"
+				/>
+			</div>
+		</div>
+	</section>
+	<section class="form-section four success">
+		<h3 class="form-section-heading">Thank you for your Submission!</h3>
+		<div class="success-icon">
+			<i class="icon checkmark"><svg><use xlink:href="#icon-checkmark" /></svg></i>
+		</div>
+		<p>We will review your artwork and get back to you within one business day!</p>
+	</section>
+	<div class="form-actions text-center">
+		<button class="button button--ghost back" data-step="back">Back</button>
+		<button class="button button--primary next" data-step="next">Next</button>
+		<button class="button button--primary submit" data-step="submit">
+			Submit Request
+			<i class="icon uploading-icon">
+				<svg
+					width="100%"
+					height="100%"
+					viewBox="0 0 100 100"
+					preserveAspectRatio="xMidYMid"
+					class="lds-rolling"
+				>
+					<circle
+						cx="50"
+						cy="50"
+						fill="none"
+						stroke="#ffffff"
+						stroke-width="10"
+						r="35"
+						stroke-dasharray="164.93361431346415 56.97787143782138"
+						transform="rotate(323.598 50 50)"
+					>
+						<animateTransform
+							attributeName="transform"
+							type="rotate"
+							calcMode="linear"
+							values="0 50 50;360 50 50"
+							keyTimes="0;1"
+							dur="1s"
+							begin="0s"
+							repeatCount="indefinite"
+						></animateTransform>
+					</circle>
+				</svg>
+			</i>
+		</button>
+		<button class="button button--primary close" data-step="close">Close</button>
+	</div>
+</form>

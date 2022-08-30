@@ -1,0 +1,86 @@
+
+<ul class="navPage-subMenu tier-2">
+	{{#if show_back}}
+		<li class="navPage-subMenu-item back">
+			<a class="navPages-action" href="javascript:void(0)">
+				{{> components/common/more-icon}} Back
+			</a>
+		</li>
+	{{/if}}
+	{{#if view_all_name}}
+		<li class="navPage-subMenu-item">
+			<a class="navPages-action" href="{{view_all_url}}">
+				All {{view_all_name}}
+			</a>
+		</li>
+	{{/if}}
+	<li class="navPage-subMenu-item">
+		<a class="navPage-subMenu-action navPages-action has-childList" href="/accessory-bundles/">Accessory Bundles</a>
+			<ul class="navPage-childList tier-3">
+			{{#if show_back}}
+				<li class="navPage-childList-item back">
+					<a class="navPage-childList-action navPages-action" href="javascript:void(0)">
+						{{> components/common/more-icon}} Back
+					</a>
+				</li>
+			{{/if}}
+			<li class="navPage-childList-item">
+				<a class="navPage-childList-action navPages-action" href="/teflon-pillow-kits/">Teflon Pillow Kits</a>
+			</li>
+			<li class="navPage-childList-item">
+				<a class="navPage-childList-action navPages-action" href="/silhouette-sketch-pen-starter-kit/">Silhouette Starter Pen Kit</a>
+			</li>
+			<li class="navPage-childList-item shop-all">
+				<a class="navPage-childList-action navPages-action" href="/accessory-bundles/">View All</a>
+			</li>
+		</ul>
+	</li>
+	<li class="navPage-subMenu-item">
+		<a class="navPage-subMenu-action navPages-action has-childList" data-level="2" href="/equipment-bundles/">Equipment Bundles {{> components/common/more-icon}}</a>
+		<ul class="navPage-childList tier-3">
+			{{#if show_back}}
+				<li class="navPage-childList-item back">
+					<a class="navPage-childList-action navPages-action" href="javascript:void(0)">
+						{{> components/common/more-icon}} Back
+					</a>
+				</li>
+			{{/if}}
+			<li class="navPage-childList-item">
+				<a class="navPage-childList-action navPages-action" href="/cutter-bundles/">Cutter Bundles</a>
+			</li>
+			<li class="navPage-childList-item">
+				<a class="navPage-childList-action navPages-action" href="/heat-press-bundles/">Heat Press Bundles</a>
+			</li>
+			<li class="navPage-childList-item">
+				<a class="navPage-childList-action navPages-action" href="/printer-bundles-1/">Printer Bundles</a>
+			</li>
+			<li class="navPage-childList-item shop-all">
+				<a class="navPage-childList-action navPages-action" href="/equipment-bundles/">View All</a>
+			</li>
+		</ul>
+	</li>
+	<li class="navPage-subMenu-item">
+		<a class="navPage-subMenu-action navPages-action has-childList" href="/dye-sublimation-bundles/">Dye Sublimation Bundles</a>
+		<ul class="navPage-childList tier-3">
+			{{#if show_back}}
+				<li class="navPage-childList-item back">
+					<a class="navPage-childList-action navPages-action" href="javascript:void(0)">
+						{{> components/common/more-icon}} Back
+					</a>
+				</li>
+			{{/if}}
+			<li class="navPage-childList-item">
+				<a class="navPage-childList-action navPages-action" href="/sg400-virtuoso-sublimation-printer-kit/">SG400 Sublimation Bundle</a>
+			</li>
+			<li class="navPage-childList-item">
+				<a class="navPage-childList-action navPages-action" href="/sg400-virtuoso-sublimation-printer-kit-blanks/">SG400 Sublimation Bundle and Blanks</a>
+			</li>
+			<li class="navPage-childList-item">
+				<a class="navPage-childList-action navPages-action" href="/sg800-virtuoso-sublimation-printer-kit/">SG800 Bundle</a>
+			</li>
+			<li class="navPage-childList-item shop-all">
+				<a class="navPage-childList-action navPages-action" href="/dye-sublimation-bundles/">View All</a>
+			</li>
+		</ul>
+	</li>
+</ul>

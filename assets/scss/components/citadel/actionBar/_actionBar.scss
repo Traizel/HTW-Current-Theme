@@ -1,0 +1,68 @@
+// =============================================================================
+// ACTION BAR (CSS)
+// =============================================================================
+
+.breadcrumbs-row .actionBar {
+    position: absolute;
+    top: 16px;
+    right: 0;
+    z-index: 2;
+}
+
+.actionBar {
+	margin: 0;
+	.actionBar-section {
+		float: none;
+	}
+}
+
+.actionBar-section {
+
+    .form-field {
+		background-color: transparent;
+		border: 0 none;
+		border-radius: 0;
+		margin: 0;
+		line-height: 1;
+
+        // scss-lint:disable NestingDepth
+        &:hover {
+            border-color: stencilColor("input-border-color-active");
+        }
+        // scss-lint:enable NestingDepth
+    }
+
+    .form-label {
+        color: $actionBar-form-label-color;
+        font-size: $actionBar-form-label-fontSize;
+        line-height: $actionBar-form-label-lineHeight;
+        margin-bottom: 0;
+        padding-left: $actionBar-form-label-padding;
+    }
+
+    .form-input,
+    .form-select {
+        border: 0;
+        padding-left: $actionBar-form-input-padding;
+        width: auto;
+    }
+
+    .form-label,
+    .form-input,
+    .form-select {
+        display: inline-block;
+    }
+
+    .form-select {
+		color: #006BD6;
+		font-weight: bold;
+		line-height: 18px;
+		height: 18px;
+		padding: 0 1.5rem 0 0.25rem;
+		background-position: top right;
+		letter-spacing: 0.05rem;
+		font-size: 1rem;
+		background-color: transparent;
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' id='icon-sort' viewBox='0 0 24 24' width='100%25' height='100%25'%3E%3Cpath d='M3 18h6v-2H3v2zM3 6v2h18V6H3zm0 7h12v-2H3v2z'%3E%3C/path%3E%3C/svg%3E");
+    }
+}

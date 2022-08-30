@@ -1,0 +1,73 @@
+// =============================================================================
+// PRODUCT REVIEWS (CSS)
+// =============================================================================
+
+
+// Review list
+//
+// 1. Kill extra display inline-block spacing
+// -----------------------------------------------------------------------------
+
+.productReviews-list {
+    @include u-listBullets("none");
+    @include grid-row($behavior: "nest");
+    font-size: 0; // 1
+}
+
+
+// Review item
+// -----------------------------------------------------------------------------
+
+.productReview {
+    @include grid-column(12);
+    display: inline-block;
+    float: none;
+    font-size: 0.875rem;
+	margin-bottom: 1rem;
+	vertical-align: top;
+
+	article {
+		background-color: #f8f8f8;
+		padding: 1rem;
+	}
+	header {
+		margin-bottom: 0.5rem;
+		.userIcon,
+		div {
+			display: inline-block;
+			vertical-align: middle;
+		}
+		.userIcon {
+			height: 2rem;
+			width: 2rem;
+		}
+		div {
+
+		}
+	}
+}
+
+.productReview-title {
+    font-size: 0;
+    margin: 0;
+    text-transform: none;
+}
+
+.productReview-author {
+	color: #424548;
+	font-weight: bold;
+    margin-bottom: -0.25rem;
+}
+
+.productReview-rating {
+    display: inline-block;
+    margin-bottom: 0;
+}
+
+.productReview-ratingNumber {
+    @include u-hidden("visually");
+}
+
+.productReview-body {
+	margin: 0;
+}

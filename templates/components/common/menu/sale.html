@@ -1,0 +1,28 @@
+<ul class="navPage-subMenu tier-2">
+	{{#if show_back}}
+		<li class="navPage-subMenu-item back">
+			<a class="navPages-action" href="javascript:void(0)">
+				{{> components/common/more-icon}} Back
+			</a>
+		</li>
+	{{/if}}
+	{{#if view_all_name}}
+		<li class="navPage-subMenu-item">
+			<a class="navPages-action" href="{{view_all_url}}">
+				All {{view_all_name}}
+			</a>
+		</li>
+	{{/if}}
+	<li class="navPage-subMenu-item">
+		<a class="navPage-subMenu-action navPages-action" href="/closeout/">Closeout</a>
+	</li>
+	<li class="navPage-subMenu-item">
+		<a class="navPage-subMenu-action navPages-action" href="/on-sale/">On Sale</a>
+	</li>
+	<li class="navPage-subMenu-item">
+		<a class="navPage-subMenu-action navPages-action" href="/promotion/">Promotion</a>
+	</li>
+	<li class="navPage-subMenu-item">
+		<a class="navPage-subMenu-action navPages-action" href="/flash-sale/">Flash Sale</a>
+	</li>
+</ul>

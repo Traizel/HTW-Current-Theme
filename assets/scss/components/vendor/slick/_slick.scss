@@ -1,0 +1,206 @@
+// SLICK
+// -----------------------------------------------------------------------------
+//
+// Purpose: These are the styles for the base Slick carousel
+//
+// -----------------------------------------------------------------------------
+
+
+//
+// Next and Previous buttons for all carousels
+//
+// Purpose: Override the plugin to give some Stencil styling to the js generated mark-up
+//
+// 1. Set the background again because the plugin sets the full background property on hover
+// 2. Prevent screen flicker when CSS transition is applied
+//
+// -----------------------------------------------------------------------------
+
+.slick-next,
+.slick-prev {
+	display: none;
+	background-color: #fff;
+    border: 1px solid $slick-arrow-borderColor;
+    margin-top: -1rem;
+    padding: 0;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 100%;
+    z-index: 1;
+
+    &::before {
+        background-position: 50% 50%;
+        background-repeat: no-repeat;
+        background-size: 0.5rem;
+        display: block;
+        height: 30px;
+		width: 15px;
+		margin: 0 0 0 6px;
+    }
+
+	&:hover {
+		background-color: #fff;
+	}
+    &:hover,
+    &:focus {
+        background-position: 50%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.16);
+    }
+
+    &:active,
+    &:focus {
+        background-color: #006bd6;
+    }
+    @include breakpoint("medium") {
+		display: block;
+		margin-top: -(remCalc(30px));
+		height: 60px;
+		width: 60px;
+		&::before {
+			background-size: 100%;
+			height: 59px;
+			width: 15px;
+			margin: 0 0 0 19px;
+		}
+    }
+}
+
+.slick-next {
+    right: 0;
+
+    @include breakpoint("small") {
+		right: -15px;
+    }
+
+    @include breakpoint("large") {
+        right: -(spacing("double") + spacing("quarter"));
+    }
+
+    &::before {
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3Cpath d='M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z' fill='%23006bd6' %3E%3C/path%3E%3C/svg%3E");
+		margin: 0 0 0 8px;
+	}
+    &:active,
+    &:focus {
+        background-color: #006bd6;
+		&:before {
+			opacity: 1;
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3Cpath d='M285.476 272.971L91.132 467.314c-9.373 9.373-24.569 9.373-33.941 0l-22.667-22.667c-9.357-9.357-9.375-24.522-.04-33.901L188.505 256 34.484 101.255c-9.335-9.379-9.317-24.544.04-33.901l22.667-22.667c9.373-9.373 24.569-9.373 33.941 0L285.475 239.03c9.373 9.372 9.373 24.568.001 33.941z' fill='%23ffffff' %3E%3C/path%3E%3C/svg%3E");
+
+		}
+	}
+    @include breakpoint("medium") {
+		&::before {
+			margin: 0 0 0 23px;
+		}
+    }
+}
+
+.slick-prev {
+    left: 0;
+    @include breakpoint("small") {
+		left: -15px;
+    }
+    @include breakpoint("large") {
+        left: -(spacing("double") + spacing("quarter"));
+    }
+
+    &::before {
+		background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3Cpath d='M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z' fill='%23006bd6' %3E%3C/path%3E%3C/svg%3E");
+	}
+    &:active,
+    &:focus {
+        background-color: #006bd6;
+		&:before {
+			opacity: 1;
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3Cpath d='M34.52 239.03L228.87 44.69c9.37-9.37 24.57-9.37 33.94 0l22.67 22.67c9.36 9.36 9.37 24.52.04 33.9L131.49 256l154.02 154.75c9.34 9.38 9.32 24.54-.04 33.9l-22.67 22.67c-9.37 9.37-24.57 9.37-33.94 0L34.52 272.97c-9.37-9.37-9.37-24.57 0-33.94z' fill='%23ffffff' %3E%3C/path%3E%3C/svg%3E");
+
+		}
+	}
+}
+
+
+//
+// Carousel dots
+//
+// Purpose: Stencil overrides for the js generated carousel dots
+//
+// 2. Nesting depth due to plugin css
+// -----------------------------------------------------------------------------
+
+.slick-dots {  // 2
+	margin: 0;
+	display: none !important;
+
+    li {
+        @include square(32px);
+        margin: 0;
+        padding: remCalc(5px);
+
+        // scss-lint:disable SelectorDepth, NestingDepth
+        button,
+        button::before {
+            @include square(15px);
+            border-radius: 50%;
+        }
+
+        button {
+            // scss-lint:disable NestingDepth
+            border: 1px solid $slick-dot-color;
+            display: inline-block;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            text-align: center;
+            vertical-align: middle;
+
+            &:hover {
+                &::before {
+                    background: $slick-dot-color;
+                }
+            }
+        }
+
+        button::before {
+            display: block;
+            left: -1px;
+            top: -1px;
+            transition: background 100ms ease-out;
+        }
+
+        &.slick-active {
+            // scss-lint:disable NestingDepth
+            button::before {
+                background: $slick-dot-color-active;
+            }
+        }
+    }
+
+}
+
+//
+// Stencil override for product detail page thumbnail dots.
+// -----------------------------------------------------------------------------
+.productView .slick-dots  {
+    position: relative;
+}
+
+
+//
+// disabled carousel elements
+// -----------------------------------------------------------------------------
+.slick-disabled {
+    cursor: $cursor-default-value;
+    opacity: 0.1;
+}
+
+
+//
+// Slick track
+// -----------------------------------------------------------------------------
+.slick-track {
+    backface-visibility: hidden; // 2
+    perspective: 1000px; // 2
+}
