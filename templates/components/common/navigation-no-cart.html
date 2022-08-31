@@ -1,0 +1,64 @@
+<nav class="navUser">
+	<ul class="navUser-section">
+		<li class="navUser-item navUser-item--search">
+			<a class="navUser-action navUser-action--quickSearch" href="#" data-search="quickSearch" aria-controls="quickSearch" aria-expanded="false">
+				<i class="icon navUser-action-userIcon" aria-hidden="true"><svg><use xlink:href="#icon-search" /></svg></i>
+				<span class="sr-only">{{lang 'common.search'}}</span>
+			</a>
+		</li>
+		{{#if customer.customer_group_id '===' 2}}
+		{{else}}
+			<li class="navUser-item navUser-item--cart">
+				<div class="dropdown-menu" id="cart-preview-dropdown" aria-hidden="true"></div>
+			</li>
+		{{/if}}
+		<li class="navUser-item navUser-item--account{{#if customer}} logged-on{{/if}}">
+			{{#if customer}}
+				<a class="navUser-action navUsers-action has-subMenu" href="javascript:void(0);"><i class="icon navUser-action-userIcon" aria-hidden="true"><svg><use xlink:href="#icon-person" /></svg></i></a>
+				<ul class="navUser-childList" id="navUsers-account">
+					<li class="navUser-item">
+						<a class="navUser-action" href="{{urls.account.index}}">{{customer.name}}</a>
+					</li>
+					<li class="navUser-item">
+						<a class="navUser-action" href="{{urls.account.orders.all}}">{{lang 'account.nav.orders'}}</a>
+					</li>
+					<li class="navUser-item">
+						<a class="navUser-action" href="{{urls.account.details}}">{{lang 'account.nav.settings'}}</a>
+					</li>
+					<li class="navUser-item">
+						<a class="navUser-action bolt-sso-custom" data-logged-in="true">{{lang 'common.logout'}}</a>
+					</li>
+				</ul>
+			{{else}}
+				<a class="navUser-action bolt-sso-custom" data-logged-in="false">Register/Login</a>
+			{{/if}}
+		</li>
+		
+	</ul>
+</nav>
+<script>
+        var insertAccountScript = function () {
+            var scriptTag = document.getElementById('bolt-account');
+            if (scriptTag) {
+                return;
+            }
+            scriptTag = document.createElement('script');
+            scriptTag.setAttribute('type', 'text/javascript');
+            scriptTag.setAttribute('async', '');
+            scriptTag.setAttribute('src', 'https://account.bolt.com/account.js');
+            scriptTag.setAttribute('id', 'bolt-account');
+            scriptTag.setAttribute('data-publishable-key', 'VR52GRcCQ7ch.nhGjuMO6fSgl.0037bb0e4a255a2eba9bad964025c6dc92e6d9534941a270443f755cc482f14b');
+            document.head.appendChild(scriptTag);
+        }
+      
+        function insertButtons() {
+            if (typeof BoltAccount === 'undefined') {
+                window.setTimeout(insertButtons, 100);
+                return;
+            }
+            BoltAccount.injectButtons();
+        }
+
+        insertAccountScript();
+        insertButtons();
+</script>

@@ -21,6 +21,11 @@
 	@include grid-row();
 }
 
+.page-full {
+	@include grid-row();
+	max-width: 100%;
+}
+
 .page-content,
 .page-content--full {
 	@include grid-column(12);
