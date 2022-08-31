@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html class="no-js" lang="{{ locale_name }}">
+    <head>
+        <style type="text/css" media="screen, print">
+            @font-face {
+                font-family: "BebasNeue_Regular";
+                src: url("{{cdn 'webdav:BebasNeue_Regular.otf'}}");
+            }
+               @font-face {
+                font-family: "Champagne_Limousines";
+                src: url("{{cdn 'webdav:Champagne_&_Limousines.ttf'}}");
+            }
+        </style>
+        
+        <script async id="Cookiebot" src="https://consent.cookiebot.com/uc.js" data-cbid="215f09f7-d9fe-4f05-abcd-e8a14a0374d9" data-blockingmode="auto" type="text/javascript"></script>
+        <title>{{ head.title }}</title>
+        {{{ resourceHints }}}
+
+        {{#each (split head.meta_tags "<meta") }}
+            {{#if @index '===' 0 }}
+            {{else }}
+                {{#contains this 'property="product:price:amount"'}}
+                {{else}}
+                    <meta {{{this}}}
+
+                {{/contains}}
+            {{/if}}
+        {{/each}}
+        
+        
+        {{{ head.config }}}
+        {{#block "head"}} {{/block}}
+
+        <link href="{{ head.favicon }}" rel="shortcut icon">
+        <meta name="test" >
+
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta property="og:type"               content="website">
+        <meta property="og:locale"               content="en_US">
+        <meta property="og:image:alt"          content="https://cdn11.bigcommerce.com/s-et4qthkygq/product_images/uploaded_images/htw-footer.png">
+        
+        <script>
+            {{!-- Change document class from no-js to js so we can detect this in css --}}
+            document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+        </script>
+
+        {{> components/common/polyfill-script }}
+
+
+        {{!-- Load Lazysizes script ASAP so images will appear --}}
+        <script>
+            {{!-- Only load visible elements until the onload event fires, after which preload nearby elements. --}}
+            window.lazySizesConfig = window.lazySizesConfig || {};
+            window.lazySizesConfig.loadMode = 1;
+        </script>
+        <script async src="{{cdn 'assets/dist/theme-bundle.head_async.js'}}"></script>
+
+        <script async src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+
+        <script>
+            WebFont.load({
+                custom: {
+                    families: ['IBM Plex Sans']
+                },
+                classes: false
+            });
+        </script>
+        
+        <!-- Facebook Pixel Code -->
+        <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', 'your-pixel-id-goes-here');
+        fbq('track', 'PageView');
+        </script>
+        <noscript>
+        <img height="1" width="1" style="display:none" 
+        src="https://www.facebook.com/tr?id=your-pixel-id-goes-here&ev=PageView&noscript=1"/>
+        </noscript>
+        <!-- End Facebook Pixel Code -->
+
+        {{ getFontsCollection }}
+        {{{stylesheet '/assets/css/theme.css'}}}
+
+        {{{head.scripts}}}
+
+        {{~inject 'showAdminBar' theme_settings.show-admin-bar}}
+        {{~inject 'genericError' (lang 'common.generic_error')}}
+        {{~inject 'maintenanceModeSettings' settings.maintenance}}
+        {{~inject 'adminBarLanguage' (langJson 'admin')}}
+        {{~inject 'urls' urls}}
+        {{~inject 'secureBaseUrl' settings.secure_base_url}}
+        {{~inject 'cartId' cart_id}}
+        {{~inject 'channelId' settings.channel_id}}
+        {{~inject 'template' template}}
+        {{~inject 'validationDictionaryJSON' (langJson 'validation_messages')}}
+        {{~inject 'validationFallbackDictionaryJSON' (langJson 'validation_fallback_messages')}}
+        {{~inject 'validationDefaultDictionaryJSON' (langJson 'default_messages')}} 
+    </head>
+	<body class="page-{{page_type}}" {{#if customer}} data-customer-id="{{customer.id}}" data-customer-group="{{customer.customer_group_id}}"{{/if}}>
+		
+        <svg data-src="{{cdn 'img/icon-sprite.svg'}}" class="icons-svg-sprite"></svg>
+
+        {{> components/common/off-canvas-menu }}
+        {{> components/common/header }}
+        {{> components/common/body-full }}
+        {{> components/common/footer }}
+
+        <script>window.__webpack_public_path__ = "{{cdn 'assets/dist/'}}";</script>
+        <script src="{{cdn 'assets/dist/theme-bundle.main.js'}}"></script>
+        <script>
+            {{!-- Exported in app.js --}}
+            window.stencilBootstrap("{{page_type}}", {{jsContext}}).load();
+        </script>
+
+        {{{footer.scripts}}}
+    </body>
+</html>

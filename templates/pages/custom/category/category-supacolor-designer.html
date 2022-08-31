@@ -39,7 +39,7 @@ category:
     {{> components/common/breadcrumbs breadcrumbs=breadcrumbs}}
     {{> components/products/filter sort=pagination.category.sort}}
 </div>
-<div class="page">
+<div class="page-full">
     <main id="product-listing-container">
         
         <br/>
@@ -316,6 +316,15 @@ $.ajax({
         let size = inksoft.SimpleDesigns[inksoft.SimpleDesigns.length - 1].DesignArtRegions[0].RegionName;
         let supagangName = inksoft.DesignSummaries[inksoft.DesignSummaries.length - 1].DesignedOnStyleName;
         let quantity = inksoft.Cart.Items[inksoft.Cart.Items.length - 1].Quantity;
+        let variantId = 0;
+        let lineItems = [];
+        let jobId = 0;
+        let jobValue = 0;
+        let numberOfTransfers = 1;
+        
+        if (cart.length !== 0) {
+            lineItems = cart[0].lineItems.physicalItems;
+        }
         
         if (quantity < 10) {
             console.log('Quantity too low');
@@ -349,10 +358,18 @@ $.ajax({
             tokenId = 21759;
             nameId = 21760;
         } else if (inksoftSku === 'supa-promo') {
+          if (lineItems !== []) {
+            for (const li of lineItems) {
+                if (li.name === "Supacolor Promotional") {
+                    numberOfTransfers++;
+                }
+            }
+          }
             productId = 9862;
             sizeId = 21813;
             tokenId = 21815;
             nameId = 21814;
+            jobId = 22305;
         } else if (inksoftSku === 'supa-headwear') {
             productId = 9863;
             sizeId = 21829;
@@ -415,6 +432,14 @@ $.ajax({
             } else if (size === "4.1 x 5.8" || size === "5.8 x 4.1") {
                 value = 12501
             }
+            
+            if (numberOfTransfers === 1) {
+                jobValue = 51829
+            } else if (numberOfTransfers === 2) {
+                jobValue = 51830
+            } else if (numberOfTransfers > 2) {
+                jobValue = 51831
+            }
         } else if (inksoftSku === 'supa-headwear') {
             if (size === "2.5 x 2.5") {
                 value = 12499
@@ -422,14 +447,18 @@ $.ajax({
                 value = 12500
             }
         }
+        
 
         let items = {};
+        
+        if (inksoftSku !== 'supa-promo') {
 
             items = {
                 lineItems: [{
                     quantity: quantity,
                     productId: productId,
-                    optionSelections: [{
+                    optionSelections: [
+                        {
                             optionId: sizeId,
                             optionValue: value
                         },
@@ -444,6 +473,36 @@ $.ajax({
                     ]
                 }]
             }
+            
+        } else if (inksoftSku === 'supa-promo') {
+            items = {
+                lineItems: [{
+                    quantity: quantity,
+                    productId: productId,
+                    variantId: variantId,
+                    optionSelections: [
+                        {
+                            optionId: sizeId,
+                            optionValue: value
+                        },
+                        {
+                            optionId: tokenId,
+                            optionValue: token
+                        },
+                        {
+                            optionId: nameId,
+                            optionValue: name
+                        },
+                        {
+                            optionId: jobId,
+                            optionValue: jobValue
+                        }
+                    ]
+                }]
+            }
+        }
+
+        console.log('Items being added: ', items)
 
         if (cart.length === 0) {
 
@@ -530,4 +589,4 @@ $.ajax({
 </script>
 
 {{/partial}}
-{{> layout/base}}
+{{> layout/base-full}}
