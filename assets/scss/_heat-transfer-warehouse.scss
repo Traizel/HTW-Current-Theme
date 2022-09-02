@@ -1108,3 +1108,27 @@ afterpay-placement:nth-of-type(2n) {
      0% 100%
    );
 }
+
+/* 
+The below safari styling and the firefox styling found on line 1130
+lowers the padding on the megamenu items. This allows us to hover over
+those items properly while using Safari and Firefox.
+*/
+/* Safari 6.1-10.0 (not 10.1) */
+
+
+@media not all and (min-resolution:.001dpcm) {
+	@supports (-webkit-appearance:none) and (stroke-color:transparent) {
+		.navPages-action {
+			padding: 0.5rem .5rem;
+		}
+	}
+}
+
+/* Firefox */
+
+@-moz-document url-prefix() {
+	.navPages-action {
+		padding: 0.5rem .5rem;
+	}
+}

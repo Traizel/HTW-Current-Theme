@@ -46,11 +46,11 @@ category:
         
         {{{category.description}}}
         
-        <div id="inksoftEmbed" style="width: 100%; height: 1600px; padding: 0; margin: 0; border: 0; max-height: 100%;"></div>
+        <p style="text-align: center;"><span style="font-size: xx-large;">This Designer uses a different cart! You will checkout directly in the designer!</span></p> 
         
-        <!-- <p style="text-align: center;"><span style="font-size: xx-large;">More Information on the different Supacolor Transfers!</span></p> 
+        <div id="inksoftEmbed" style="width: 100%; height: 900px; padding: 0; margin: 0; border: 0; max-height: 100%;"></div>
         
-        {{> components/category/tshirt-designer/panels}}
+        <!-- {{> components/category/tshirt-designer/panels}}
         
         {{> components/category/tshirt-designer/categories}} -->
         
@@ -133,7 +133,7 @@ $.ajax({
         
     await $.ajax({
     type: 'POST',
-    url: "https://stores.inksoft.com/DS490710189/Api2/GetOrCreateSessionWithApiKey",
+    url: "https://stores.inksoft.com/DS350156262/Api2/GetOrCreateSessionWithApiKey",
     headers: {
       'Content-Type': 'application/x-www-form-urlencoded',
       Accept: "application/x-www-form-urlencoded"
@@ -159,12 +159,11 @@ $.ajax({
     }
     
     
-    
     try {
         
     await $.ajax({
     type: 'GET',
-    url: `https://stores.inksoft.com/DS490710189/Api2/GetSession?SessionToken=${inksoftSess}&Format=JSON`,
+    url: `https://stores.inksoft.com/DS350156262/Api2/GetSession?SessionToken=${inksoftSess}&Format=JSON`,
     dataType: 'text',
     data: '',
     processData: false,
@@ -208,9 +207,11 @@ $.ajax({
     xmlhttp.send();
   }
   
+ 
+  
     function start() {
       console.log('Designer Ready!');
-  }
+    }
 
     window.dataLayer = window.dataLayer || []
     window.dataLayer.push({
@@ -223,270 +224,13 @@ $.ajax({
         console.log('Design Saved');
     }
 
-    async function getCart(url) {
-
-        await $.ajax({
-            type: 'GET',
-            url: `${url}`,
-            dataType: 'text',
-            data: '',
-            processData: false,
-            crossDomain: true,
-            success: function (res) {
-                res = JSON.parse(res);
-                response = res;
-            }
-        });
-
-        return response;
-    }
-
-    async function addCartItem(url, cartId, cartItems) {
-
-        await $.ajax({
-            type: 'POST',
-            url: `${url}/${cartId}/items?include=lineItems.physicalItems.options`,
-            dataType: 'text',
-            data: JSON.stringify(cartItems),
-            processData: false,
-            crossDomain: true,
-            success: function (res) {
-                res = JSON.parse(res);
-                response = res;
-            }
-        });
-
-        return response;
-    };
-
-    async function postCartItem(url, cartItems) {
-
-        await $.ajax({
-            type: 'POST',
-            url: `${url}`,
-            dataType: 'text',
-            data: JSON.stringify(cartItems),
-            processData: false,
-            crossDomain: true,
-            success: function (res) {
-                res = JSON.parse(res);
-                response = res;
-            }
-        });
-
-        return response;
-    };
-
-    async function getInksoft(id, token) {
-        let response = [];
-
-        await $.ajax({
-            type: 'GET',
-            url: `https://stores.inksoft.com/DS490710189/Api2/GetCartPackage?SessionToken=${token}&Format=JSON&SessionId=${id}`,
-            dataType: 'text',
-            data: '',
-            processData: false,
-            crossDomain: true,
-            success: function (res) {
-                res = JSON.parse(res);
-                response = res.Data;
-            }
-        });
-        return response;
-    };
 
     async function handleCartTriggered(c) {
         console.log(c);
         const id = c.ID;
-        const token = c.SessionToken;
-        let inksoft = [];
-        let cart = [];
-
-        await getInksoft(id, token)
-            .then(data => inksoft = data)
-            .catch(error => console.log('Error on get Inksoft:', error))
-
-        console.log('Inksoft: ', inksoft);
-
-        await getCart('/api/storefront/carts')
-            .then(data => cart = data)
-            .catch(error => console.log('Error on get Cart:', error))
-
-        console.log('Cart: ', cart);
-
-        let inksoftSku = inksoft.DesignSummaries[inksoft.DesignSummaries.length - 1].DesignedOnSku;
-        let name = inksoft.DesignSummaries[inksoft.DesignSummaries.length - 1].Name;
-        let size = inksoft.SimpleDesigns[inksoft.SimpleDesigns.length - 1].DesignArtRegions[0].RegionName;
-        let supagangName = inksoft.DesignSummaries[inksoft.DesignSummaries.length - 1].DesignedOnStyleName;
-        let quantity = inksoft.Cart.Items[inksoft.Cart.Items.length - 1].Quantity;
-        
-        console.log('Chosen Size: ', size);
-
-        let value = 0;
-        let productId = 0;
-        let sizeId = 0;
-        let tokenId = 0;
-        let nameId = 0;
-        let supagangId = 0;
-        let supagangValue = 0;
-
-        if (inksoftSku === 'supa-sub-blocker') {
-            productId = 9831;
-            sizeId = 22163;
-            tokenId = 22164;
-            nameId = 22165;
-        } else if (inksoftSku === 'supa-wearables') {
-            productId = 9616;
-            sizeId = 22169;
-            tokenId = 22170;
-            nameId = 22171;
-        } else if (inksoftSku === 'supa-soft-shell') {
-            productId = 9832;
-            sizeId = 21758;
-            tokenId = 21759;
-            nameId = 21760;
-        } else if (inksoftSku === 'supa-promo') {
-            productId = 9862;
-            sizeId = 21813;
-            tokenId = 21815;
-            nameId = 21814;
-        } else if (inksoftSku === 'supa-headwear') {
-            productId = 9863;
-            sizeId = 21829;
-            tokenId = 21831;
-            nameId = 21830;
-        } else if (inksoftSku === 'supa-gang') {
-            if (supagangName === 'Wearables') {
-                productId = 9616;
-                sizeId = 22169;
-                tokenId = 22170;
-                nameId = 22171;
-            } else if (supagangName === 'Sub Blocker') {
-                productId = 9831;
-                sizeId = 22163;
-                tokenId = 22164;
-                nameId = 22165;
-            } else if (supagangName === 'Soft Shell Blocker') {
-                productId = 9832;
-                sizeId = 21758;
-                tokenId = 21759;
-                nameId = 21760;
-            }
-        }
-
-        if (inksoftSku === 'supa-sub-blocker' || inksoftSku === 'supa-wearables' || inksoftSku ===
-            'supa-soft-shell') {
-            if (size === "5.8 x 8.3" || size === "8.3 x 5.8") {
-                value = 12479
-            } else if (size === "11.7 x 4.25" || size === "4.25 x 11.7") {
-                value = 12444
-            } else if (size === "8.3 x 11.7" || size === "11.7 x 8.3") {
-                value = 12445
-            } else if (size === "11.7 x 16.5" || size === "16.5 x 11.7") {
-                value = 12447
-            } else if (size === "16.5 x 5.85" || size === "5.85 x 16.5") {
-                value = 12446
-            } else if (size === "2.5 x 2.5") {
-                value = 12443
-            } else if (size === "4 x 4") {
-                value = 12478
-            } else if (size === "1.5 x 1.5") {
-                value = 46368
-            } else if (size === "11.7 x 11.7") {
-                value = 46369
-            }
-
-        } else if (inksoftSku === 'supa-gang') {
-                value = 47181
-        } else if (inksoftSku === 'supa-promo') {
-            if (size === "5.8 x 8.3") {
-                value = 12502
-            } else if (size === "11.7 x 4.25" || size === "4.25 x 11.7") {
-                value = 12503
-            } else if (size === "11.7 x 16.5" || size === "16.5 x 11.7") {
-                value = 47085
-            } else if (size === "16.5 x 5.85" || size === "5.85 x 16.5") {
-                value = 12505
-            } else if (size === "8.3 x 11.7" || size === "11.7 x 8.3") {
-                value = 12504
-            } else if (size === "4.1 x 5.8" || size === "5.8 x 4.1") {
-                value = 12501
-            }
-        } else if (inksoftSku === 'supa-headwear') {
-            if (size === "2.5 x 2.5") {
-                value = 12499
-            } else if (size === "4.7 x 2.8" || size === "2.8 x 4.7") {
-                value = 12500
-            }
-        }
-
-        let items = {};
-
-            items = {
-                lineItems: [{
-                    quantity: quantity,
-                    productId: productId,
-                    optionSelections: [{
-                            optionId: sizeId,
-                            optionValue: value
-                        },
-                        {
-                            optionId: tokenId,
-                            optionValue: token
-                        },
-                        {
-                            optionId: nameId,
-                            optionValue: name
-                        }
-                    ]
-                }]
-            }
-        
-        const amountAdding = document.querySelectorAll(".grid-x.ng-star-inserted").length;
-        console.log(amountAdding);
-
-        if (cart.length === 0) {
-
-            console.log('Making a cart: ', items);
-            await postCartItem('/api/storefront/carts', items)
-                .then(data => console.log(`Updated Cart..`))
-                .catch(error => console.log('Error on add to Cart:', error))
-
-        } else {
-
-            console.log('Cart ID: ', cart[0].id);
-            console.log('Line Items: ', items);
-
-            await addCartItem('/api/storefront/carts', cart[0].id, items)
-                .then(data => console.log(`Updated Cart..`))
-                .catch(error => console.log('Error on add to Cart:', error))
-
-        }
     }
 
     function launchDesignStudio(t) {
-        if (t) {
-            
-        window.inksoftApi.launchEmbeddedDesignStudio({
-            targetElementId: 'inksoftEmbed',
-            domain: 'https://stores.inksoft.com',
-            cdnDomain: 'https://cdn.inksoft.com',
-            storeUri: 'DS490710189',
-            disableLeavePrompt: true,
-            disableCart: false,
-            //sessionToken: t,
-            //ProductId: i,
-            onCartTriggered: handleCartTriggered,
-            onDesignerReady: start,
-            onDesignSaved: handleDesignSaved,
-            customDesignerInterfaceText: {
-                buyNow: 'Finish',
-                getPrice: 'View Summary',
-                saveDesign: 'Save Design'
-            }
-        });
-        
-        } else {
             
         window.inksoftApi.launchEmbeddedDesignStudio({
             targetElementId: 'inksoftEmbed',
@@ -506,7 +250,6 @@ $.ajax({
             }
         });
         
-      }
     }
 
     const initDesigner = (t) => {
